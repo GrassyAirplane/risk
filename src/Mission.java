@@ -3,6 +3,6 @@
 
 /* Mission Card Class
  * Parent  : Card */
-public class Mission { 
+public class Mission extends Card { 
    
 }

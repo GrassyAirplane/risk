@@ -3,6 +3,6 @@
 
 /* Bonus Card Class
  * Parent  : Card */
-public class Bonus { 
+public class Bonus extends Card { 
    
 }

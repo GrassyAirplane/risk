@@ -4,6 +4,6 @@
 /* Card Class
  * Children  : Bonus
  *             Mission */
-public class card { 
+public class Card { 
 
 }

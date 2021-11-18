@@ -72,6 +72,8 @@ public abstract class Player {
     return this.bonusStatus;
   }
   
+  /* reassigns the bonus status
+   * @param status - boolean value to set bonusStatus to */
   public void SetBonusStatus(boolean status) {
     this.bonusStatus = status;
   }

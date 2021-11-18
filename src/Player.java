@@ -1,7 +1,11 @@
 /* Developed By: ------
  * Revised Date: Nov 17, 2021 */
 
-/* Abstract Player Class */
+/* Abstract Player Class
+ * Children  : Attacker
+ *             Defender
+ *             Producer */
+
 public abstract class Player { 
   
   // instance variables
@@ -13,7 +17,7 @@ public abstract class Player {
   private boolean bonusStatus;
   
   // keeps track of number of players created
-  public static PlayerCount = 0;
+  public static int PlayerCount = 0;
   
   /* constructs a new player
    * @param playerId      - ID of player
@@ -24,7 +28,7 @@ public abstract class Player {
     this.playerId = playerId;
     this.reinforcement = reinforcement;
     this.countryOwned = countryOwned;
-    this.playerMission = mission;
+    this.playerMission = playerMission;
     // increments number of players created
     PlayerCount++;
   }
@@ -73,11 +77,13 @@ public abstract class Player {
   }
   
   public int[] Attack(Country playerPos, Country enemyPos, int numAttacker) {
-    
+    int[] placeholder = {1};
+    return placeholder;
   }
   
   public int[] Defender(int numDefender) {
-    
+    int[] placeholder = {1};
+    return placeholder;
   }
   
 }

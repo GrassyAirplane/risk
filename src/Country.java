@@ -26,6 +26,7 @@ public class Country {
    //keeps track of num countries created
    public static int CountryCount = 0; 
    
+   /*=============== CONSTRUCTOR ===============*/
    /* Country Constructor
     * @param countryName  - name of country
     *        continentId  - id of continent, object is apartof
@@ -41,6 +42,30 @@ public class Country {
       CountryCount ++; 
    }
    
+   /*=============== PRIVATE METHODS ===============*/
+   /* Sets the ContinentId of this country */
+   private void setContinentId() {
+      if( this.countryId >= 0 && this.countryId <= 8 ) {
+         this.continentId = NORTH_AMERICA_CONTINENT_ID;
+      }
+      else if( this.countryId >= 9 && this.countryId <= 12 ) {
+         this.continentId = SOUTH_AMERICA_CONTINENT_ID; 
+      }
+      else if( this.countryId >= 13 && this.countryId <= 19 ) {
+         this.continentId = EUROPE_CONTINENT_ID; 
+      }
+      else if( this.countryId >= 20 && this.countryId <= 25 ) {
+         this.continentId = AFRICA_CONTINENT_ID; 
+      }
+      else if( this.countryId >= 26 && this.countryId <= 37 ) {
+         this.continentId = ASIA_CONTINENT_ID;
+      }
+      else {
+         this.continentId = AUSTRALIA_CONTINENT_ID;
+      }
+   }
+   
+   /*=============== PUBLIC METHODS ===============*/ 
    /* Gets the number of Troops in the country 
     * @return - Troop Count */
    public int GetTroopCount() {
@@ -69,28 +94,6 @@ public class Country {
     * @return - Country id int */
    public int GetCountryId() {
       return this.countryId; 
-   }
-   
-   /* Sets the ContinentId of this country */
-   private void setContinentId() {
-      if( this.countryId >= 0 && this.countryId <= 8 ) {
-         this.continentId = NORTH_AMERICA_CONTINENT_ID;
-      }
-      else if( this.countryId >= 9 && this.countryId <= 12 ) {
-         this.continentId = SOUTH_AMERICA_CONTINENT_ID; 
-      }
-      else if( this.countryId >= 13 && this.countryId <= 19 ) {
-         this.continentId = EUROPE_CONTINENT_ID; 
-      }
-      else if( this.countryId >= 20 && this.countryId <= 25 ) {
-         this.continentId = AFRICA_CONTINENT_ID; 
-      }
-      else if( this.countryId >= 26 && this.countryId <= 37 ) {
-         this.continentId = ASIA_CONTINENT_ID;
-      }
-      else {
-         this.continentId = AUSTRALIA_CONTINENT_ID;
-      }
    }
    
    /* Gets the Continent id 

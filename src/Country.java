@@ -12,14 +12,13 @@ public class Country {
    public final static int ASIA_CONTINENT_ID               = 4;
    public final static int AUSTRALIA_CONTINENT_ID          = 5;
 
-   
-   //instance variables
+   /* INSTANCE VARIABLES */
    private String countryName; 
    private int countryId; 
    private int continentId;
    private int[] adjacency;
    
-   //additional variables
+   /* ADDITIONAL VARIABLES */
    private int troopCount;  
    private Player owner; 
    

@@ -3,5 +3,12 @@
 
 /* Database */
 public class Database { 
-
+   
+   /*=============== CONSTRUCTOR ===============*/
+   public Database() {
+      this.allParcels = null;
+   }
+   
+   
+   
 }

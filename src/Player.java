@@ -1,5 +1,5 @@
 /* Developed By: ------
- * Revised Date: Nov 17, 2021 */
+ * Revised Date: Nov 18, 2021 */
 
 /* Abstract Player Class
  * Children  : Attacker
@@ -78,11 +78,19 @@ public abstract class Player {
     this.bonusStatus = status;
   }
   
+  /* attacks from one country to another
+   * @param playerPos   - country the player is attacking from
+   *        enemyPos    - country that is being attacked
+   *        numAttacker - number of troops being used to attack
+   * @return            - returns the dice values in an array */
   public int[] Attack(Country playerPos, Country enemyPos, int numAttacker) {
     int[] placeholder = {1};
     return placeholder;
   }
   
+  /* player being attacked defends with troops
+   * @param numDefender - number of troops player has to defend country
+   * @return            - dice values in an array */
   public int[] Defender(int numDefender) {
     int[] placeholder = {1};
     return placeholder;

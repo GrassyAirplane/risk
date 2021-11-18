@@ -1,5 +1,5 @@
 /* Developed By: Euan Lim
- * Revised Date: Nov 18, 2021 */
+ * Revised Date: Nov 19, 2021 */
 
 /* Country Class */
 public class Country { 
@@ -11,6 +11,7 @@ public class Country {
    public final static int AFRICA_CONTINENT_ID             = 3;
    public final static int ASIA_CONTINENT_ID               = 4;
    public final static int AUSTRALIA_CONTINENT_ID          = 5;
+   public final static int NUM_COUNTRIES                   = 42;
 
    /* INSTANCE VARIABLES */
    private String countryName; 

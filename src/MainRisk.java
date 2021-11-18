@@ -8,8 +8,8 @@ public class MainRisk {
       //Main Code
       
       int[] blank = {0,5,3};
-      Country Malaysia = new Country("Malaysia", 1, blank);
-      Country Singapore = new Country("Singapore", 1, blank);
+      Country Malaysia = new Country("Malaysia", blank);
+      Country Singapore = new Country("Singapore", blank);
       
       System.out.println(Malaysia.GetCountryId() + " " + Malaysia.GetContinentId());
       System.out.println(Singapore.GetCountryId() + " " + Singapore.GetContinentId());

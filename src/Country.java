@@ -4,6 +4,15 @@
 /* Country Class */
 public class Country { 
    
+   /* GLOBAL VARIABLES */
+   public final static int NORTH_AMERICA_CONTINENT_ID      = 0;
+   public final static int SOUTH_AMERICA_CONTINENT_ID      = 1;
+   public final static int EUROPE_CONTINENT_ID             = 2;
+   public final static int AFRICA_CONTINENT_ID             = 3;
+   public final static int ASIA_CONTINENT_ID               = 4;
+   public final static int AUSTRALIA_CONTINENT_ID          = 5;
+
+   
    //instance variables
    private String countryName; 
    private int countryId; 
@@ -21,12 +30,13 @@ public class Country {
     * @param countryName  - name of country
     *        continentId  - id of continent, object is apartof
     *        adjacency    - id's of country current object is adjacent to */
-   public Country( String countryName, int continentId, int[] adjacency ) {
+   public Country( String countryName, int[] adjacency ) {
       this.countryName = countryName;
-      this.continentId = continentId; 
       this.adjacency = adjacency;
       //Sets country id to the current country count 
       this.countryId = CountryCount; 
+      //Sets continent id
+      setContinentId();
       //Increments the county count
       CountryCount ++; 
    }
@@ -59,6 +69,28 @@ public class Country {
     * @return - Country id int */
    public int GetCountryId() {
       return this.countryId; 
+   }
+   
+   /* Sets the ContinentId of this country */
+   private void setContinentId() {
+      if( this.countryId >= 0 && this.countryId <= 8 ) {
+         this.continentId = NORTH_AMERICA_CONTINENT_ID;
+      }
+      else if( this.countryId >= 9 && this.countryId <= 12 ) {
+         this.continentId = SOUTH_AMERICA_CONTINENT_ID; 
+      }
+      else if( this.countryId >= 13 && this.countryId <= 19 ) {
+         this.continentId = EUROPE_CONTINENT_ID; 
+      }
+      else if( this.countryId >= 20 && this.countryId <= 25 ) {
+         this.continentId = AFRICA_CONTINENT_ID; 
+      }
+      else if( this.countryId >= 26 && this.countryId <= 37 ) {
+         this.continentId = ASIA_CONTINENT_ID;
+      }
+      else {
+         this.continentId = AUSTRALIA_CONTINENT_ID;
+      }
    }
    
    /* Gets the Continent id 

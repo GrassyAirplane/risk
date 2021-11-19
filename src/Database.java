@@ -18,6 +18,8 @@ public class Database {
    
    /*=============== CONSTRUCTOR ===============*/
    public Database() {
+      //
+      importCountries(FILE_PATH_COUNTRY);
    }
    
    /*=============== PRIVATE METHODS ===============*/
@@ -36,25 +38,50 @@ public class Database {
          while( scan.hasNextLine() ) {
             //Access line in file
             String scanData = scan.nextLine();
-            
+              
             //Checks to make sure the current line is not empty 
             if( !scanData.equals("") ) {
                
                //converts scanData into an array
                String[] dataArray = scanData.split(":");
+
+               //Initialize Country object into allCountry array
+               this.allCountries[index] = new Country(dataArray[0], stringToIntArray(dataArray[1]));
                
-               
-            
+               //Increments index
+               index++;
             }
-            
-            
-         
          }
-         
+   }
+   
+   /* Converts string into 
+    * @param adjacencyData - string in format x,y,z...
+    * @return              - int array of data */
+   private int[] stringToIntArray(String adjacencyData) {
+      //Converts string into array
+      String[] tempArray = adjacencyData.split(",");
+      
+      //Creates an int array with size lenth of tempArray
+      int[] returnArray = new int[tempArray.length];
+      
+      //parses through every item in tempArray
+      for( int i = 0; i < tempArray.length; i++ ) {
+      
+         //slots in the values, converting the strings into ints
+         returnArray[i] = Integer.parseInt(tempArray[i]);
+      }
+      
+      return returnArray; 
    }
    
    
    /*=============== PUBLIC METHODS ===============*/ 
+   
+   public void displayCountryNames() {
+      for( int i = 0; i < allCountries.length; i++ ) {
+         System.out.println(allCountries[i].get);
+      }
+   }
    
    /*
    public Country getCountry(String countryName) {   

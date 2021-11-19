@@ -90,6 +90,12 @@ public class Country {
       this.owner = newOwner;
    }
    
+   /* Gets the string name of the country
+    * @return - name of the country */
+   public String GetCountryName() {
+      return this.countryName; 
+   }
+   
    /* Gets the Country id
     * @return - Country id int */
    public int GetCountryId() {

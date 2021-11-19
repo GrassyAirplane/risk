@@ -92,6 +92,10 @@ public class Database {
    */
    
    
+   /* Gets Country Position in allCountries array by country name
+    * @param countryName  -  name of Counrty
+    * @return             -  position of country in allCountries
+    *                     -1 if country doesn't exist */
    public int GetCountryPos(String countryName) {   
       for( int i = 0; i < allCountries.length; i++ ) {
          if( allCountries[i].GetCountryName().toUpperCase().equals(countryName.toUpperCase()) ) {
@@ -101,6 +105,10 @@ public class Database {
       return -1;
    }
    
+   /* Gets Country Position in allCountries array by country id
+    * @param countryId    -  id of Country 
+    * @return             -  position of country in allCountries
+    *                     -1 if country doesn't exist */
    public int GetCountryPos(int countryId) {
       for( int i = 0; i < allCountries.length; i++ ) {
          if( allCountries[i].GetCountryId() == countryId) {
@@ -110,6 +118,8 @@ public class Database {
       return -1; 
    }
    
+   /* Gets Country in allCountries array by its pos index
+    **/
    public Country GetCountryByPos(int countryPos) {
       return allCountries[countryPos]; 
    }

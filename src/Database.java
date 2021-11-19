@@ -11,7 +11,7 @@ public class Database {
    /* INSTANCE VARIABLE */
    private Country[] allCountries;
    private Bonus[] allBonus;
-   private Mission[] allMission;
+   private Mission[] allMission;;
    
    /* FILE VARIABLES */
    private final static String FILE_PATH_COUNTRY = "../Countries.txt";
@@ -106,7 +106,7 @@ public class Database {
                   //converts scanData into an array
                   String[] dataArray = scanData.split(":");
                   //Adds initialized country object           
-                  addMission( new Mission(dataArray[0],dataArray[1]) ); 
+                  addMission(new Mission(dataArray[0], dataArray[1])); 
                }
             }
       } catch( FileNotFoundException exception ) {
@@ -173,7 +173,7 @@ public class Database {
       }
       
       else {
-         //Create temp array with length of one longer then allCountries
+         //Create temp array with length of one longer then allBonus
          tempArray = new Bonus[this.allBonus.length + 1];
          
          //copies allCountries into tempArray
@@ -191,27 +191,6 @@ public class Database {
    /* Increases the size of allMission Array, adding the inputted Mission Card object in
     * @param    - Mission Card inputted*/
    private void addMission(Mission mission) {
-      //Initilize empty temp array
-      Mission[] tempArray; 
-      
-      if( this.allMission == null ) {
-         //Creates temp array with length of one
-         tempArray = new Mission[1];
-      }
-      else {
-         //Create temp array with length of one longer then allCountries
-         tempArray = new Mission[this.allMission.length + 1];
-         
-         //copies allCountries into tempArray
-         for( int i = 0; i < this.allMission.length; i++ ) {
-            System.out.println(this.allMission[i]);
-            tempArray[i] = this.allMission[i];
-         }
-         //Adds given country into the last position of the temp array
-         tempArray[tempArray.length-1] = mission;
-         //Sets allCountries to equal tempArray
-         this.allMission = tempArray;
-      }
    }
    
    /*=============== PUBLIC METHODS ===============*/ 
@@ -279,12 +258,5 @@ public class Database {
          }
       }
       return -1;
-   }
-   
-   
-   public void PrintBonusId() {
-      for(int i = 0; i < allMission.length; i++){
-         System.out.println(allMission.length);
-      }
    }
 }

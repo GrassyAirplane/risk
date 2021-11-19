@@ -19,8 +19,5 @@ public class MainRisk {
       for (int i = 0; i < a.Attack(3).length; i++) {
         System.out.println(a.Attack(3)[i]);
       */
-      
-      db.PrintBonusId();
-      
    }  
 }

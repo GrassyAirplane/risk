@@ -9,7 +9,7 @@ public class MainRisk {
       
       Database db = new Database();
       
-      System.out.println(db.GetCountryPos(2));
+      System.out.println(db.GetCountryPos("Siberia"));
    
       
    }  

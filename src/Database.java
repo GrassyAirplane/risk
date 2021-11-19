@@ -15,7 +15,7 @@ public class Database {
    
    /* FILE VARIABLES */
    private final static String FILE_PATH_COUNTRY = "../Countries.txt";
-   private final static String FILE_PATH_CARD = "";
+   private final static String FILE_PATH_BONUS = "../Bonus.txt";
    
    /*=============== CONSTRUCTOR ===============*/
    public Database()  /*if File not found in scanner*/ {
@@ -28,7 +28,7 @@ public class Database {
     * and initializing country instances which are then inserted
     * into allCountries Country array. 
     * @param fileName - path to access file */
-   private void importCountries(String fileName)  /*if File not found in scanner*/ {
+   private void importCountries(String fileName) {
          /* Catching incorrect file input */
          try {
             //Create Scanner of file
@@ -53,6 +53,36 @@ public class Database {
             System.out.println(exception); 
          }
    }
+   
+   /* imports all of the bonus Cards data from the inputted textfile,
+    * and intializing Bonus Card instances inserte into allBonus array
+    * @param fileName - path to access file */
+   private void importBonusCard(String fileName) {
+      /* Catching incorrect file input */
+      try {
+         //Create Scanner of file
+         Scanner scan = new Scanner(new File(fileName)); 
+         
+         //Accesses every line in the file
+            while( scan.hasNextLine() ) {
+               //Access line in file
+               String scanData = scan.nextLine();
+                 
+               //Checks to make sure the current line is not empty 
+               if( !scanData.equals("") ) {
+                  
+                  //converts scanData into an array
+                  String[] dataArray = scanData.split(":");
+                  
+                  //Adds initialized country object           
+                  addBonus( new Bonus(dataArray[0], Integer.parseInt(dataArray[1])) );
+               }
+            }
+      } catch( FileNotFoundException exception ) {
+            System.out.println(exception); 
+         }
+   }
+   
    
    /* Converts string into 
     * @param adjacencyData - string in format x,y,z...
@@ -81,7 +111,7 @@ public class Database {
       //Initilize empty temp array
       Country[] tempArray; 
       
-      if( this.allCountries == null) {
+      if( this.allCountries == null ) {
          //Creates temp array with length of one
          tempArray = new Country[1];
       }
@@ -99,6 +129,35 @@ public class Database {
       //Sets allCountries to equal tempArray
       this.allCountries = tempArray;
    }
+   
+   /* Increases the size of allBonus Array, adding the inputted Bonus Card object in
+    * @param    - Bonus Card inputted*/
+   private void addBonus(Card bonus) {
+      //Initilize empty temp array
+      Card[] tempArray; 
+      
+      if( this.allBonus == null ) {
+         //Creates temp array with length of one
+         tempArray = new Card[1];
+      }
+      
+      else {
+         //Create temp array with length of one longer then allCountries
+         tempArray = new Card[this.allBonus.length + 1];
+         
+         //copies allCountries into tempArray
+         for( int i = 0; i < this.allBonus.length; i++ ) {
+            tempArray[i] = this.allBonus[i];
+         }
+      }
+      
+      //Adds given country into the last position of the temp array
+      tempArray[tempArray.length-1] = bonus;
+      //Sets allCountries to equal tempArray
+      this.allBonus = tempArray;
+  }
+
+   
    
    /*=============== PUBLIC METHODS ===============*/ 
    /* Gets Country Position in allCountries array by country name

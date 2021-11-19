@@ -21,6 +21,7 @@ public class Database {
    public Database()  /*if File not found in scanner*/ {
       //Imports Country data 
       importCountries(FILE_PATH_COUNTRY);
+      importBonusCard(FILE_PATH_BONUS); 
    }
    
    /*=============== PRIVATE METHODS ===============*/
@@ -192,5 +193,26 @@ public class Database {
    public Country GetCountryByPos(int countryPos) {
       return allCountries[countryPos]; 
    }
+   
+   /* Gets Bonus Card Position in allBonus array by card id 
+    * @param cardId       -  id of Card 
+    * @return             -  position of country in allCountries
+    *                     -1 if card doesn't exist */  
+   public int GetBonusPos(int cardId) {
+      for( int i = 0; i < allBonus.length; i++ ) {
+         if( allBonus[i].GetCardId() == cardId ) {
+            return i;
+         }
+      }
+      return -1; 
+   }
+   
+   /* Gets Card in allBonus array by its pos index
+    * @param bonusPos     -  position of card in allBonus
+    * @return             -  Bonus card instance at position in allBonus */
+   public Card GetBonusByPos(int bonusPos) {
+      return allBonus[bonusPos]; 
+   }
+   
    
 }

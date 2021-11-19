@@ -1,5 +1,7 @@
-/* Developed By: ------
- * Revised Date: Nov 18, 2021 */
+/* Developed By: Zoe Tay Shiao Shuen
+ * Revised Date: Nov 19, 2021 */
+
+import java.util.Random;
 
 /* Abstract Player Class
  * Children  : Attacker
@@ -8,7 +10,7 @@
 
 public abstract class Player { 
   
-  // instance variables
+  /* INSTANCE VARIABLES */
   private int playerId;
   private int reinforcement;
   private Country[] countryOwned;
@@ -19,8 +21,8 @@ public abstract class Player {
   // keeps track of number of players created
   public static int PlayerCount = 0;
   
-  /* constructs a new player
-   * @param playerId      - ID of player
+  /*=============== CONSTRUCTOR ===============*/
+  /* @param playerId      - ID of player
    *        reinforcement - number of troop reinforcements player can have at the start of each round
    *        countryOwned  - list of countries the player owns
    *        playerMission - player's personal win condition */
@@ -32,6 +34,8 @@ public abstract class Player {
     // increments number of players created
     PlayerCount++;
   }
+  
+  /*=============== PUBLIC METHODS ===============*/
   
   /* gets the number of troops.
    * @return - value of reinforcement variable. */
@@ -45,13 +49,15 @@ public abstract class Player {
     this.reinforcement = reinforcement;
   }
   
-  // comment
   /* cashes in card bonuses for extra troops.
    * @param bonusCount - number of troops to add to reinforcements. */
   public void Bonus(int bonusCount) {
     // checking if player has necessary cards to cash in
     if (bonusCount == 4) {
-      
+      int numInfantry = 0; // keeps track of number of infantry bonuses
+      for (int i = 0; i < deck.length; i++) {
+        
+      }
     }
     else if (bonusCount == 6) {
       
@@ -85,8 +91,28 @@ public abstract class Player {
    *        numAttacker - number of troops being used to attack
    * @return            - returns the dice values in an array */
   public int[] Attack(Country playerPos, Country enemyPos, int numAttacker) {
-    int[] placeholder = {1};
-    return placeholder;
+    int[] die = {1, 2, 3, 4, 5, 6};
+    int[] rolls = null;
+    // rolling die
+    if (numAttacker == 1) {
+      int firstRoll = die[new Random().nextInt(die.length)];
+      rolls[0] = firstRoll;
+    }
+    else if (numAttacker == 2) {
+      int firstRoll = die[new Random().nextInt(die.length)];
+      int secondRoll = die[new Random().nextInt(die.length)];
+      rolls[0] = firstRoll;
+      rolls[1] = secondRoll;
+    }
+    else if (numAttacker > 2) {
+      int firstRoll = die[new Random().nextInt(die.length)];
+      int secondRoll = die[new Random().nextInt(die.length)];
+      int thirdRoll = die[new Random().nextInt(die.length)];
+      rolls[0] = firstRoll;
+      rolls[1] = secondRoll;
+      rolls[3] = thirdRoll;
+    }
+    return rolls;
   }
   
   /* player being attacked defends with troops

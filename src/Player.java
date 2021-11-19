@@ -45,6 +45,7 @@ public abstract class Player {
     this.reinforcement = reinforcement;
   }
   
+  // comment
   /* cashes in card bonuses for extra troops.
    * @param bonusCount - number of troops to add to reinforcements. */
   public void Bonus(int bonusCount) {

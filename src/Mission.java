@@ -23,6 +23,12 @@ public class Mission extends Card {
   }
   
   /*=============== PUBLIC METHODS ===============*/
+  /* Gets Card's missionDesc 
+    * @return - missionDesc */
+   public String GetMissionDesc() {
+      return this.missionDesc;
+   }
+  
   /* Gets Card's missionId 
     * @return - missionId */
    public int GetMissionId() {

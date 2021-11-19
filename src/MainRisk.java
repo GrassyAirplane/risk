@@ -9,6 +9,7 @@ public class MainRisk {
       
       Database db = new Database();
       
+      /*
       System.out.println(db.GetCountryPos("Siberia"));
       
       Country[] temp = null;
@@ -17,6 +18,9 @@ public class MainRisk {
       a.Attack(3);
       for (int i = 0; i < a.Attack(3).length; i++) {
         System.out.println(a.Attack(3)[i]);
-      }
+      */
+      
+      db.PrintBonusId();
+      
    }  
 }

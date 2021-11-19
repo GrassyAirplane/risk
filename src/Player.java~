@@ -14,7 +14,7 @@ public abstract class Player {
   private int playerId;
   private char playerChar;
   private int reinforcement;
-  private int[] countryOwned;
+  private Country[] countryOwned;
   private Bonus[] deck;
   private Mission playerMission;
   private boolean bonusStatus;
@@ -27,7 +27,7 @@ public abstract class Player {
    *        reinforcement - number of troop reinforcements player can have at the start of each round
    *        countryOwned  - list of countries the player owns
    *        playerMission - player's personal win condition */
-  public Player(char playerChar, int reinforcement, int[] countryOwned, Mission playerMission) {
+  public Player(char playerChar, int reinforcement, Country[] countryOwned, Mission playerMission) {
     this.playerChar = playerChar;
     this.reinforcement = reinforcement;
     this.countryOwned = countryOwned;
@@ -59,88 +59,23 @@ public abstract class Player {
   }
   
   /* cashes in card bonuses for extra troops.
-   * @param bonusCount - number of troops to add to reinforcements.
-   * @return           - 1 if bonus troops are successfully added to reinforcements
-   *                   - -1 if the player do not have the required bonuses to cash in */
-  // not yet subtracted cashed in bonus cards from deck and added them back to cards
-  public int Bonus(int bonusCount) {
-    int numInfantry = 0; // keeps track of number of infantry bonuses
-    int numHorse = 0; // keeps track of number of horse bonuses
-    int numCannon = 0; // keeps track of number of cannon bonuses
-    int numJoker = 0; // keeps track of number of joker bonuses
-    
-    // counting number of troops for each type
-    for (int i = 0; i < deck.length; i++) {
-      if (deck[i].GetTroopBonusType() == GameSystem.INFANTRY_TROOP) {
-        numInfantry++;
-      }
-      else if (deck[i].GetTroopBonusType() == GameSystem.HORSE_TROOP) {
-        numHorse++;
-      }
-      else if (deck[i].GetTroopBonusType() == GameSystem.CANNON_TROOP) {
-        numCannon++;
-      }
-      else if (deck[i].GetTroopBonusType() == GameSystem.JOKER_TROOP) {
-        numJoker++;
-      }
-    }
+   * @param bonusCount - number of troops to add to reinforcements. */
+  public void Bonus(int bonusCount) {
     // checking if player has necessary cards to cash in
     if (bonusCount == 4) {
-      // checking if the required number of infantry bonuses is met
-      if (numInfantry >= 3) {
-        this.reinforcement += 4;
-        return 1;
-      }
-      else if (numJoker >= (3 - numInfantry)) {
-        // checking if there are joker bonuses to cash in as replacement
-        this.reinforcement += 4;
-        return 1;
-      }
-      else {
-        return -1;
+      int numInfantry = 0; // keeps track of number of infantry bonuses
+      for (int i = 0; i < deck.length; i++) {
+        
       }
     }
     else if (bonusCount == 6) {
-      if (numHorse >= 3) {
-        // checking if there are enough horse troop bonuses
-        this.reinforcement += 6;
-        return 1;
-      }
-      else if (numJoker >= (3 - numHorse)) {
-        // checking if there are enough joker bonuses for replacement
-        this.reinforcement += 6;
-        return 1;
-      }
-      else {
-        return -1;
-      }
+      
     }
     else if (bonusCount == 8) {
-      // checking if there are enough cannon troop bonuses
-      if (numCannon >= 3) {
-        this.reinforcement += 8;
-        return 1;
-      }
-      else if (numJoker >= (3 - numCannon)) {
-        this.reinforcement += 8;
-        return 1;
-      }
-      else {
-        return -1;
-      }
+      
     }
     else if (bonusCount == 10) {
-      // checking if there are enough troop bonuses to cash in for 10
-      if (numInfantry > 0 && numHorse > 0 && numCannon > 0) {
-        this.reinforcement += 10;
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    }
-    else {
-      return -1; // default return for compiling purpose
+      
     }
   }
   

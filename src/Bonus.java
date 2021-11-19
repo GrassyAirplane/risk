@@ -16,6 +16,7 @@ public class Bonus extends Card {
       this.troopBonusType = troopBonusType; 
    }
    
+   /*=============== PUBLIC METHODS ===============*/
    /* Gets troopBonusType of card
     * @return - troopBonusType*/
    public int GetTroopBonusType() {

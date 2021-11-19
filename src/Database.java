@@ -17,8 +17,8 @@ public class Database {
    private final static String FILE_PATH_CARD = "";
    
    /*=============== CONSTRUCTOR ===============*/
-   public Database() {
-      //
+   public Database() throws FileNotFoundException /*if File not found in scanner*/ {
+      //Imports Country data 
       importCountries(FILE_PATH_COUNTRY);
    }
    
@@ -71,15 +71,16 @@ public class Database {
          returnArray[i] = Integer.parseInt(tempArray[i]);
       }
       
+      //returned int array
       return returnArray; 
    }
    
    
    /*=============== PUBLIC METHODS ===============*/ 
    
-   public void displayCountryNames() {
+   public void DisplayCountryNames() {
       for( int i = 0; i < allCountries.length; i++ ) {
-         System.out.println(allCountries[i].get);
+         System.out.println(allCountries[i].GetCountryName() +" "+allCountries[i].GetCountryId());
       }
    }
    

@@ -1,12 +1,13 @@
 /* Developed By: ------
  * Revised Date: Nov 17, 2021 */
 
-//Zoe Added Comment
+import java.io.FileNotFoundException;
 
 public class MainRisk {
-   public static void main(String [] args) {
+   public static void main(String [] args) throws FileNotFoundException {
       //Main Code
       
+      /*
       int[] blank = {0,5,3};
       Country Malaysia = new Country("Malaysia", blank);
       Country Singapore = new Country("Singapore", blank);
@@ -18,6 +19,10 @@ public class MainRisk {
       
       System.out.println(Singapore.isAdjacent(Malaysia.GetCountryId()));
       //public Country( String countryName, int continentId, int[] adjacency ) {
-
-   }
+      */
+      
+      Database db = new Database();
+      db.DisplayCountryNames(); 
+      
+   }  
 }

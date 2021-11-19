@@ -19,5 +19,7 @@ public class MainRisk {
       for (int i = 0; i < a.Attack(3).length; i++) {
         System.out.println(a.Attack(3)[i]);
       */
+      
+      System.out.println(db.GetMissionByPos(db.GetMissionPos(5)).GetMissionDesc());
    }  
 }

@@ -83,17 +83,35 @@ public class Database {
    
    /*=============== PUBLIC METHODS ===============*/ 
    
+   /*
    public void DisplayCountryNames() {
       for( int i = 0; i < allCountries.length; i++ ) {
          System.out.println(allCountries[i].GetCountryName() +" "+allCountries[i].GetCountryId());
       }
    }
-   
-   /*
-   public Country getCountry(String countryName) {   
-   }
-   
-   public Country getCountry(int countryId) {
-   }
    */
+   
+   
+   public int GetCountryPos(String countryName) {   
+      for( int i = 0; i < allCountries.length; i++ ) {
+         if( allCountries[i].GetCountryName().toUpperCase().equals(countryName.toUpperCase()) ) {
+            return i; 
+         }
+      }
+      return -1;
+   }
+   
+   public int GetCountryPos(int countryId) {
+      for( int i = 0; i < allCountries.length; i++ ) {
+         if( allCountries[i].GetCountryId() == countryId) {
+            return i; 
+         }
+      }
+      return -1; 
+   }
+   
+   public Country GetCountryByPos(int countryPos) {
+      return allCountries[countryPos]; 
+   }
+   
 }

@@ -22,7 +22,9 @@ public class MainRisk {
       */
       
       Database db = new Database();
-      db.DisplayCountryNames(); 
+      
+      System.out.println(db.GetCountryPos(2));
+   
       
    }  
 }

@@ -17,7 +17,7 @@ public class Database {
    private final static String FILE_PATH_CARD = "";
    
    /*=============== CONSTRUCTOR ===============*/
-   public Database() throws FileNotFoundException /*if File not found in scanner*/ {
+   public Database()  /*if File not found in scanner*/ {
       //Imports Country data 
       importCountries(FILE_PATH_COUNTRY);
    }
@@ -27,30 +27,35 @@ public class Database {
     * and initializing country instances which are then inserted
     * into allCountries Country array. 
     * @param fileName - path to access file */
-   private void importCountries(String fileName) throws FileNotFoundException /*if File not found in scanner*/ {
-         //Create Scanner of file
-         Scanner scan = new Scanner(new File(fileName)); 
-         
-         //indexAllCountries
-         int index = 0; 
-         
-         //Accesses every line in the file
-         while( scan.hasNextLine() ) {
-            //Access line in file
-            String scanData = scan.nextLine();
-              
-            //Checks to make sure the current line is not empty 
-            if( !scanData.equals("") ) {
-               
-               //converts scanData into an array
-               String[] dataArray = scanData.split(":");
-
-               //Initialize Country object into allCountry array
-               this.allCountries[index] = new Country(dataArray[0], stringToIntArray(dataArray[1]));
-               
-               //Increments index
-               index++;
+   private void importCountries(String fileName)  /*if File not found in scanner*/ {
+         /* Catching incorrect file input */
+         try {
+            //Create Scanner of file
+            Scanner scan = new Scanner(new File(fileName)); 
+            
+            //indexAllCountries
+            int index = 0; 
+            
+            //Accesses every line in the file
+            while( scan.hasNextLine() ) {
+               //Access line in file
+               String scanData = scan.nextLine();
+                 
+               //Checks to make sure the current line is not empty 
+               if( !scanData.equals("") ) {
+                  
+                  //converts scanData into an array
+                  String[] dataArray = scanData.split(":");
+   
+                  //Initialize Country object into allCountry array
+                  this.allCountries[index] = new Country(dataArray[0], stringToIntArray(dataArray[1]));
+                  
+                  //Increments index
+                  index++;
+               }
             }
+         } catch( FileNotFoundException exception ) {
+            System.out.println(exception); 
          }
    }
    

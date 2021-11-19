@@ -44,6 +44,12 @@ public class Country {
    /*=============== PRIVATE METHODS ===============*/
    /* Sets the ContinentId of this country */
    private void setContinentId() {
+      /* first 9 Countries are part of North America
+       * next  4 Countries are part of South America
+       * next  7 Countries are part of Europe
+       * next  6 Countries are part of Africa
+       * next 12 Countries are part of Asia
+       * next  4 Countries are part of Australia */
       if( this.countryId >= 0 && this.countryId <= 8 ) {
          this.continentId = NORTH_AMERICA_CONTINENT_ID;
       }

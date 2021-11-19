@@ -141,7 +141,7 @@ public abstract class Player {
   /* player being attacked defends with troops
    * @param numDefender - number of troops player has to defend country
    * @return            - dice values in an array */
-  public int[] Defender(int numDefender) {
+  public int[] Defend(int numDefender) {
     int[] die = {1, 2, 3, 4, 5, 6};
     int[] rolls;
     // rolling die

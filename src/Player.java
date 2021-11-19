@@ -12,6 +12,7 @@ public abstract class Player {
   
   /* INSTANCE VARIABLES */
   private int playerId;
+  private char playerChar;
   private int reinforcement;
   private Country[] countryOwned;
   private Bonus[] deck;
@@ -26,13 +27,15 @@ public abstract class Player {
    *        reinforcement - number of troop reinforcements player can have at the start of each round
    *        countryOwned  - list of countries the player owns
    *        playerMission - player's personal win condition */
-  public Player(int playerId, int reinforcement, Country[] countryOwned, Mission playerMission) {
-    this.playerId = playerId;
+  public Player(char playerChar, int reinforcement, Country[] countryOwned, Mission playerMission) {
+    this.playerChar = playerChar;
     this.reinforcement = reinforcement;
     this.countryOwned = countryOwned;
     this.playerMission = playerMission;
     // increments number of players created
     PlayerCount++;
+    // setting player ID
+    this.playerId = this.PlayerCount;
   }
   
   /*=============== PUBLIC METHODS ===============*/
@@ -90,28 +93,42 @@ public abstract class Player {
    *        enemyPos    - country that is being attacked
    *        numAttacker - number of troops being used to attack
    * @return            - returns the dice values in an array */
-  public int[] Attack(Country playerPos, Country enemyPos, int numAttacker) {
+  public int[] Attack(int numAttacker) {
     int[] die = {1, 2, 3, 4, 5, 6};
-    int[] rolls = null;
+    int[] rolls;
     // rolling die
     if (numAttacker == 1) {
-      int firstRoll = die[new Random().nextInt(die.length)];
-      rolls[0] = firstRoll;
+      rolls = new int[1];
+      rolls[0] = die[new Random().nextInt(die.length)];
     }
     else if (numAttacker == 2) {
-      int firstRoll = die[new Random().nextInt(die.length)];
-      int secondRoll = die[new Random().nextInt(die.length)];
-      rolls[0] = firstRoll;
-      rolls[1] = secondRoll;
+      rolls = new int[2];
+      rolls[0] = die[new Random().nextInt(die.length)];
+      rolls[1] = die[new Random().nextInt(die.length)];
     }
-    else if (numAttacker > 2) {
-      int firstRoll = die[new Random().nextInt(die.length)];
-      int secondRoll = die[new Random().nextInt(die.length)];
-      int thirdRoll = die[new Random().nextInt(die.length)];
-      rolls[0] = firstRoll;
-      rolls[1] = secondRoll;
-      rolls[3] = thirdRoll;
+    else {
+      rolls = new int[3];
+      rolls[0] = die[new Random().nextInt(die.length)];
+      rolls[1] = die[new Random().nextInt(die.length)];
+      rolls[2] = die[new Random().nextInt(die.length)];
     }
+    
+    // sorting the rolls array highest to lowest value
+    for (int i = 0; i < rolls.length - 1; i++) {
+      int currMax = rolls[i];
+      int currMaxIndex = i;
+      for (int j = i + 1; j < rolls.length; j++) {
+        if (rolls[j] > currMax) {
+          currMax = rolls[j];
+          currMaxIndex = j;
+        }
+      }
+      if (currMaxIndex != i) {
+        rolls[currMaxIndex] = rolls[i];
+        rolls[i] = currMax;
+      }
+    }
+    
     return rolls;
   }
   

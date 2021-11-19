@@ -5,4 +5,13 @@
  * Parent  : Card */
 public class Mission extends Card { 
    
+  /* INSTANCE VARIABLES */
+  private String missionDesc;
+  private int missionId;
+  
+  /*=============== CONSTRUCTOR ===============*/
+  public Mission(String missionDesc) {
+    this.missionDesc = missionDesc;
+  }
+  
 }

@@ -1,5 +1,5 @@
-/* Developed By: ------
- * Revised Date: Nov 17, 2021 */
+/* Developed By: Euan 
+ * Revised Date: Nov 19, 2021 */
 
 /* Card Class
  * Children  : Bonus

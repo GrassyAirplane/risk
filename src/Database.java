@@ -9,8 +9,9 @@ import java.util.Scanner;
 public class Database { 
    
    /* INSTANCE VARIABLE */
-   private Country[] allCountries = new Country[Country.NUM_COUNTRIES];
-   private Card[] allCards;
+   private Country[] allCountries;
+   private Card[] allBonus;
+   private Card[] allMission;
    
    /* FILE VARIABLES */
    private final static String FILE_PATH_COUNTRY = "../Countries.txt";
@@ -33,9 +34,6 @@ public class Database {
             //Create Scanner of file
             Scanner scan = new Scanner(new File(fileName)); 
             
-            //indexAllCountries
-            int index = 0; 
-            
             //Accesses every line in the file
             while( scan.hasNextLine() ) {
                //Access line in file
@@ -47,11 +45,8 @@ public class Database {
                   //converts scanData into an array
                   String[] dataArray = scanData.split(":");
    
-                  //Initialize Country object into allCountry array
-                  this.allCountries[index] = new Country(dataArray[0], stringToIntArray(dataArray[1]));
-                  
-                  //Increments index
-                  index++;
+                  //Adds initialized country object           
+                  addCountry( new Country(dataArray[0], stringToIntArray(dataArray[1])) );
                }
             }
          } catch( FileNotFoundException exception ) {
@@ -80,18 +75,32 @@ public class Database {
       return returnArray; 
    }
    
+   /* Increases the size of allCountry Array, adding the inputted country object in
+    * @param    - Country instance to be inputted*/
+   private void addCountry(Country country) {
+      //Initilize empty temp array
+      Country[] tempArray; 
+      
+      if( this.allCountries == null) {
+         //Creates temp array with length of one
+         tempArray = new Country[1];
+      }
+      else {
+         //Create temp array with length of one longer then allCountries
+         tempArray = new Country[this.allCountries.length + 1];
+         
+         //copies allCountries into tempArray
+         for( int i = 0; i < this.allCountries.length; i++ ) {
+            tempArray[i] = this.allCountries[i];
+         }
+      }
+      //Adds given country into the last position of the temp array
+      tempArray[tempArray.length-1] = country;
+      //Sets allCountries to equal tempArray
+      this.allCountries = tempArray;
+   }
    
    /*=============== PUBLIC METHODS ===============*/ 
-   
-   /*
-   public void DisplayCountryNames() {
-      for( int i = 0; i < allCountries.length; i++ ) {
-         System.out.println(allCountries[i].GetCountryName() +" "+allCountries[i].GetCountryId());
-      }
-   }
-   */
-   
-   
    /* Gets Country Position in allCountries array by country name
     * @param countryName  -  name of Counrty
     * @return             -  position of country in allCountries
@@ -119,7 +128,8 @@ public class Database {
    }
    
    /* Gets Country in allCountries array by its pos index
-    **/
+    * @param countryPos   -  position of countrin in allCountries
+    * @return             -  country in the position of allCountries*/
    public Country GetCountryByPos(int countryPos) {
       return allCountries[countryPos]; 
    }

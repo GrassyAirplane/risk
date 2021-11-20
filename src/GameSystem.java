@@ -12,4 +12,8 @@ public class GameSystem {
   public final static int CANNON_TROOP   = 3;
   public final static int JOKER_TROOP    = 4;
   
+  //
+  private Database db = new Database(); 
+  private Displayer disp = new Displayer(db);
+  
 }

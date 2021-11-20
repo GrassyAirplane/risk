@@ -19,6 +19,7 @@ public class Database {
    private final static String FILE_PATH_MISSION = "../Mission.txt";
    
    /*=============== CONSTRUCTOR ===============*/
+   /* Constructor method for Database */
    public Database()  /*if File not found in scanner*/ {
       //Imports Country data 
       importCountries(FILE_PATH_COUNTRY);

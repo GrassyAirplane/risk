@@ -8,6 +8,7 @@ public class MainRisk {
       //Main Code
       
       Database db = new Database();
+      Displayer disp = new Displayer();
       
       /*
       System.out.println(db.GetCountryPos("Siberia"));
@@ -21,5 +22,7 @@ public class MainRisk {
       */
       
       System.out.println(db.GetMissionByPos(db.GetMissionPos(5)).GetMissionDesc());
+      
+      disp.DisplayBoard();
    }  
 }

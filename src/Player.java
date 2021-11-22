@@ -63,11 +63,10 @@ public abstract class Player {
    * @return           - 1 if bonus troops are successfully added to reinforcements
    *                   - -1 if the player do not have the required bonuses to cash in */
   // not yet subtracted cashed in bonus cards from deck and added them back to cards
-  public int Bonus(int bonusCount) {
+  public int Bonus(int t1, int t2, int t3) {
     int numInfantry = 0; // keeps track of number of infantry bonuses
     int numHorse = 0; // keeps track of number of horse bonuses
     int numCannon = 0; // keeps track of number of cannon bonuses
-    int numJoker = 0; // keeps track of number of joker bonuses
     
     // counting number of troops for each type
     for (int i = 0; i < deck.length; i++) {
@@ -80,67 +79,26 @@ public abstract class Player {
       else if (deck[i].GetTroopBonusType() == GameSystem.CANNON_TROOP) {
         numCannon++;
       }
-      else if (deck[i].GetTroopBonusType() == GameSystem.JOKER_TROOP) {
-        numJoker++;
-      }
     }
-    // checking if player has necessary cards to cash in
-    if (bonusCount == 4) {
-      // checking if the required number of infantry bonuses is met
-      if (numInfantry >= 3) {
-        this.reinforcement += 4;
-        return 1;
+    if (t1 == t2 && t1 == t3) {
+      if (t1 == 1) {
+        if (numInfantry >= 3) {
+          this.reinforcement += 4;
+          return 1;
+        }
+        else if (t1 == 2) {
+          if (numHorse >= 3) {
+            this.reinforcement += 6;
+            return 1;
+          }
+        }
+        else {
+          if (numCannon >= 3) {
+            this.reinforcement += 8;
+            return 1;
+          }
+        }
       }
-      else if (numJoker >= (3 - numInfantry)) {
-        // checking if there are joker bonuses to cash in as replacement
-        this.reinforcement += 4;
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    }
-    else if (bonusCount == 6) {
-      if (numHorse >= 3) {
-        // checking if there are enough horse troop bonuses
-        this.reinforcement += 6;
-        return 1;
-      }
-      else if (numJoker >= (3 - numHorse)) {
-        // checking if there are enough joker bonuses for replacement
-        this.reinforcement += 6;
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    }
-    else if (bonusCount == 8) {
-      // checking if there are enough cannon troop bonuses
-      if (numCannon >= 3) {
-        this.reinforcement += 8;
-        return 1;
-      }
-      else if (numJoker >= (3 - numCannon)) {
-        this.reinforcement += 8;
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    }
-    else if (bonusCount == 10) {
-      // checking if there are enough troop bonuses to cash in for 10
-      if (numInfantry > 0 && numHorse > 0 && numCannon > 0) {
-        this.reinforcement += 10;
-        return 1;
-      }
-      else {
-        return -1;
-      }
-    }
-    else {
-      return -1; // default return for compiling purpose
     }
   }
   
@@ -237,6 +195,84 @@ public abstract class Player {
     }
     
     return rolls;
+  }
+  
+  /* adds a country to list of countries owned by player.
+   * @param id - ID of the country to add */
+  public void AddCountry(int id) {
+    int[] temp;
+    if (this.countryOwned == null) {
+      temp = new int[1];
+    }
+    else {
+      temp = new int[this.countryOwned.length + 1];
+      
+      // transferring all the items in countryOwned to temp
+      for (int i = 0; i < this.countryOwned.length; i++) {
+        temp[i] = this.countryOwned[i];
+      }
+    }
+    
+    // adding the new country in to the last position
+    temp[temp.length - 1] = id;
+    this.countryOwned = temp;
+  }
+  
+  /* removes a country from the list of countries owned by player.
+   * @param pos - position of the country to remove */
+  public void RemoveCountry(int pos) {
+    int[] temp = new int[this.countryOwned.length - 1];
+    int newIndex = 0;
+    
+    // removing item at the position
+    for( int i = 0; i < this.countryOwned.length; i++ ){
+       if( i != pos ) {
+          temp[newIndex] = this.countryOwned[i];
+          newIndex++;
+       }
+    }
+    
+    // setting countryOwned to temp
+    this.countryOwned = temp;
+  }
+  
+  /* adds bonus card to player's bonus deck.
+   * @param bonus - bonus object to add */
+  public void AddBonus(Bonus bonus) {
+    Bonus[] temp;
+    if (this.deck == null) {
+      temp = new Bonus[1];
+    }
+    else {
+      temp = new Bonus[this.deck.length + 1];
+      
+      // transferring all the items in deck to temp
+      for (int i = 0; i < this.deck.length; i++) {
+        temp[i] = this.deck[i];
+      }
+    }
+    
+    // adding the new country in to the last position
+    temp[temp.length - 1] = bonus;
+    this.deck = temp;
+  }
+  
+  /* removes bonus card from player's bonus deck.
+   * @param bonus - bonus object to remove */
+  public void RemoveBonus(Bonus bonus) {
+    int[] temp = new int[this.countryOwned.length - 1];
+    int newIndex = 0;
+    
+    // removing item at the position
+    for( int i = 0; i < this.countryOwned.length; i++ ){
+       if( i != pos ) {
+          temp[newIndex] = this.countryOwned[i];
+          newIndex++;
+       }
+    }
+    
+    // setting countryOwned to temp
+    this.countryOwned = temp;
   }
   
 }

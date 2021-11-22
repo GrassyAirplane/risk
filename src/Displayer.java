@@ -23,11 +23,11 @@ public class Displayer {
    }
    
    
-   public void DisplayBoard() {
-      char icon = 'p';
+   public void DisplayGlobe() {
+      char icon = '#';
       System.out.printf("_____________________________________________________________________________________              \n");
       System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|-Player-                                \n");
-      System.out.printf(".. . . . . . . .%c%c%c%c%c%c . %c . . . . . . . . . . . . . . . .|1.                               \n", icon, icon, icon, icon, icon,icon/*Greenland 2*/,icon/*Iceland 13*/);
+      System.out.printf(".. . . . . . . .%c%c%c%c%c%c . %c . . . . . . . . . . . . . . . .|1.                               \n", icon, icon, icon, icon, icon, icon/*Greenland 2*/,icon/*Iceland 13*/);
       System.out.printf(".. . .%c%c%c%c%c%c .%c. .%c%c%c%c .%c%c . .%c%c%c. . .%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c. . .|2.       \n", icon, icon/*Alaska 0*/, icon, icon, icon, icon/*NorthWest 1*/, icon/*Quebec 5*/, icon, icon, icon, icon/*Greenland 2*/, icon, icon/*Iceland 13*/, icon, icon/*Scandinavia 14*/, icon/*Ukraine 17*/, icon, icon/*Siberia 27*/, icon, icon, icon, icon, icon/*Yakutsk 28*/, icon, icon, icon, icon, icon, icon, icon, icon/*Kamchatka 30*/); 
       System.out.printf(".. . %c%c%c%c%c%c%c%c. %c%c. %c%c. . . %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c . . .|3. \n", icon, icon, icon/*Alaska 0*/, icon, icon, icon, icon, icon/*NorthWest 1*/, icon, icon/*Quebec 5*/, icon, icon/*Greenland 2*/, icon, icon, icon/*Great Britain 15*/, icon, icon/*Northern Europe 16*/, icon/*Ukraine 17*/, icon, icon, icon/*Ural 26*/, icon, icon, icon, icon, icon/*Siberia 27*/,icon, icon, icon, icon, icon, icon/*Irkutsk 29*/, icon, icon, icon, icon, icon/*Kamchatka 30*/);
       System.out.printf(".. . . %c%c%c%c%c%c%c%c%c%c. . . . %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c. . . . . .|4.      \n", icon, icon, icon, icon/*Alberta 3*/, icon, icon, icon/*Ontario 4*/, icon, icon, icon/*Quebec 5*/, icon, icon, icon, icon, icon/*Western Europe 18*/, icon, icon/*Southern Europe*/, icon/*Ukraine 17*/, icon/*Afghanistan 31*/, icon, icon/*Ural 26*/, icon, icon, icon, icon/*China 32*/, icon, icon, icon, icon, icon, icon, icon/*Mongolia 33*/);

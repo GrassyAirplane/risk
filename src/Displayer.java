@@ -27,8 +27,8 @@ public class Displayer {
       String icon = "#";
       System.out.printf("___________________________________________________________________________________\n");
       System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|-Player-                \n");
-      System.out.printf(".. . . . . . . .%s%s%s%s%s . %s . . . . . . . . . . . . . . . .|1.                      \n", icon, icon, icon, icon, icon/*Greenland 2*/,icon/*Iceland 13*/);
-      System.out.printf(".. . .%s%s%s%s%s%s .%s. .%s%s%s%s .%s%s . .%s%s%s. . .%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s. . .|2.  \n", icon, icon/*Alaska 0*/, icon, icon, icon, icon/*NorthWest 1*/, icon/*Quebec*/, icon, icon, icon, icon/*Greenland*/, icon, icon/*Iceland*/);
+      System.out.printf(".. . . . . . . .%c%c%c%c%c . %c . . . . . . . . . . . . . . . .|1.                      \n", icon, icon, icon, icon, icon/*Greenland 2*/,icon/*Iceland 13*/);
+      System.out.printf(".. . .%c%c%c%c%c%c .%c. .%c%c%c%c .%c%c . .%c%c%c. . .%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c. . .|2.  \n", icon, icon/*Alaska 0*/, icon, icon, icon, icon/*NorthWest 1*/, icon/*Quebec*/, icon, icon, icon, icon/*Greenland*/, icon, icon/*Iceland*/);
       System.out.printf("");
 
    }

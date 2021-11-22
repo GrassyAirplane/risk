@@ -296,7 +296,7 @@ public abstract class Player {
       }
     }
     
-    // adding the new country in to the last position
+    // adding the new bonus in to the last position
     temp[temp.length - 1] = bonus;
     this.deck = temp;
   }
@@ -315,7 +315,7 @@ public abstract class Player {
        }
     }
     
-    // setting countryOwned to temp
+    // setting deck to temp
     this.deck = temp;
   }
   

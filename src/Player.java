@@ -59,10 +59,11 @@ public abstract class Player {
   }
   
   /* cashes in card bonuses for extra troops.
-   * @param bonusCount - number of troops to add to reinforcements.
-   * @return           - 1 if bonus troops are successfully added to reinforcements
-   *                   - -1 if the player do not have the required bonuses to cash in */
-  // not yet subtracted cashed in bonus cards from deck and added them back to cards
+   * @param t1 - position in deck array of first bonus card to cash in
+   *        t2 - position in deck array of second bonus card to cash in
+   *        t3 - position in deck array of third bonus card to cash in
+   * @return   - 1 if bonus troops are successfully added to reinforcements
+   *           - -1 if the player do not have the required bonuses to cash in */
   public int Bonus(int t1, int t2, int t3) {
     int numInfantry = 0; // keeps track of number of infantry bonuses
     int numHorse = 0; // keeps track of number of horse bonuses
@@ -80,25 +81,68 @@ public abstract class Player {
         numCannon++;
       }
     }
-    if (t1 == t2 && t1 == t3) {
-      if (t1 == 1) {
+    
+    // checking if all troops are the same type
+    if (deck[t1].GetTroopBonusType() == deck[t2].GetTroopBonusType() && deck[t1].GetTroopBonusType() == deck[t3].GetTroopBonusType()) {
+      if (deck[t1].GetTroopBonusType() == GameSystem.INFANTRY_TROOP) {
+        // checking for infantry bonus
         if (numInfantry >= 3) {
           this.reinforcement += 4;
+          RemoveBonus(t1);
+          RemoveBonus(t2);
+          RemoveBonus(t3);
           return 1;
         }
-        else if (t1 == 2) {
-          if (numHorse >= 3) {
-            this.reinforcement += 6;
-            return 1;
-          }
-        }
         else {
-          if (numCannon >= 3) {
-            this.reinforcement += 8;
-            return 1;
-          }
+          return -1;
         }
       }
+      else if (deck[t1].GetTroopBonusType() == GameSystem.HORSE_TROOP) {
+        // checking for horse bonus
+        if (numHorse >= 3) {
+          this.reinforcement += 6;
+          RemoveBonus(t1);
+          RemoveBonus(t2);
+          RemoveBonus(t3);
+          return 1;
+        }
+        else {
+          return -1;
+        }
+      }
+      else if (deck[t1].GetTroopBonusType() == GameSystem.CANNON_TROOP) {
+        // checking for cannon bonus
+        if (numCannon >= 3) {
+          this.reinforcement += 8;
+          RemoveBonus(t1);
+          RemoveBonus(t2);
+          RemoveBonus(t3);
+          return 1;
+        }
+        else {
+          return -1;
+        }
+      }
+      else {
+        return -1;
+      }
+    }
+    else if (deck[t1].GetTroopBonusType() != deck[t2].GetTroopBonusType() && 
+             deck[t2].GetTroopBonusType() != deck[t3].GetTroopBonusType() && 
+             deck[t1].GetTroopBonusType() != deck[t3].GetTroopBonusType()) {
+      if (numInfantry > 0 && numHorse > 0 && numCannon > 0) {
+        this.reinforcement += 10;
+        RemoveBonus(t1);
+        RemoveBonus(t2);
+        RemoveBonus(t3);
+        return 1;
+      }
+      else {
+        return -1;
+      }
+    }
+    else {
+      return -1;
     }
   }
   
@@ -258,21 +302,21 @@ public abstract class Player {
   }
   
   /* removes bonus card from player's bonus deck.
-   * @param bonus - bonus object to remove */
-  public void RemoveBonus(Bonus bonus) {
-    int[] temp = new int[this.countryOwned.length - 1];
+   * @param pos - position of bonus object to remove */
+  public void RemoveBonus(int pos) {
+    Bonus[] temp = new Bonus[this.deck.length - 1];
     int newIndex = 0;
     
     // removing item at the position
-    for( int i = 0; i < this.countryOwned.length; i++ ){
+    for( int i = 0; i < this.deck.length; i++ ){
        if( i != pos ) {
-          temp[newIndex] = this.countryOwned[i];
+          temp[newIndex] = this.deck[i];
           newIndex++;
        }
     }
     
     // setting countryOwned to temp
-    this.countryOwned = temp;
+    this.deck = temp;
   }
   
 }

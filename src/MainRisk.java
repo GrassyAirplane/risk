@@ -10,9 +10,10 @@ public class MainRisk {
       Displayer disp = new Displayer(gs.GetDb());
       Scanner scan = new Scanner(System.in);
    
-      //Main Code
+      //Game Variables      
+      int menuOption, numPlayer, creationCycle = 0, turnPhase; 
       
-      int turnPhase, menuOption, numPlayers = 0; 
+      //
       
       //DisplayMenu
       disp.DisplayMenu();
@@ -21,16 +22,25 @@ public class MainRisk {
       do {
          menuOption = scan.nextInt();
          
+         //Main menu 
          switch(menuOption) {
             //Start Game
             case 1: 
+               //Makes sure the number of Players is 2 - 6
+               while(true) {
+                  disp.DisplayInitialiser();
+                  numPlayer = scan.nextInt();
+                  if(numPlayer >= 2 && numPlayer <= 6) {
+                     break;
+                  }
+                  disp.ErrorMessage();
+               }
                
                
-               
-               
-              
-            
-               
+               while(creationCycle < numPlayer) {
+                  
+                  creationCycle ++;
+               }
                break;
             //Display Rules
             case 2:
@@ -44,12 +54,8 @@ public class MainRisk {
             default:
                disp.ErrorMessage();
                disp.DisplayMenuOption();
-            
          }
          
       }while(menuOption != 3 && menuOption != 1); 
-      
-      
-
    }  
 }

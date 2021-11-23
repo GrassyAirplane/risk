@@ -23,7 +23,9 @@ public class Displayer {
    private char getPlayerCharByCountryId( int countryId ) {
       return db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
    }
-    
+   
+   /*=============== PUBLIC METHODS ===============*/
+   /* Displaying the Menu*/ 
    public void DisplayMenu() {
       System.out.println("__________________________________________________________________"); 
       System.out.println("_____________        __      __      __             __        ___");
@@ -39,6 +41,7 @@ public class Displayer {
       System.out.printf("    Selection: ");
    }
    
+   /* Displaying only the Menu Options */
    public void DisplayMenuOption() {
       System.out.println("\n 1. Start Game                                                   ");
       System.out.println(" 2. Rules                                                        ");
@@ -46,10 +49,12 @@ public class Displayer {
       System.out.printf("    Selection: ");
    }
    
+   /* Displays the error Message */
    public void ErrorMessage() {
       System.out.print("\nInvalid Input\n ");
    }
    
+   /* Displays the Game Rules */
    public void DisplayRules() {
       
       Scanner scan = new Scanner(System.in);
@@ -104,6 +109,12 @@ public class Displayer {
       System.out.println("The Victor is found when they complete their \"Secret\" Mission Objective, or are the last player remaining.");
       scan.nextLine();
       System.out.println("Player's lose when they no longer have any owned territories");
+   }
+   
+   public void DisplayInitialiser() {
+      System.out.println("\n█ █▄░█ █ ▀█▀ █ ▄▀█ █░░ █ ▀█ █▀▀   █▀█ █░░ ▄▀█ █▄█ █▀▀ █▀█ █▀");
+      System.out.println("█ █░▀█ █ ░█░ █ █▀█ █▄▄ █ █▄ ██▄   █▀▀ █▄▄ █▀█ ░█░ ██▄ █▀▄ ▄█\n");
+      System.out.print("Insert Number of Players [Must be 2 or More]: "); 
    }
    
    public void DisplayGlobe() {

@@ -28,9 +28,31 @@ public class GameSystem {
     return this.db;
   }
   
+  /* creates a new player and adds it to allPlayer array
+   * @param playerChar - player icon
+   *        reinforcement - number of troop reinforcements at beginning of turn
+   *        countryOwned - list of countries owned by player
+   *        playerMission - personal win condition */
+  public void CreatePlayer(int playerType, char playerChar, int reinforcement, int[] countryOwned, Mission playerMission) {
+    switch (playerType) {
+      case Player.ATTACKER:
+        // creates attacker type player and adds it to allPlayer array
+        AddPlayer(new Attacker(playerChar, reinforcement, countryOwned, playerMission));
+        break;
+      case Player.DEFENDER:
+        // creates defender type player and adds it to allPlayer array
+        AddPlayer(new Defender(playerChar, reinforcement, countryOwned, playerMission));
+        break;
+      case Player.PRODUCER:
+        // creates producer type player and adds it to allPlayer array
+        AddPlayer(new Producer(playerChar, reinforcement, countryOwned, playerMission));
+        break;
+    }
+  }
+  
   /* distribute countries among players at the start of game */
   public void DistributeCountry() {
-    
+
   }
   
   /* adds new player to allPlayer array

@@ -10,6 +10,11 @@ import java.util.Random;
 
 public abstract class Player { 
   
+  /* GLOBAL CONSTANT VARIABLES */
+  public final static int ATTACKER = 1;
+  public final static int DEFENDER = 2;
+  public final static int PRODUCER = 3;
+  
   /* INSTANCE VARIABLES */
   private int playerId;
   private char playerChar;

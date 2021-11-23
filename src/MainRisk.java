@@ -22,6 +22,7 @@ public class MainRisk {
          menuOption = scan.nextInt();
          
          switch(menuOption) {
+            //Start Game
             case 1: 
                break;
             //Display Rules
@@ -29,8 +30,10 @@ public class MainRisk {
                disp.DisplayRules();
                disp.DisplayMenuOption();
                break;
+            //Exits Game
             case 3:
-               break; 
+               break;
+            //Invalid Input 
             default:
                disp.ErrorMessage();
                disp.DisplayMenuOption();

@@ -69,12 +69,41 @@ public class Displayer {
       scan.nextLine();
       System.out.println("Gameplay will begin with the placement of troops onto the board");
       scan.nextLine();
-      System.out.println("Each Player will start with the amount of countries owned x 3");
-      
+      System.out.println("Each Player will start with the amount of countries owned x 3; 42 divided among the players");
+      scan.nextLine();
       System.out.println("Each territory will have a minimum of 1 troop");
-      
-      
-
+      scan.nextLine();
+      System.out.println("Players every turn will have a set amount of reinforcement troops to place");
+      scan.nextLine();
+      System.out.println("This will be based on the countries owned / 3, in addition to bonuses from continents");
+      scan.nextLine();
+      System.out.println("Players will also have the ability to purchase troops with specific card combinations");
+      scan.nextLine();
+      System.out.println("At the end of the placement phase, Players will be able to attack nations");
+      scan.nextLine();
+      System.out.println("Regular Attackers have a maximum of 3 di, Defenders will have 2 di");
+      scan.nextLine();
+      System.out.println("The highest value rolled by Attackers will be compared with the highest Defender di and so on");
+      scan.nextLine();
+      System.out.println("The final phase involves moving around troops to strengthen defences; remember defenders advantage");
+      scan.nextLine();
+      System.out.println("While players will have unlimited turns to attack and move, once the attacking phase has ended,");
+      scan.nextLine();
+      System.out.println("Players will no longer be able to attack.");
+      scan.nextLine();
+      System.out.println("▄▀█ █▀▄ █▀▄ █ ▀█▀ █ █▀█ █▄░█ ▄▀█ █░░");
+      System.out.println("█▀█ █▄▀ █▄▀ █ ░█░ █ █▄█ █░▀█ █▀█ █▄▄\n");
+      System.out.println("At the end of a Players turn, if they gain atleast one country they will be issued a card");
+      scan.nextLine();
+      System.out.println("Specific combiantions of cards can be traded for additional reinforcements.");
+      scan.nextLine();
+      System.out.println("All of the Mission Objectives rely on capturing sppecific combinations of continents");
+      scan.nextLine();
+      System.out.println("Alliances are allowed, though there will only be a single Victor.");
+      scan.nextLine();
+      System.out.println("The Victor is found when they complete their \"Secret\" Mission Objective, or are the last player remaining.");
+      scan.nextLine();
+      System.out.println("Player's lose when they no longer have any owned territories");
    }
    
    public void DisplayGlobe() {

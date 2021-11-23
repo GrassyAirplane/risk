@@ -90,4 +90,5 @@ public class GameSystem {
         countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
       }
     }
+  }
 }

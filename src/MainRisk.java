@@ -13,7 +13,9 @@ public class MainRisk {
       //Game Variables      
       int menuOption, numPlayer, creationCycle = 0, turnPhase; 
       
-      //
+      //Player Creation
+      
+
       
       //DisplayMenu
       disp.DisplayMenu();
@@ -36,11 +38,14 @@ public class MainRisk {
                   disp.ErrorMessage();
                }
                
-               
+               //Player Creation
                while(creationCycle < numPlayer) {
                   
-                  creationCycle ++;
+                  /* Insert Code */
+                  
+                  creationCycle++;
                }
+               
                break;
             //Display Rules
             case 2:

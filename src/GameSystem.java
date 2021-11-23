@@ -33,19 +33,19 @@ public class GameSystem {
    *        reinforcement - number of troop reinforcements at beginning of turn
    *        countryOwned - list of countries owned by player
    *        playerMission - personal win condition */
-  public void CreatePlayer(int playerType, char playerChar, int reinforcement, int[] countryOwned, Mission playerMission) {
+  public void CreatePlayer(int playerType, char playerChar, Mission playerMission) {
     switch (playerType) {
       case Player.ATTACKER:
         // creates attacker type player and adds it to allPlayer array
-        AddPlayer(new Attacker(playerChar, reinforcement, countryOwned, playerMission));
+        AddPlayer(new Attacker(playerChar, playerMission));
         break;
       case Player.DEFENDER:
         // creates defender type player and adds it to allPlayer array
-        AddPlayer(new Defender(playerChar, reinforcement, countryOwned, playerMission));
+        AddPlayer(new Defender(playerChar, playerMission));
         break;
       case Player.PRODUCER:
         // creates producer type player and adds it to allPlayer array
-        AddPlayer(new Producer(playerChar, reinforcement, countryOwned, playerMission));
+        AddPlayer(new Producer(playerChar, playerMission));
         break;
     }
   }

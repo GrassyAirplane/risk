@@ -25,17 +25,15 @@ public abstract class Player {
   private boolean bonusStatus;
   
   // keeps track of number of players created
-  public static int PlayerCount = 0;
+  private static int PlayerCount = 0;
   
   /*=============== CONSTRUCTOR ===============*/
   /* @param playerId      - ID of player
    *        reinforcement - number of troop reinforcements player can have at the start of each round
    *        countryOwned  - list of countries the player owns
    *        playerMission - player's personal win condition */
-  public Player(char playerChar, int reinforcement, int[] countryOwned, Mission playerMission) {
+  public Player(char playerChar, Mission playerMission) {
     this.playerChar = playerChar;
-    this.reinforcement = reinforcement;
-    this.countryOwned = countryOwned;
     this.playerMission = playerMission;
     // increments number of players created
     PlayerCount++;

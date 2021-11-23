@@ -6,8 +6,8 @@
 public class Producer extends Player {
   
   /*=============== CONSTRUCTOR ===============*/
-  public Producer(char playerChar, Mission playerMission) {
-    super(playerChar, playerMission);
+  public Producer(char playerChar, int reinforcement, int[] countryOwned, Mission playerMission) {
+    super(playerChar, reinforcement, countryOwned, playerMission);
   }
 
 }

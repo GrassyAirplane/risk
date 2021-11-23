@@ -6,8 +6,8 @@
 public class Defender extends Player { 
   
   /*=============== CONSTRUCTOR ===============*/
-  public Defender(char playerChar, Mission playerMission) {
-    super(playerChar, playerMission);
+  public Defender(char playerChar, int reinforcement, int[] countryOwned, Mission playerMission) {
+    super(playerChar, reinforcement, countryOwned, playerMission);
   }
 
 }

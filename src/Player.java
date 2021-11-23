@@ -1,5 +1,5 @@
 /* Developed By: Zoe Tay Shiao Shuen
- * Revised Date: Nov 22, 2021 */
+ * Revised Date: Nov 23, 2021 */
 
 import java.util.Random;
 
@@ -109,10 +109,18 @@ public abstract class Player {
     return this.reinforcement;
   }
   
-  /* reassigns the number of reinforcements.
-   * @param reinforcement - number of troops to set to. */
-  public void SetReinforcement(int reinforcement) {
-    this.reinforcement = reinforcement;
+  /* calculates number of troop reinforcements player should have */
+  public void SetReinforcement() {
+    // setting the minimum number of reinforcements at the beginning of each turn
+    int tempReinforcement = 3;
+    // calculating number of reinforcements at the beginning of each turn
+    if ((this.countryOwned.length / 3) > tempReinforcement) {
+      tempReinforcement = (this.countryOwned.length / 3);
+    }
+    // adding continent bonus to reinforcement
+    tempReinforcement += continentBonus();
+    // assigning to reinforcement instance variable
+    this.reinforcement = tempReinforcement;
   }
   
   /* gets the countries owned by the player

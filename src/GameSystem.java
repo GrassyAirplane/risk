@@ -1,5 +1,5 @@
 /* Developed By: Zoe Tay Shiao Shuen
- * Revised Date: Nov 22, 2021 */
+ * Revised Date: Nov 23, 2021 */
 
 /* Attacker Player Class
  * Ability:  */
@@ -26,6 +26,11 @@ public class GameSystem {
    * @return - returns db */
   public Database GetDb() {
     return this.db;
+  }
+  
+  /* distribute countries among players at the start of game */
+  public void DistributeCountry() {
+    
   }
   
   /* adds new player to allPlayer array

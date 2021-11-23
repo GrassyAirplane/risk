@@ -22,6 +22,13 @@ public class Displayer {
       return db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
    }
    
+   public void DisplayRisk() {
+      System.out.println("\\______   \\__| _____|  | __ /  \\    /  \\___________|  |    __| _/");
+      System.out.println(" |       _/  |/  ___/  |/ / \\   \\/\\/   /  _ \\_  __ \\  |   / __ | ");
+      System.out.println(" |    |   \\  |\\___ \\|    <   \\        (  <_> )  | \\/  |__/ /_/ | ");
+      System.out.println(" |____|_  /__/____  >__|_ \\   \\__/\\  / \\____/|__|  |____/\\____ | ");
+      System.out.println("        \\/        \\/     \\/        \\/                         \\/ ");
+   }
    
    public void DisplayGlobe() {
       char icon = '#';

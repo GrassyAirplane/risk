@@ -1,26 +1,44 @@
-/* Developed By: ------
- * Revised Date: Nov 17, 2021 */
+/* Developed By: Euan
+ * Revised Date: Nov 23, 2021 */
 
-import java.io.FileNotFoundException;
+import java.util.Scanner; 
 
 public class MainRisk {
    public static void main(String [] args) {
+      //Initial Variables
+      GameSystem gs = new GameSystem(); 
+      Displayer disp = new Displayer(gs.GetDb());
+      Scanner scan = new Scanner(System.in);
+   
       //Main Code
       
-      Database db = new Database();
+      int turnPhase, menuOption; 
       
-      /*
-      System.out.println(db.GetCountryPos("Siberia"));
+      //DisplayMenu
+      disp.DisplayMenu();
       
-      Country[] temp = null;
-      Mission tempMis = new Mission("insert mission");
-      Player a = new Attacker('a', 30, temp, tempMis);
-      a.Attack(3);
-      for (int i = 0; i < a.Attack(3).length; i++) {
-        System.out.println(a.Attack(3)[i]);
-      */
+      //Menu Looping
+      do {
+         menuOption = scan.nextInt();
+         
+         switch(menuOption) {
+            case 1: 
+               break;
+            case 2:
+               disp.DisplayRules();
+               disp.DisplayMenuOption();
+               break;
+            case 3:
+               break; 
+            default:
+               disp.ErrorMessage();
+               disp.DisplayMenuOption();
+            
+         }
+         
+      }while(menuOption != 3 && menuOption != 1); 
       
-      System.out.println(db.GetMissionByPos(db.GetMissionPos(5)).GetMissionDesc());
       
+
    }  
 }

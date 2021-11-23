@@ -50,7 +50,7 @@ public class Database {
                   String[] dataArray = scanData.split(":");
    
                   //Adds initialized country object           
-                  addCountry( new Country(dataArray[0], stringToIntArray(dataArray[1])) );
+                  addCountry( new Country(dataArray[0], stringToIntArray(dataArray[1]), Integer.parseInt(dataArray[2]) ));
                }
             }
          } catch( FileNotFoundException exception ) {

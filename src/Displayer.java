@@ -1,6 +1,8 @@
 /* Developed By: Euan Lim
  * Revised Date: Nov 20, 2021 */
 
+import java.util.Scanner; 
+
 /* Displayer */
 public class Displayer { 
    
@@ -21,13 +23,58 @@ public class Displayer {
    private char getPlayerCharByCountryId( int countryId ) {
       return db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
    }
-   
-   public void DisplayRisk() {
+     
+   public void DisplayMenu() {
+      System.out.println("__________________________________________________________________"); 
+      System.out.println("_____________        __      __      __             __        ___");
       System.out.println("\\______   \\__| _____|  | __ /  \\    /  \\___________|  |    __| _/");
       System.out.println(" |       _/  |/  ___/  |/ / \\   \\/\\/   /  _ \\_  __ \\  |   / __ | ");
       System.out.println(" |    |   \\  |\\___ \\|    <   \\        (  <_> )  | \\/  |__/ /_/ | ");
       System.out.println(" |____|_  /__/____  >__|_ \\   \\__/\\  / \\____/|__|  |____/\\____ | ");
       System.out.println("        \\/        \\/     \\/        \\/                         \\/ ");
+      System.out.println("__________________________________________________________________");
+      System.out.println("\n 1. Start Game                                                   ");
+      System.out.println(" 2. Rules                                                        ");
+      System.out.println(" 3. Exit Game                                                    "); 
+      System.out.printf("    Selection: ");
+   }
+   
+   public void DisplayMenuOption() {
+      System.out.println("\n 1. Start Game                                                   ");
+      System.out.println(" 2. Rules                                                        ");
+      System.out.println(" 3. Exit Game                                                    "); 
+      System.out.printf("    Selection: ");
+   }
+   
+   public void ErrorMessage() {
+      System.out.print("\nInvalid Input\n ");
+   }
+   
+   public void DisplayRules() {
+      
+      Scanner scan = new Scanner(System.in);
+   
+      System.out.println("__________________________________________________________________\n");
+      System.out.println("█▀▀ █▀█ █▀▄▀█ █▀█ █▀█ █▄░█ █▀▀ █▄░█ ▀█▀ █▀");
+      System.out.println("█▄▄ █▄█ █░▀░█ █▀▀ █▄█ █░▀█ ██▄ █░▀█ ░█░ ▄█\n");
+      System.out.println("The game board is a map of 6 continents divided into 42 territories.");
+      scan.nextLine();
+      System.out.println("42 Cards are marked with a territory and a troop bonus type");
+      scan.nextLine();
+      System.out.println("6 Cards are Distinguished as mission cards; complete their objective and receive a win");
+      scan.nextLine();
+      System.out.println("█▀▀ ▄▀█ █▀▄▀█ █▀▀ █▀█ █░░ ▄▀█ █▄█");
+      System.out.println("█▄█ █▀█ █░▀░█ ██▄ █▀▀ █▄▄ █▀█ ░█░\n");
+      System.out.println("The obvious goal outside of mission objectives is to survive whilst attacking other nations"); 
+      scan.nextLine();
+      System.out.println("Gameplay will begin with the placement of troops onto the board");
+      scan.nextLine();
+      System.out.println("Each Player will start with the amount of countries owned x 3");
+      
+      System.out.println("Each territory will have a minimum of 1 troop");
+      
+      
+
    }
    
    public void DisplayGlobe() {

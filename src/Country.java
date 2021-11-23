@@ -40,9 +40,10 @@ public class Country {
     * @param countryName  - name of country
     *        continentId  - id of continent, object is apartof
     *        adjacency    - id's of country current object is adjacent to */
-   public Country( String countryName, int[] adjacency ) {
+   public Country( String countryName, int[] adjacency, int troopCount ) {
       this.countryName = countryName;
       this.adjacency = adjacency;
+      this.troopCount = troopCount; 
       //Sets country id to the current country count 
       this.countryId = CountryCount; 
       //Sets continent id

@@ -8,7 +8,7 @@ import java.util.Random;
  *             Defender
  *             Producer */
 
-public abstract class Player { 
+public abstract class Player_Backup { 
   
   /* INSTANCE VARIABLES */
   private int playerId;
@@ -56,12 +56,6 @@ public abstract class Player {
    * @param reinforcement - number of troops to set to. */
   public void SetReinforcement(int reinforcement) {
     this.reinforcement = reinforcement;
-  }
-  
-  /* gets the countries owned by the player
-   * @return - array that stores the list of countries the player owns */
-  public int[] GetCountryOwned() {
-    return this.countryOwned;
   }
   
   /* cashes in card bonuses for extra troops.

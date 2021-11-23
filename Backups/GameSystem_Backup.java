@@ -3,7 +3,7 @@
 
 /* Attacker Player Class
  * Ability:  */
-public class GameSystem {
+public class GameSystem_Backup {
   
   /* GLOBAL CONSTANT VARIABLES */
   // Troop Type
@@ -11,83 +11,21 @@ public class GameSystem {
   public final static int HORSE_TROOP    = 2;
   public final static int CANNON_TROOP   = 3;
   
-  /* INSTANCE VARIABLES */
-  private Player currPlayer;
-  
-  // array to store all players
-  private Player[] allPlayer;
-
   private Database db = new Database(); 
   private Displayer disp = new Displayer(db);
   
-  /*=============== PUBIC METHODS ===============*/
-  
-  /* gets db
-   * @return - returns db */
-  public Database GetDb() {
-    return this.db;
-  }
-  
-  /* adds new player to allPlayer array
-   * @param player - player object to add */
-  public void AddPlayer(Player player) {
-    // creating new temporary array with bigger size
-    Player[] temp = new Player[this.allPlayer.length + 1];
-    // transferring items to temp array
-    for (int i = 0; i < this.allPlayer.length; i++) {
-      temp[i] = this.allPlayer[i];
-    }
-    // adding new player at the end of temp array
-    temp[temp.length - 1] = player;
-    // set allPlayer equal to temp array
-    this.allPlayer = temp;
-  }
-  
-  /* removes a player from allPlayer array
-   * @param player - player object to remove */
-  public void RemovePlayer(Player player) {
-    // creating new temp array with smaller size
-    Player[] temp = new Player[this.allPlayer.length - 1];
-    // transferring items to temp array except item to remove
-    for (int i = 0; i < this.allPlayer.length; i++) {
-      if (allPlayer[i] != player) {
-        temp[i] = this.allPlayer[i];
-      }
-    }
-    // set allPlayer equal to temp array
-    this.allPlayer = temp;
-  }
-
   /* switch current player to give next player a turn.
-   * @param currPlayer - player object of current player that just played their turn */
-  public void RotatePlayer(Player currPlayer) {
-    if (allPlayer[allPlayer.length - 1] == currPlayer) {
-      this.currPlayer = allPlayer[0];
+   * @param currPlayer - ID of current player that just played their turn
+   * @return           - ID of new player */
+  public int RotatePlayer(int currPlayer) {
+    if (currPlayer < Player.PlayerCount) {
+      return currPlayer + 1;
     }
     else {
-      for (int i = 0; i < allPlayer.length - 1; i++) {
-        if (allPlayer[i] == currPlayer) {
-          this.currPlayer = allPlayer[i + 1];
-        }
-      }
-    }
-  }
-  
-  /* checks if player being attacked has lost
-   * @param player - player to check if eliminated
-   * @return       - 1 if player has lost and is removed
-   *                 -1 if player has not lost */
-  public int RemoveLoser(Player player) {
-    // checks if player is eliminated by seeing if they no longer own any countries
-    if (player.GetCountryOwned().length == 0) {
-      RemovePlayer(player);
       return 1;
     }
-    else {
-      return -1;
-    }
   }
-
+  
   /* move troops from one country to another
    * @param fromCountry - ID of country the troops are moved from
    *        toCountry   - ID country the troops are moving to
@@ -110,7 +48,7 @@ public class GameSystem {
       return -1;
     }
   }
-
+  
   /* Compares dice rolls and transfers ownership if attacker successfully conquered the country
    * @param attack        - attacking player
    *        defend        - defending player
@@ -151,18 +89,6 @@ public class GameSystem {
         countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
       }
     }
-  }
-  
-  /* gets the current player
-   * @return - returns player object that is the current player */
-  public Player GetCurrPlayer() {
-    return this.currPlayer;
-  }
-  
-  /* sets the current player
-   * @param player - player object to set the current player */
-  public void SetCurrPlayer(Player player) {
-    this.currPlayer = player;
   }
   
 }

@@ -58,12 +58,6 @@ public abstract class Player {
     this.reinforcement = reinforcement;
   }
   
-  /* gets the countries owned by the player
-   * @return - array that stores the list of countries the player owns */
-  public int[] GetCountryOwned() {
-    return this.countryOwned;
-  }
-  
   /* cashes in card bonuses for extra troops.
    * @param t1 - position in deck array of first bonus card to cash in
    *        t2 - position in deck array of second bonus card to cash in

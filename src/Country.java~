@@ -5,22 +5,12 @@
 public class Country { 
    
    /* GLOBAL VARIABLES */
-  
-   // continent IDs
    public final static int NORTH_AMERICA_CONTINENT_ID      = 0;
    public final static int SOUTH_AMERICA_CONTINENT_ID      = 1;
    public final static int EUROPE_CONTINENT_ID             = 2;
    public final static int AFRICA_CONTINENT_ID             = 3;
    public final static int ASIA_CONTINENT_ID               = 4;
    public final static int AUSTRALIA_CONTINENT_ID          = 5;
-   
-   // continent bonuses
-   public final static int NORTH_AMERICA_BONUS = 5;
-   public final static int SOUTH_AMERICA_BONUS = 2;
-   public final static int EUROPE_BONUS = 5;
-   public final static int AFRICA_BONUS = 3;
-   public final static int ASIA_BONUS = 7;
-   public final static int AUSTRALIA_BONUS = 2;
 
    /* INSTANCE VARIABLES */
    private String countryName; 

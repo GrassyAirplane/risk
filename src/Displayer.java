@@ -23,7 +23,7 @@ public class Displayer {
    private char getPlayerCharByCountryId( int countryId ) {
       return db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
    }
-     
+    
    public void DisplayMenu() {
       System.out.println("__________________________________________________________________"); 
       System.out.println("_____________        __      __      __             __        ___");

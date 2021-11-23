@@ -12,7 +12,7 @@ public class MainRisk {
    
       //Main Code
       
-      int turnPhase, menuOption; 
+      int turnPhase, menuOption, numPlayers = 0; 
       
       //DisplayMenu
       disp.DisplayMenu();
@@ -24,6 +24,13 @@ public class MainRisk {
          switch(menuOption) {
             //Start Game
             case 1: 
+               
+               
+               
+               
+              
+            
+               
                break;
             //Display Rules
             case 2:

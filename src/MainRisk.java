@@ -24,6 +24,7 @@ public class MainRisk {
          switch(menuOption) {
             case 1: 
                break;
+            //Display Rules
             case 2:
                disp.DisplayRules();
                disp.DisplayMenuOption();

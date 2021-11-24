@@ -217,6 +217,9 @@ public class Displayer {
       String[] cardId = {"N/A", "N/A", "N/A", "N/A", "N/A"};
       String[] cardType = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
       
+      //Current Player
+      Player currPlayer = gs.GetCurrPlayer();
+      
    
       //Checks PhaseNumber
       switch(phaseNum) {
@@ -248,5 +251,22 @@ public class Displayer {
             System.out.printf(" Selection : ");
             break; 
       }
+   }
+   
+   public void DisplayTrade() {
+      
+      //Card Name Array
+      String[] cardName = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
+      String[] cardId = {"N/A", "N/A", "N/A", "N/A", "N/A"};
+      String[] cardType = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
+      
+      System.out.printf("       TURN PHASE THREE        ________________________________________________________________ \n");
+      System.out.printf("                              |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+      System.out.printf("Options:                      |     %s     |     %s     |     %s     |     %s     |     %s     |\n", cardId[0], cardId[1], cardId[2], cardId[3], cardId[4]); //Card Id
+      System.out.printf("9.  -----   12. ------        |            |            |            |            |            |\n");
+      System.out.printf("10. -----   13. Move          |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+      System.out.printf("11. Mission 14. End Turn      |____________|____________|____________|____________|____________|\n");
+   
+   
    }
 }

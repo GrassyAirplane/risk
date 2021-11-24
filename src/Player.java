@@ -138,6 +138,12 @@ public abstract class Player {
     return this.countryOwned;
   }
   
+  /* gets the bonus deck owned by the player
+   * @return - array that stores the list of bonus deck */
+  public Bonus[] GetBonusDeck() {
+   return this.deck;
+  }
+  
   /* cashes in card bonuses for extra troops.
    * @param t1 - position in deck array of first bonus card to cash in
    *        t2 - position in deck array of second bonus card to cash in

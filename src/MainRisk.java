@@ -18,7 +18,7 @@ public class MainRisk {
       char playerChar; 
       
       //Player Input
-      int reinforcementAmount; 
+      int reinforcementAmount, countryId; 
       
       //DisplayMenu
       disp.DisplayMenu();
@@ -73,9 +73,33 @@ public class MainRisk {
                //Initial Player Turn
                gs.RotatePlayer();
                
+               //Place until Reinforcements are diminished
                while(gs.GetCurrPlayer().GetReinforcement() > 0) {
                   disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
-                  gameOption
+                  gameOption = scan.nextInt();
+                  //Placement Option
+                  switch(gameOption) {
+                     case Displayer.PLACE:
+                        disp.DisplayPlace();
+                        countryId = scan.nextInt();
+                        System.out.print("Selection [Amount of Reinforcement] : ");
+                        reinforcementAmount = scan.nextInt();
+                        //Places Troops
+                        switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
+                           case GameSystem.SUCCESSFUL:
+                              System.out.println("\nSuccess\n");
+                              break;
+                           case GameSystem.INVALID_OWNER:
+                              System.out.println("\nCountry Not Owned by Player\n");
+                              break; 
+                           case GameSystem.INADEQUATE_TROOPS:
+                              System.out.println("\nInvalid Amount of Troops\n");
+                              break;
+                        }
+                        break;
+                     default:
+                        disp.ErrorMessage();                 
+                  }            
                }
                
 

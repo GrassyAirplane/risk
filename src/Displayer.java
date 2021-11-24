@@ -20,6 +20,8 @@ public class Displayer {
    public final static int AUSTRALIA     = 7;
    public final static int SCOREBOARD    = 8;
    
+   public final static int PLACE         =10;
+   
    
    public final static int PHASE_PLACEMENT = 0;
    public final static int PHASE_ONE = 1; 
@@ -160,7 +162,7 @@ public class Displayer {
    }
    
    /* Displays Globe and information */
-   public void DisplayGlobe(int displayOption) {
+   public void DisplayGlobe() {
   
       String[] player = {"N/A", "N/A", "N/A", "N/A", "N/A", "N/A"}; 
       Player[] allPlayer = db.GetAllPlayer();       
@@ -335,12 +337,21 @@ public class Displayer {
       }
       
       System.out.printf("\n       TRADE SCHEMEATIC           ________________________________________________________________ \n");
-      System.out.printf("   Options:                        |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-      System.out.printf("   Infantry X 3  = 4               |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
+      System.out.printf("   Options:                        |%s       |%s       |%s       |%s       |%s       |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+      System.out.printf("   Infantry X 3  = 4               |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
       System.out.printf("   Horse X 3     = 6               |            |            |            |            |            |\n");
-      System.out.printf("   Cannon X 3    = 8               |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+      System.out.printf("   Cannon X 3    = 8               |  %s          |  %s          |  %s          |  %s          |  %s          |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
       System.out.printf("   One of Each   = 10              |____________|____________|____________|____________|____________|\n");
       System.out.printf(" Card 1 [Id] : ");
    
    }
+   
+   /* Placement Troops in country */
+   public void DisplayPlace() {
+      System.out.printf("        PLACEMENT TROOPS\n");
+      System.out.printf("Receiving a total of %d Troops \n", gs.GetCurrPlayer().GetReinforcement());
+      System.out.printf("Selection [Owned Country Id] : ");
+   
+   }
+   
 }

@@ -11,9 +11,21 @@ public class Displayer {
    GameSystem gs;
    
    /* GLOBAL CONSTANT VARIABLES */
+   public final static int DISPLAY_GLOBE = 1;
+   public final static int N_AMERICA     = 2;
+   public final static int S_AMERICA     = 3;
+   public final static int EUROPE        = 4;
+   public final static int AFRICA        = 5;
+   public final static int ASIA          = 6;
+   public final static int AUSTRALIA     = 7;
+   public final static int SCOREBOARD    = 8;
+   
+   
+   public final static int PHASE_PLACEMENT = 0;
    public final static int PHASE_ONE = 1; 
    public final static int PHASE_TWO = 2;
    public final static int PHASE_THREE = 3;
+   
    
    /*=============== CONSTRUCTOR ===============*/
    /* Displayer Constructor
@@ -34,7 +46,7 @@ public class Displayer {
       }
       return gs.GetCountryByPos(gs.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
    }
-   
+     
    /*=============== PUBLIC METHODS ===============*/
    /* Displaying the Menu*/ 
    public void DisplayMenu() {
@@ -147,12 +159,9 @@ public class Displayer {
       System.out.print("Enter a unique player char [i.e 'k' or '#' ] : ");
    }
    
-   
-   
    /* Displays Globe and information */
-   public void DisplayGlobe() {
-      char icon = 't';
-      
+   public void DisplayGlobe(int displayOption) {
+  
       String[] player = {"N/A", "N/A", "N/A", "N/A", "N/A", "N/A"}; 
       Player[] allPlayer = db.GetAllPlayer();       
       
@@ -211,6 +220,12 @@ public class Displayer {
    
    }
    
+   /* Displays Scoreboard */
+   public void DisplayScoreboard() {
+   
+   }
+   
+   
    /* Displays Player information */
    public void DisplayPhase(int phaseNum) {
       
@@ -244,34 +259,43 @@ public class Displayer {
             }
          }
       }
-            
+      
    
       //Checks PhaseNumber
       switch(phaseNum) {
+         case PHASE_PLACEMENT: 
+            System.out.printf("        PLACEMENT PHASE         ________________________________________________________________ \n");
+            System.out.printf("Receiving a total of %d Troops |%s       |%s       |%s       |%s       |%s       |\n", currPlayer.GetReinforcement(), cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+            System.out.printf("Options:                       |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
+            System.out.printf("9.  -----   12. ------         |            |            |            |            |            |\n");
+            System.out.printf("10. Place   13. ----           |  %s          |  %s          |  %s          |  %s          |  %s          |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+            System.out.printf("11. ------- 14. --- -----      |____________|____________|____________|____________|____________|\n");
+            System.out.printf(" Selection : "); 
+            break;
          case PHASE_ONE:
             System.out.printf("        TURN PHASE ONE          ________________________________________________________________ \n");
-            System.out.printf("Receiving a total of %f  Troops |%s          |%s          |%s          |%s          |%s          |\n", currPlayer.GetReinforcement(), cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-            System.out.printf("Options:                       |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
+            System.out.printf("Receiving a total of %d Troops |%s       |%s       |%s       |%s       |%s       |\n", currPlayer.GetReinforcement(), cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+            System.out.printf("Options:                       |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  Trade   12. ------         |            |            |            |            |            |\n");
-            System.out.printf("10. Place   13. ----           |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+            System.out.printf("10. Place   13. ----           |  %s          |  %s          |  %s          |  %s          |  %s          |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
             System.out.printf("11. Mission 14. --- -----      |____________|____________|____________|____________|____________|\n");
             System.out.printf(" Selection : "); 
             break;
          case PHASE_TWO:
             System.out.printf("        TURN PHASE TWO          ________________________________________________________________ \n");
-            System.out.printf("                               |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-            System.out.printf("Options:                       |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
+            System.out.printf("                               |%s       |%s       |%s       |%s       |%s       |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+            System.out.printf("Options:                       |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  -----   12. Attack         |            |            |            |            |            |\n");
-            System.out.printf("10. -----   13. ----           |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+            System.out.printf("10. -----   13. ----           |  %s          |  %s          |  %s          |  %s          |  %s          |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
             System.out.printf("11. Mission 14. End Phase      |____________|____________|____________|____________|____________|\n");
             System.out.printf(" Selection : ");
             break; 
          case PHASE_THREE:
             System.out.printf("       TURN PHASE THREE         ________________________________________________________________ \n");
-            System.out.printf("                               |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-            System.out.printf("Options:                       |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
+            System.out.printf("                               |%s       |%s       |%s       |%s       |%s       |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+            System.out.printf("Options:                       |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  -----   12. ------         |            |            |            |            |            |\n");
-            System.out.printf("10. -----   13. Move           |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+            System.out.printf("10. -----   13. Move           |  %s          |  %s          |  %s          |  %s          |  %s          |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
             System.out.printf("11. Mission 14. End Turn       |____________|____________|____________|____________|____________|\n");
             System.out.printf(" Selection : ");
             break; 

@@ -17,6 +17,9 @@ public class MainRisk {
       int classType; 
       char playerChar; 
       
+      //Player Input
+      int reinforcementAmount; 
+      
       //DisplayMenu
       disp.DisplayMenu();
       
@@ -70,6 +73,10 @@ public class MainRisk {
                //Initial Player Turn
                gs.RotatePlayer();
                
+               while(gs.GetCurrPlayer().GetReinforcement() > 0) {
+                  disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
+                  gameOption
+               }
                
 
                /* Place Troops ZOE

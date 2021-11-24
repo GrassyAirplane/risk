@@ -43,38 +43,6 @@ public abstract class Player {
   
   /*=============== PRIVATE METHODS ===============*/
   
-  /* checks if player owns a continent and gets the number of bonus troops
-   * @return - number of bonus troops the player gets by owning the continent
-   *           returns 0 if player does not own any continents */
-  private int continentBonus() {
-    int sumBonus = 0;
-    int[] nAmerica = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-    int[] sAmerica = {9, 10, 11, 12};
-    int[] europe = {13, 14, 15, 16, 17, 18, 19};
-    int[] africa = {20, 21, 22, 23, 24, 25};
-    int[] asia = {26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37};
-    int[] australia = {38, 39, 40, 41};
-    if (checkContinent(nAmerica)) {
-      sumBonus += Country.NORTH_AMERICA_BONUS;
-    }
-    if (checkContinent(sAmerica)) {
-      sumBonus += Country.SOUTH_AMERICA_BONUS;
-    }
-    if (checkContinent(europe)) {
-      sumBonus += Country.EUROPE_BONUS;
-    }
-    if (checkContinent(africa)) {
-      sumBonus += Country.AFRICA_BONUS;
-    }
-    if (checkContinent(asia)) {
-      sumBonus += Country.ASIA_BONUS;
-    }
-    if (checkContinent(australia)) {
-      sumBonus += Country.AUSTRALIA_BONUS;
-    }
-    return sumBonus;
-  }
-  
   /* checks if a list of countries that make a continent 
    * is within the the list of countries that the player owns
    * @param list1 - list to check if it is in another list
@@ -134,6 +102,38 @@ public abstract class Player {
     tempReinforcement += continentBonus();
     // assigning to reinforcement instance variable
     this.reinforcement = tempReinforcement;
+  }
+  
+  /* checks if player owns a continent and gets the number of bonus troops
+   * @return - number of bonus troops the player gets by owning the continent
+   *           returns 0 if player does not own any continents */
+  public int continentBonus() {
+    int sumBonus = 0;
+    int[] nAmerica = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    int[] sAmerica = {9, 10, 11, 12};
+    int[] europe = {13, 14, 15, 16, 17, 18, 19};
+    int[] africa = {20, 21, 22, 23, 24, 25};
+    int[] asia = {26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37};
+    int[] australia = {38, 39, 40, 41};
+    if (checkContinent(nAmerica)) {
+      sumBonus += Country.NORTH_AMERICA_BONUS;
+    }
+    if (checkContinent(sAmerica)) {
+      sumBonus += Country.SOUTH_AMERICA_BONUS;
+    }
+    if (checkContinent(europe)) {
+      sumBonus += Country.EUROPE_BONUS;
+    }
+    if (checkContinent(africa)) {
+      sumBonus += Country.AFRICA_BONUS;
+    }
+    if (checkContinent(asia)) {
+      sumBonus += Country.ASIA_BONUS;
+    }
+    if (checkContinent(australia)) {
+      sumBonus += Country.AUSTRALIA_BONUS;
+    }
+    return sumBonus;
   }
   
   /* gets the countries owned by the player

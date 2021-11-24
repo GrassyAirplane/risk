@@ -21,17 +21,11 @@ public class Displayer {
     * @param countryId   - Id of specified country
     * @return            -   */
    private char getPlayerCharByCountryId( int countryId ) {
+      //Checks if no current owner 
       if (db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner() == null) {
          return '#';
       }
       return db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
-   }
-   
-   /* Retrieves the players char, by their id
-    * 
-    * */
-   private char getPlayerCharByPlayerId( int playerId) {
-      return '3';
    }
    
    /*=============== PUBLIC METHODS ===============*/
@@ -118,29 +112,58 @@ public class Displayer {
       scan.nextLine();
       System.out.println("The Victor is found when they complete their \"Secret\" Mission Objective, or are the last player remaining.");
       scan.nextLine();
+      System.out.println("Be Careful, other players may have the same mission objectives, or similar objectives.");
+      scan.nextLine();
       System.out.println("Player's lose when they no longer have any owned territories");
    }
    
+   /* Initalizer Code */
    public void DisplayInitialiser() {
       System.out.println("\n█ █▄░█ █ ▀█▀ █ ▄▀█ █░░ █ ▀█ █▀▀   █▀█ █░░ ▄▀█ █▄█ █▀▀ █▀█ █▀");
       System.out.println("█ █░▀█ █ ░█░ █ █▀█ █▄▄ █ █▄ ██▄   █▀▀ █▄▄ █▀█ ░█░ ██▄ █▀▄ ▄█\n");
       System.out.print("Insert Number of Players [Must be 2 or More]: "); 
    }
    
+   /* Displays Class Types*/
+   public void DisplayClassType() {
+      System.out.println("_____________________________________________________________________________________________________________________ ");
+      System.out.println("\n▄▀█ ▀█▀ ▀█▀ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█     |     █▀▄ █▀▀ █▀▀ █▀▀ █▄░█ █▀▄ █▀▀ █▀█     |     █▀█ █▀█ █▀█ █▀▄ █░█ █▀▀ █▀▀ █▀█ ");
+      System.out.println("█▀█ ░█░ ░█░ █▀█ █▄▄ █░█ ██▄ █▀▄     |     █▄▀ ██▄ █▀░ ██▄ █░▀█ █▄▀ ██▄ █▀▄     |     █▀▀ █▀▄ █▄█ █▄▀ █▄█ █▄▄ ██▄ █▀▄\n ");   
+      System.out.println(" 1. Attack Bonus when attacking     | 2. Defend Bonus when Defending           | 3. Producing Bonus Every Turn         "); 
+      System.out.println("    Rolls [+1] Extra Dice           |    Rolls [+1] Extra Dice                 |    Formula [Countries Owned/2] -1     ");
+      System.out.print(  "\nClass Selection : ");
+      
+   }
+   
+   /* Displays the playerCreation char */
+   public void DisplayPlayerChar() {
+      System.out.print("Enter a unique player char [i.e 'k' or '#' ] : ");
+   }
+   
+   
+   
+   /* Displays Globe and information */
    public void DisplayGlobe() {
       char icon = 't';
       
-      String[] player = new String[6]; 
+      String[] player = {"N/A", "N/A", "N/A", "N/A", "N/A", "N/A"}; 
       Player[] allPlayer = db.GetAllPlayer();       
       
+      //Converts Chars into Strings
+      if(allPlayer != null) {
+         for( int i = 0; i < allPlayer.length; i++ ) {
+            player[i] = Character.toString(allPlayer[i].GetPlayerChar());
+         }
+      }
+
       System.out.printf("_____________________________________________________________________________________              \n");
       System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|-Player-                                \n");
-      System.out.printf(".. . . . . . . .%c%c%c%c%c%c . %c . . . . . . . . . . . . . . . .|1.                               \n", getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/,getPlayerCharByCountryId(13)/*Iceland 13*/);
-      System.out.printf(".. . .%c%c%c%c%c%c .%c. .%c%c%c%c .%c%c . .%c%c%c. . .%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c. . .|2.       \n", getPlayerCharByCountryId(0), getPlayerCharByCountryId(0)/*Alaska 0*/, getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1)/*NorthWest 1*/, getPlayerCharByCountryId(5)/*Quebec 5*/, getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/, getPlayerCharByCountryId(13), getPlayerCharByCountryId(13)/*Iceland 13*/, getPlayerCharByCountryId(14), getPlayerCharByCountryId(14)/*Scandinavia 14*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(27), getPlayerCharByCountryId(27)/*Siberia 27*/, getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28)/*Yakutsk 28*/, getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30)/*Kamchatka 30*/); 
-      System.out.printf(".. . %c%c%c%c%c%c%c%c. %c%c. %c%c. . . %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c . . .|3. \n", getPlayerCharByCountryId(0), getPlayerCharByCountryId(0), getPlayerCharByCountryId(0)/*Alaska 0*/, getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1)/*NorthWest 1*/, getPlayerCharByCountryId(5), getPlayerCharByCountryId(5)/*Quebec 5*/, getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/, getPlayerCharByCountryId(15), getPlayerCharByCountryId(15), getPlayerCharByCountryId(15)/*Great Britain 15*/, getPlayerCharByCountryId(16), getPlayerCharByCountryId(16)/*Northern Europe 16*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(26), getPlayerCharByCountryId(26), getPlayerCharByCountryId(26)/*Ural 26*/, getPlayerCharByCountryId(27), getPlayerCharByCountryId(27), getPlayerCharByCountryId(27), getPlayerCharByCountryId(27), getPlayerCharByCountryId(27)/*Siberia 27*/, getPlayerCharByCountryId(29), getPlayerCharByCountryId(29), getPlayerCharByCountryId(29), getPlayerCharByCountryId(29), getPlayerCharByCountryId(29), getPlayerCharByCountryId(29)/*Irkutsk 29*/, getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30)/*Kamchatka 30*/);
-      System.out.printf(".. . . %c%c%c%c%c%c%c%c%c%c. . . . %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c. . . . . .|4.      \n", getPlayerCharByCountryId(3), getPlayerCharByCountryId(3), getPlayerCharByCountryId(3), getPlayerCharByCountryId(3)/*Alberta 3*/, getPlayerCharByCountryId(4), getPlayerCharByCountryId(4), getPlayerCharByCountryId(4)/*Ontario 4*/, getPlayerCharByCountryId(5), getPlayerCharByCountryId(5), getPlayerCharByCountryId(5)/*Quebec 5*/, getPlayerCharByCountryId(18), getPlayerCharByCountryId(18), getPlayerCharByCountryId(18), getPlayerCharByCountryId(18), getPlayerCharByCountryId(18)/*Western Europe 18*/, getPlayerCharByCountryId(19), getPlayerCharByCountryId(19)/*Southern Europe 19*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(31)/*Afghanistan 31*/, getPlayerCharByCountryId(26), getPlayerCharByCountryId(26)/*Ural 26*/, getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32)/*China 32*/, getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33)/*Mongolia 33*/);
-      System.out.printf(".. . . .%c%c%c%c%c%c%c%c . . . .   %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c.%c%c . . . .|5.        \n", getPlayerCharByCountryId(6), getPlayerCharByCountryId(6), getPlayerCharByCountryId(6)/*Western US 6*/, getPlayerCharByCountryId(7), getPlayerCharByCountryId(7), getPlayerCharByCountryId(7), getPlayerCharByCountryId(7), getPlayerCharByCountryId(7)/*Eastern Us 7*/, getPlayerCharByCountryId(18), getPlayerCharByCountryId(18)/*Western Europe 18*/, getPlayerCharByCountryId(19), getPlayerCharByCountryId(19), getPlayerCharByCountryId(19)/*Southern Europe 19*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(31), getPlayerCharByCountryId(31), getPlayerCharByCountryId(31)/*Afghanistan 31*/, getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32)/*China 32*/, getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33)/*Mongolia 33*/, getPlayerCharByCountryId(34), getPlayerCharByCountryId(34)/*Japan 34*/);
-      System.out.printf(".. . . . %c%c%c . . . . . .%c%c%c%c%c. %c%c%c%c%c%c%c%c%c%c%c%c%c%c. %c%c. . . . .|6.              \n", getPlayerCharByCountryId(8), getPlayerCharByCountryId(8), getPlayerCharByCountryId(8)/*Central America 8*/, getPlayerCharByCountryId(20), getPlayerCharByCountryId(20), getPlayerCharByCountryId(20)/*North Africa 20*/, getPlayerCharByCountryId(21), getPlayerCharByCountryId(21)/*Egypt 21*/, getPlayerCharByCountryId(35), getPlayerCharByCountryId(35), getPlayerCharByCountryId(35), getPlayerCharByCountryId(35)/*Middle East 35*/, getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36)/*India 36*/, getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36)/*Siam 36*/, getPlayerCharByCountryId(34), getPlayerCharByCountryId(34)/*Japan 34*/ );
+      System.out.printf(".. . . . . . . .%c%c%c%c%c%c . %c . . . . . . . . . . . . . . . .|1. %s                               \n", getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/,getPlayerCharByCountryId(13)/*Iceland 13*/, player[0]);
+      System.out.printf(".. . .%c%c%c%c%c%c .%c. .%c%c%c%c .%c%c . .%c%c%c. . .%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c. . .|2. %s       \n", getPlayerCharByCountryId(0), getPlayerCharByCountryId(0)/*Alaska 0*/, getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1)/*NorthWest 1*/, getPlayerCharByCountryId(5)/*Quebec 5*/, getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/, getPlayerCharByCountryId(13), getPlayerCharByCountryId(13)/*Iceland 13*/, getPlayerCharByCountryId(14), getPlayerCharByCountryId(14)/*Scandinavia 14*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(27), getPlayerCharByCountryId(27)/*Siberia 27*/, getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28)/*Yakutsk 28*/, getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30)/*Kamchatka 30*/, player[1]); 
+      System.out.printf(".. . %c%c%c%c%c%c%c%c. %c%c. %c%c. . . %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c . . .|3. %s \n", getPlayerCharByCountryId(0), getPlayerCharByCountryId(0), getPlayerCharByCountryId(0)/*Alaska 0*/, getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1)/*NorthWest 1*/, getPlayerCharByCountryId(5), getPlayerCharByCountryId(5)/*Quebec 5*/, getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/, getPlayerCharByCountryId(15), getPlayerCharByCountryId(15), getPlayerCharByCountryId(15)/*Great Britain 15*/, getPlayerCharByCountryId(16), getPlayerCharByCountryId(16)/*Northern Europe 16*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(26), getPlayerCharByCountryId(26), getPlayerCharByCountryId(26)/*Ural 26*/, getPlayerCharByCountryId(27), getPlayerCharByCountryId(27), getPlayerCharByCountryId(27), getPlayerCharByCountryId(27), getPlayerCharByCountryId(27)/*Siberia 27*/, getPlayerCharByCountryId(29), getPlayerCharByCountryId(29), getPlayerCharByCountryId(29), getPlayerCharByCountryId(29), getPlayerCharByCountryId(29), getPlayerCharByCountryId(29)/*Irkutsk 29*/, getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30)/*Kamchatka 30*/, player[2]);
+      System.out.printf(".. . . %c%c%c%c%c%c%c%c%c%c. . . . %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c. . . . . .|4. %s      \n", getPlayerCharByCountryId(3), getPlayerCharByCountryId(3), getPlayerCharByCountryId(3), getPlayerCharByCountryId(3)/*Alberta 3*/, getPlayerCharByCountryId(4), getPlayerCharByCountryId(4), getPlayerCharByCountryId(4)/*Ontario 4*/, getPlayerCharByCountryId(5), getPlayerCharByCountryId(5), getPlayerCharByCountryId(5)/*Quebec 5*/, getPlayerCharByCountryId(18), getPlayerCharByCountryId(18), getPlayerCharByCountryId(18), getPlayerCharByCountryId(18), getPlayerCharByCountryId(18)/*Western Europe 18*/, getPlayerCharByCountryId(19), getPlayerCharByCountryId(19)/*Southern Europe 19*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(31)/*Afghanistan 31*/, getPlayerCharByCountryId(26), getPlayerCharByCountryId(26)/*Ural 26*/, getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32)/*China 32*/, getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33)/*Mongolia 33*/, player[3]);
+      System.out.printf(".. . . .%c%c%c%c%c%c%c%c . . . .   %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c.%c%c . . . .|5. %s        \n", getPlayerCharByCountryId(6), getPlayerCharByCountryId(6), getPlayerCharByCountryId(6)/*Western US 6*/, getPlayerCharByCountryId(7), getPlayerCharByCountryId(7), getPlayerCharByCountryId(7), getPlayerCharByCountryId(7), getPlayerCharByCountryId(7)/*Eastern Us 7*/, getPlayerCharByCountryId(18), getPlayerCharByCountryId(18)/*Western Europe 18*/, getPlayerCharByCountryId(19), getPlayerCharByCountryId(19), getPlayerCharByCountryId(19)/*Southern Europe 19*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(31), getPlayerCharByCountryId(31), getPlayerCharByCountryId(31)/*Afghanistan 31*/, getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32), getPlayerCharByCountryId(32)/*China 32*/, getPlayerCharByCountryId(33), getPlayerCharByCountryId(33), getPlayerCharByCountryId(33)/*Mongolia 33*/, getPlayerCharByCountryId(34), getPlayerCharByCountryId(34)/*Japan 34*/, player[4]);
+      System.out.printf(".. . . . %c%c%c . . . . . .%c%c%c%c%c. %c%c%c%c%c%c%c%c%c%c%c%c%c%c. %c%c. . . . .|6. %s              \n", getPlayerCharByCountryId(8), getPlayerCharByCountryId(8), getPlayerCharByCountryId(8)/*Central America 8*/, getPlayerCharByCountryId(20), getPlayerCharByCountryId(20), getPlayerCharByCountryId(20)/*North Africa 20*/, getPlayerCharByCountryId(21), getPlayerCharByCountryId(21)/*Egypt 21*/, getPlayerCharByCountryId(35), getPlayerCharByCountryId(35), getPlayerCharByCountryId(35), getPlayerCharByCountryId(35)/*Middle East 35*/, getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36)/*India 36*/, getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36)/*Siam 36*/, getPlayerCharByCountryId(34), getPlayerCharByCountryId(34)/*Japan 34*/, player[5]);
       System.out.printf(".. . . . . %c%c%c%c%c . . . .%c%c%c%c%c%c%c. %c%c%c%c%c%c%c%c%c%c. . . . . . . .|                  \n", getPlayerCharByCountryId(9), getPlayerCharByCountryId(9), getPlayerCharByCountryId(9)/*Venezuela 9*/, getPlayerCharByCountryId(10), getPlayerCharByCountryId(10)/*Brazil 10*/, getPlayerCharByCountryId(20), getPlayerCharByCountryId(20), getPlayerCharByCountryId(20), getPlayerCharByCountryId(20)/*North Africa 20*/, getPlayerCharByCountryId(21), getPlayerCharByCountryId(21), getPlayerCharByCountryId(21)/*Egypt 21*/, getPlayerCharByCountryId(35), getPlayerCharByCountryId(35)/*Middle East 35*/, getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36), getPlayerCharByCountryId(36)/*India 36*/, getPlayerCharByCountryId(37), getPlayerCharByCountryId(37), getPlayerCharByCountryId(37)/*Siam 37*/);
       System.out.printf(".. . . . . .%c%c%c%c%c%c . . . .%c%c%c%c . . . . .%c%c . . . . . . . .|View Option                 \n", getPlayerCharByCountryId(9)/*Venezuela 9*/, getPlayerCharByCountryId(11)/*Peru 11*/, getPlayerCharByCountryId(10), getPlayerCharByCountryId(10), getPlayerCharByCountryId(10), getPlayerCharByCountryId(10)/*Brazil 10*/, getPlayerCharByCountryId(22), getPlayerCharByCountryId(22)/*Congo 22*/, getPlayerCharByCountryId(23), getPlayerCharByCountryId(23)/*East Africa 23*/, getPlayerCharByCountryId(36), getPlayerCharByCountryId(36)/*Siam 36*/);
       System.out.printf(".. . . . . . %c%c%c%c%c . . . .%c%c%c%c %c . . . . . %c%c%c%c. . . . . .|1. Globe     5. Africa    \n", getPlayerCharByCountryId(11), getPlayerCharByCountryId(11)/*Peru 11*/, getPlayerCharByCountryId(10), getPlayerCharByCountryId(10), getPlayerCharByCountryId(10)/*Brazil 10*/, getPlayerCharByCountryId(22), getPlayerCharByCountryId(22)/*Congo 22*/, getPlayerCharByCountryId(23)/*East Africa 23*/, getPlayerCharByCountryId(24)/*South Africa 24*/, getPlayerCharByCountryId(25)/*Madagascar 25*/, getPlayerCharByCountryId(38), getPlayerCharByCountryId(38), getPlayerCharByCountryId(38)/*Indonesia 38*/, getPlayerCharByCountryId(39)/*New Guinea 39*/);
@@ -151,5 +174,34 @@ public class Displayer {
 
    }
    
+   /* Displays NAmerica */
+   public void DisplayNAmerica() {
+   
+   }
+   
+   /* Displays SAmerica */
+   public void DisplaySAmerica() {
+   
+   }
+   
+   /* Displays Europe */
+   public void DisplayEurope() {
+   
+   }
+   
+   /* Displays Africa */
+   public void DisplayAfrica() {
+   
+   }
+   
+   /* Displays Asia */
+   public void DisplayAsia() {
+   
+   }
+   
+   /* Displays Australia */
+   public void DisplayAustralia() {
+   
+   }
    
 }

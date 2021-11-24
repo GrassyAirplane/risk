@@ -306,13 +306,24 @@ public class Database {
    
    /* adds new player to allPlayer array
    * @param player - player object to add */
-   public void AddPlayer(Player player) {
+   public void AddPlayer(Player player) {   
      // creating new temporary array with bigger size
-     Player[] temp = new Player[this.allPlayer.length + 1];
-     // transferring items to temp array
-     for (int i = 0; i < this.allPlayer.length; i++) {
-       temp[i] = this.allPlayer[i];
+     Player[] temp;
+     
+     if(this.allPlayer == null) {
+      temp = new Player[1];
      }
+     
+     else {
+         temp = new Player[this.allPlayer.length + 1];
+         
+        // transferring items to temp array
+        for (int i = 0; i < this.allPlayer.length; i++) {
+          temp[i] = this.allPlayer[i];
+        }
+     }
+     
+     
      // adding new player at the end of temp array
      temp[temp.length - 1] = player;
      // set allPlayer equal to temp array

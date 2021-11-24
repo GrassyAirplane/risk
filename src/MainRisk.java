@@ -17,8 +17,6 @@ public class MainRisk {
       int classType; 
       char playerChar;
       
-
-      
       //DisplayMenu
       disp.DisplayMenu();
       

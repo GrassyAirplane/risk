@@ -215,14 +215,14 @@ public abstract class Player {
         RemoveBonus(t1);
         RemoveBonus(t2);
         RemoveBonus(t3);
-        return 1;
+        return GameSystem.SUCCESSFUL;
       }
       else {
-        return -1;
+        return GameSystem.INADEQUATE_BONUS;
       }
     }
     else {
-      return -1;
+      return GameSystem.INADEQUATE_BONUS;
     }
   }
   

@@ -1,6 +1,8 @@
 /* Developed By: Zoe Tay Shiao Shuen
  * Revised Date: Nov 23, 2021 */
 
+import java.util.Random;
+
 /* Attacker Player Class
  * Ability:  */
 public class GameSystem {
@@ -40,7 +42,10 @@ public class GameSystem {
    *        reinforcement - number of troop reinforcements at beginning of turn
    *        countryOwned - list of countries owned by player
    *        playerMission - personal win condition */
-  public void CreatePlayer(int playerType, char playerChar, Mission playerMission) {
+  public void CreatePlayer(int playerType, char playerChar) {
+    
+    Mission playerMission = db.GetAllMission()[new Random().nextInt(db.GetAllMission().length - 1)]; 
+    
     switch (playerType) {
       case Player.ATTACKER:
         // creates attacker type player and adds it to allPlayer array
@@ -97,7 +102,8 @@ public class GameSystem {
    *        toCountry   - ID country the troops are moving to
    *        numTroops   - number of troops being moved
    * @return            - 1 if successful,
-   *                    - 
+   *                    - -1 if not enough troops,
+   *                    - -3 if not adjacent */
   public int Move(Country fromCountry, Country toCountry, int numTroops) {
     // checks if countries are adjacents of one another
     if (fromCountry.isAdjacent(toCountry.GetCountryId())) {
@@ -123,40 +129,77 @@ public class GameSystem {
    *        countryAttack - place the attacker is attacking from
    *        countryDefend - place the attacker wants to conquer
    * @return              - 1 if successful
-   *                      - 
-  public void Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
+   *                      - 0 if player does not own the country
+   *                      - -1 if player does not have enough troops
+   *                      - -3 if countries are not adjacent */
+  public int Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
+    for (int i = 0; i < attack.GetCountryOwned().length; i++) {
+      boolean ownsCountry = false;
+      if (attack.GetCountryOwned()[i] == countryAttack.GetCountryId()) {
+        ownsCountry = true;
+      }
+      if (!ownsCountry) {
+        return INVALID_OWNER;
+      }
+    }
+    for (int i = 0; i < defend.GetCountryOwned().length; i++) {
+      boolean ownsCountry = false;
+      if (defend.GetCountryOwned()[i] == countryDefend.GetCountryId()) {
+        ownsCountry = true;
+      }
+      if (!ownsCountry) {
+        return INVALID_OWNER;
+      }
+    }
     // checking if both countries are adjacent to one another
     if (countryAttack.isAdjacent(countryDefend.GetCountryId())) {
-      int[] rollAttack = attack.Attack(numAttackers);
-      int[] rollDefend = defend.Defend(countryDefend.GetTroopCount());
-      if (rollAttack.length < 2 || rollDefend.length < 2) {
-        if (rollAttack[0] > rollDefend[0]) {
-          countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
-        }
-        else {
-          countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
-          numAttackers--;
-        }
-      }
-      else {
-        for (int i = 0; i < rollDefend.length; i++) {
-          if (rollAttack[i] > rollDefend[i]) {
+      // creating arrays to store dice roll values for attacker and defender
+      if (countryDefend.GetTroopCount() > numAttackers) {
+        // checking if player has enough troops to attack
+        int[] rollAttack = attack.Attack(numAttackers);
+        int[] rollDefend = defend.Defend(countryDefend.GetTroopCount());
+        if (rollAttack.length < 2 || rollDefend.length < 2) {
+          // if only one roll is compared
+          if (rollAttack[0] > rollDefend[0]) {
+            // if attacker wins, defender loses one troop
             countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
           }
           else {
+            // if defender wins, attacker loses one troop
             countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
             numAttackers--;
           }
         }
+        else {
+          for (int i = 0; i < rollDefend.length; i++) {
+            // if two rolls are compared
+            if (rollAttack[i] > rollDefend[i]) {
+              // if attacker wins, defender loses one troop
+              countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
+            }
+            else {
+              // if defender wins, attacker loses one troop
+              countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
+              numAttackers--;
+            }
+          }
+        }
+        // if attacker successfully conquered the country
+        if (countryDefend.GetTroopCount() < 1) {
+          // transferring country ownership to attacker
+          countryDefend.SetOwner(attack);
+          // transferring troops over
+          countryDefend.SetTroopCount(numAttackers);
+          countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
+        }
       }
-      // if attacker successfully conquered the country
-      if (countryDefend.GetTroopCount() < 1) {
-        // transferring country ownership to attacker
-        countryDefend.SetOwner(attack);
-        // transferring troops over
-        countryDefend.SetTroopCount(numAttackers);
-        countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
+      else {
+        return INADEQUATE_TROOPS;
       }
+    }
+    else {
+      // if countries are not adjacent
+      return NOT_ADJACENT;
     }
   }
   

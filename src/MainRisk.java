@@ -45,6 +45,8 @@ public class MainRisk {
                   
                   /* Insert Code */
                   disp.DisplayClassType();
+                  classType = scan.nextInt();
+                  
                   creationCycle++;
                }
                

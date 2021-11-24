@@ -273,12 +273,6 @@ public class Database {
       return allBonus[bonusPos]; 
    }
    
-   /* get all mission
-    * @return - all mission array */
-   public Mission[] GetAllMission() {
-     return this.allMission;
-   }
-   
    /* Gets Mission Card Position in allMission array by missionId 
     * @param missionId       -  id of Card 
     * @return                -  position of country in allCountries

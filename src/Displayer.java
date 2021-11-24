@@ -223,31 +223,34 @@ public class Displayer {
       Player currPlayer = gs.GetCurrPlayer();
       Bonus[] currPlayerDeck = currPlayer.GetBonusDeck();
       
+      
       //Adds card variables into deck
-      for(int i = 0; i < currPlayerDeck.length; i++) {
-         Bonus currCard = currPlayerDeck[i];
-         cardName[i] = currCard.GetCardName();
-         cardPos[i] = cardPos[i] = Integer.toString(i);
-         //Converts the value into the troop type string
-         switch(currCard.GetTroopBonusType()) {
-            case GameSystem.INFANTRY_TROOP:
-               cardType[i] = "Infantry";
-               break;
-            case GameSystem.HORSE_TROOP:
-               cardType[i] = "Horse";
-               break;
-            case GameSystem.CANNON_TROOP:
-               cardType[i] = "Cannon";
-               break;
+      if(currPlayerDeck != null) {
+         for(int i = 0; i < currPlayerDeck.length; i++) {
+            Bonus currCard = currPlayerDeck[i];
+            cardName[i] = currCard.GetCardName();
+            cardPos[i] = cardPos[i] = Integer.toString(i);
+            //Converts the value into the troop type string
+            switch(currCard.GetTroopBonusType()) {
+               case GameSystem.INFANTRY_TROOP:
+                  cardType[i] = "Infantry";
+                  break;
+               case GameSystem.HORSE_TROOP:
+                  cardType[i] = "Horse";
+                  break;
+               case GameSystem.CANNON_TROOP:
+                  cardType[i] = "Cannon";
+                  break;
+            }
          }
       }
-      
+            
    
       //Checks PhaseNumber
       switch(phaseNum) {
          case PHASE_ONE:
             System.out.printf("        TURN PHASE ONE          ________________________________________________________________ \n");
-            System.out.printf("Receiving a total of %f  Troops |%s          |%s          |%s          |%s          |%s          |\n", currPlayer.GetReinforcement(),cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+            System.out.printf("Receiving a total of %f  Troops |%s          |%s          |%s          |%s          |%s          |\n", currPlayer.GetReinforcement(), cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
             System.out.printf("Options:                       |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  Trade   12. ------         |            |            |            |            |            |\n");
             System.out.printf("10. Place   13. ----           |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
@@ -287,21 +290,23 @@ public class Displayer {
       Bonus[] currPlayerDeck = currPlayer.GetBonusDeck();
       
       //Adds card variables into deck
-      for(int i = 0; i < currPlayerDeck.length; i++) {
-         Bonus currCard = currPlayerDeck[i];
-         cardName[i] = currCard.GetCardName();
-         cardPos[i] = Integer.toString(i);
-         //Converts the value into the troop type string
-         switch(currCard.GetTroopBonusType()) {
-            case GameSystem.INFANTRY_TROOP:
-               cardType[i] = "Infantry";
-               break;
-            case GameSystem.HORSE_TROOP:
-               cardType[i] = "Horse";
-               break;
-            case GameSystem.CANNON_TROOP:
-               cardType[i] = "Cannon";
-               break;
+      if(currPlayerDeck != null) {
+         for(int i = 0; i < currPlayerDeck.length; i++) {
+            Bonus currCard = currPlayerDeck[i];
+            cardName[i] = currCard.GetCardName();
+            cardPos[i] = cardPos[i] = Integer.toString(i);
+            //Converts the value into the troop type string
+            switch(currCard.GetTroopBonusType()) {
+               case GameSystem.INFANTRY_TROOP:
+                  cardType[i] = "Infantry";
+                  break;
+               case GameSystem.HORSE_TROOP:
+                  cardType[i] = "Horse";
+                  break;
+               case GameSystem.CANNON_TROOP:
+                  cardType[i] = "Cannon";
+                  break;
+            }
          }
       }
       

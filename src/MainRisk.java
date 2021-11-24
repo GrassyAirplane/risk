@@ -15,8 +15,7 @@ public class MainRisk {
       
       //Player Creation
       int classType; 
-      char playerChar;
-      
+      char playerChar; 
       
       //DisplayMenu
       disp.DisplayMenu();
@@ -65,9 +64,13 @@ public class MainRisk {
                //Distributes Countries
                gs.DistributeCountry();
                
+               //Initial Globe Display
                disp.DisplayGlobe();
                
+               //Initial Player Turn
                gs.RotatePlayer();
+               
+               
 
                /* Place Troops ZOE
                 * Swich currPlayer*/

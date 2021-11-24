@@ -128,7 +128,11 @@ public class GameSystem {
     for (i = 0; i < db.GetAllCountries().length; i++) {
       // check if all players have enough countries
       for (int j = 0; j < db.GetAllPlayer().length; j++) {
-        if (db.GetAllPlayer()[i].GetCountryOwned().length < numCountry) {
+         if(db.GetAllPlayer()[j].GetCountryOwned() == null) {
+            breakStatus = false;
+        }
+      
+        else if (db.GetAllPlayer()[j].GetCountryOwned().length < numCountry) {
           // if player's country list isn't full, don't break out of outer loop
           breakStatus = false;
         }

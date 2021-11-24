@@ -9,6 +9,11 @@ public class Displayer {
    /* INSTANCE VARIABLE */
    Database db; 
    
+   /* GLOBAL CONSTANT VARIABLES */
+   public final static int PHASE_ONE = 1; 
+   public final static int PHASE_TWO = 2;
+   public final static int PHASE_THREE = 3;
+   
    /*=============== CONSTRUCTOR ===============*/
    /* Displayer Constructor
     * @param db  - Database instance */
@@ -156,7 +161,7 @@ public class Displayer {
          }
       }
 
-      System.out.printf("_____________________________________________________________________________________              \n");
+      System.out.printf("______________________________________________________________________________________              \n");
       System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|-Player-                                \n");
       System.out.printf(".. . . . . . . .%c%c%c%c%c%c . %c . . . . . . . . . . . . . . . .|1. %s                               \n", getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/,getPlayerCharByCountryId(13)/*Iceland 13*/, player[0]);
       System.out.printf(".. . .%c%c%c%c%c%c .%c. .%c%c%c%c .%c%c . .%c%c%c. . .%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c. . .|2. %s       \n", getPlayerCharByCountryId(0), getPlayerCharByCountryId(0)/*Alaska 0*/, getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1), getPlayerCharByCountryId(1)/*NorthWest 1*/, getPlayerCharByCountryId(5)/*Quebec 5*/, getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/, getPlayerCharByCountryId(13), getPlayerCharByCountryId(13)/*Iceland 13*/, getPlayerCharByCountryId(14), getPlayerCharByCountryId(14)/*Scandinavia 14*/, getPlayerCharByCountryId(17)/*Ukraine 17*/, getPlayerCharByCountryId(27), getPlayerCharByCountryId(27)/*Siberia 27*/, getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28), getPlayerCharByCountryId(28)/*Yakutsk 28*/, getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30), getPlayerCharByCountryId(30)/*Kamchatka 30*/, player[1]); 
@@ -170,7 +175,7 @@ public class Displayer {
       System.out.printf(".. . . . . . %c%c%c . . . . . %c%c. . . . . . . .%c%c%c%c . . . . .|2. N.America 6. Asia           \n", getPlayerCharByCountryId(11)/*Peru 11*/, getPlayerCharByCountryId(12), getPlayerCharByCountryId(12)/*Argentina 12*/, getPlayerCharByCountryId(24), getPlayerCharByCountryId(24)/*South Affrica 24*/, getPlayerCharByCountryId(40), getPlayerCharByCountryId(40)/*Western Australia 40*/, getPlayerCharByCountryId(41), getPlayerCharByCountryId(41)/*Eastern Australia 41*/);
       System.out.printf(".. . . . . . %c%c. . . . . . . . . . . . . . . %c%c. . . . . .|3. S.America 7. Australia           \n", getPlayerCharByCountryId(12), getPlayerCharByCountryId(12)/*Argentina 12*/, getPlayerCharByCountryId(41), getPlayerCharByCountryId(41)/*Eastern Australia 41*/ );   
       System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|4. Europe    8. Scoreboard              \n");
-      System.out.printf("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾              \n");
+      System.out.printf("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾              \n");
 
    }
    
@@ -205,7 +210,43 @@ public class Displayer {
    }
    
    /* Displays Player information */
-   public void DisplayPlayerInfo() {
+   public void DisplayPhase(int phaseNum) {
+      
+      //Card Name Array
+      String[] cardName = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
+      String[] cardId = {"N/A", "N/A", "N/A", "N/A", "N/A"};
+      String[] cardType = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
+      
    
+      //Checks PhaseNumber
+      switch(phaseNum) {
+         case PHASE_ONE:
+            System.out.printf("        TURN PHASE ONE         ________________________________________________________________ \n");
+            System.out.printf("Receiving a total of x Troops |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+            System.out.printf("Options:                      |     %s     |     %s     |     %s     |     %s     |     %s     |\n", cardId[0], cardId[1], cardId[2], cardId[3], cardId[4]); //Card Id
+            System.out.printf("9.  Trade   12. ------        |            |            |            |            |            |\n");
+            System.out.printf("10. Place   13. ----          |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+            System.out.printf("11. Mission 14. --- -----     |____________|____________|____________|____________|____________|\n");
+            System.out.printf(" Selection : "); 
+            break;
+         case PHASE_TWO:
+            System.out.printf("        TURN PHASE TWO         ________________________________________________________________ \n");
+            System.out.printf("                              |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+            System.out.printf("Options:                      |     %s     |     %s     |     %s     |     %s     |     %s     |\n", cardId[0], cardId[1], cardId[2], cardId[3], cardId[4]); //Card Id
+            System.out.printf("9.  -----   12. Attack        |            |            |            |            |            |\n");
+            System.out.printf("10. -----   13. ----          |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+            System.out.printf("11. Mission 14. End Phase     |____________|____________|____________|____________|____________|\n");
+            System.out.printf(" Selection : ");
+            break; 
+         case PHASE_THREE:
+            System.out.printf("       TURN PHASE THREE        ________________________________________________________________ \n");
+            System.out.printf("                              |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+            System.out.printf("Options:                      |     %s     |     %s     |     %s     |     %s     |     %s     |\n", cardId[0], cardId[1], cardId[2], cardId[3], cardId[4]); //Card Id
+            System.out.printf("9.  -----   12. ------        |            |            |            |            |            |\n");
+            System.out.printf("10. -----   13. Move          |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+            System.out.printf("11. Mission 14. End Turn      |____________|____________|____________|____________|____________|\n");
+            System.out.printf(" Selection : ");
+            break; 
+      }
    }
 }

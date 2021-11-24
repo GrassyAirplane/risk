@@ -11,7 +11,7 @@ public class MainRisk {
       Scanner scan = new Scanner(System.in);
       
       //Game Variables      
-      int menuOption, numPlayer, creationCycle = 0, turnPhase; 
+      int menuOption, numPlayer, creationCycle = 0, turnPhase, gameOption; 
       
       //Player Creation
       int classType; 

@@ -7,7 +7,7 @@ public class MainRisk {
    public static void main(String [] args) {
       //Initial Variables
       GameSystem gs = new GameSystem(); 
-      Displayer disp = new Displayer(gs, gs.GetDb());
+      Displayer disp = new Displayer(gs.GetDb());
       Scanner scan = new Scanner(System.in);
       
       //Game Variables      
@@ -64,6 +64,8 @@ public class MainRisk {
                
                
                gs.DistributeCountry();
+               
+               disp.DisplayGlobe();
                
                /* Place Troops
                 * Swich currPlayer*/

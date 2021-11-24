@@ -11,7 +11,8 @@ public class Database {
    /* INSTANCE VARIABLE */
    private Country[] allCountries;
    private Bonus[] allBonus;
-   private Mission[] allMission;;
+   private Mission[] allMission;
+   private Player[] allPlayer; 
    
    /* FILE VARIABLES */
    private final static String FILE_PATH_COUNTRY = "../Countries.txt";
@@ -251,6 +252,7 @@ public class Database {
       return allCountries[countryPos]; 
    }
    
+  
    /* Gets Bonus Card Position in allBonus array by card id 
     * @param cardId       -  id of Card 
     * @return             -  position of country in allCountries
@@ -291,5 +293,39 @@ public class Database {
       return allMission[missionPos]; 
    }
    
+   /* adds new player to allPlayer array
+   * @param player - player object to add */
+   public void AddPlayer(Player player) {
+     // creating new temporary array with bigger size
+     Player[] temp = new Player[this.allPlayer.length + 1];
+     // transferring items to temp array
+     for (int i = 0; i < this.allPlayer.length; i++) {
+       temp[i] = this.allPlayer[i];
+     }
+     // adding new player at the end of temp array
+     temp[temp.length - 1] = player;
+     // set allPlayer equal to temp array
+     this.allPlayer = temp;
+  }
+  
+  /* removes a player from allPlayer array
+   * @param player - player object to remove */
+  public void RemovePlayer(Player player) {
+     // creating new temp array with smaller size
+     Player[] temp = new Player[this.allPlayer.length - 1];
+     // transferring items to temp array except item to remove
+     for (int i = 0; i < this.allPlayer.length; i++) {
+        if (allPlayer[i] != player) {
+        temp[i] = this.allPlayer[i];
+      }
+    }
+    // set allPlayer equal to temp array
+    this.allPlayer = temp;
+  }
    
+  /* gets all players
+  * @return - array that stores all player */
+  public Player[] GetAllPlayer() {
+    return this.allPlayer;
+  }    
 }

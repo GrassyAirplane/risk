@@ -63,6 +63,7 @@ public class GameSystem {
   }
   
   /* distribute countries among players at the start of game */
+  /*
   public void DistributeCountry() {
     int numCountry = db.GetAllCountries().length / db.GetAllPlayer().length; // number of countries each player gets
     for (int i = 0; i < db.GetAllPlayer().length; i++) {
@@ -94,6 +95,16 @@ public class GameSystem {
         db.GetAllPlayer()[playerIndex].AddCountry(db.GetAllCountries()[i].GetCountryId());
         playerIndex++; // increments player index for rotation
       }
+    }
+  }
+  */
+  
+  public void DistributeCountry() {
+    int numCountry = db.GetAllCountries().length / db.GetAllPlayer().length;
+    int[] index = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 
+                  30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41};
+    for (int i = 0; i < db.GetAllPlayer().length; i++) {
+      
     }
   }
 

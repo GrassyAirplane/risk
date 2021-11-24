@@ -64,7 +64,12 @@ public class GameSystem {
   
   /* distribute countries among players at the start of game */
   public void DistributeCountry() {
-    
+    int numCountry = db.GetAllCountries().length / db.GetAllPlayer().length; // number of countries each player gets
+    for (int i = 0; i < GetAllPlayer().length; i++) {
+      for (int j = 0; j <= numCountry; j++) {
+        
+      }
+    }
   }
 
   /* switch current player to give next player a turn.
@@ -134,7 +139,7 @@ public class GameSystem {
    *                      - -3 if countries are not adjacent */
   public int Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
     for (int i = 0; i < attack.GetCountryOwned().length; i++) {
-      boolean ownsCountry = false;
+      boolean ownsCountry = false;X
       if (attack.GetCountryOwned()[i] == countryAttack.GetCountryId()) {
         ownsCountry = true;
       }

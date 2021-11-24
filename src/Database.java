@@ -219,6 +219,11 @@ public class Database {
    }
    
    /*=============== PUBLIC METHODS ===============*/ 
+   
+   public Country[] GetAllCountries() {
+     return this.allCountries;
+   }
+   
    /* Gets Country Position in allCountries array by country name
     * @param countryName  -  name of Counrty
     * @return             -  position of country in allCountries

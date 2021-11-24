@@ -1,5 +1,5 @@
 /* Developed By: Zoe Tay Shiao Shuen
- * Revised Date: Nov 23, 2021 */
+ * Revised Date: Nov 24, 2021 */
 
 import java.util.Random;
 
@@ -123,10 +123,57 @@ public class GameSystem {
   
   public void DistributeCountry() {
     int numCountry = db.GetAllCountries().length / db.GetAllPlayer().length;
-    int[] index = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 
-                  30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41};
-    for (int i = 0; i < db.GetAllPlayer().length; i++) {
-      
+    boolean breakStatus = false; // to check if should break when checking if all players have enough countries
+    int i;
+    for (i = 0; i < db.GetAllCountries().length; i++) {
+      // check if all players have enough countries
+      for (int j = 0; j < db.GetAllPlayer().length; j++) {
+        if (db.GetAllPlayer()[i].GetCountryOwned().length < numCountry) {
+          // if player's country list isn't full, don't break out of outer loop
+          breakStatus = false;
+        }
+        else {
+          // don't break until the end of the list to check if all players' lists are full
+          // if all the players' country lists are full, break out of outer loop
+          breakStatus = true;
+        }
+        if (!breakStatus) {
+          // breaks out of inner loop for player's that don't have a full list
+          break;
+        }
+      }
+      if (breakStatus) {
+        // breaks out of outer loop if all players have a full list
+        break;
+      }
+      // randomize player index
+      int playerIndex = new Random().nextInt(db.GetAllPlayer().length - 1);
+      // check if player's list is full
+      if (db.GetAllPlayer()[playerIndex].GetCountryOwned().length < numCountry) {
+        // set player as owner of the country
+        db.GetAllCountries()[i].SetOwner(db.GetAllPlayer()[playerIndex]);
+        // add country to player's country list
+        db.GetAllPlayer()[playerIndex].AddCountry(db.GetAllCountries()[i].GetCountryId());
+      }
+      else {
+        // if full
+        i--; // don't increment i to find another player to add the country to
+      }
+    }
+    int playerIndex = db.GetAllPlayer().length - 1; // set player index to the last position
+    // assigns remaining countries to players starting from the last position
+    for (int j = i; j < db.GetAllCountries().length; j++) {
+      // set player as owner of the country
+      db.GetAllCountries()[j].SetOwner(db.GetAllPlayer()[playerIndex]);
+      // add country to player's country list
+      db.GetAllPlayer()[playerIndex].AddCountry(db.GetAllCountries()[j].GetCountryId());
+      // rotating player index
+      if (playerIndex == 0) {
+        playerIndex = db.GetAllPlayer().length - 1;
+      }
+      else {
+        playerIndex--;
+      }
     }
   }
 

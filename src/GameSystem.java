@@ -25,21 +25,21 @@ public class GameSystem {
 
   private Database db = new Database();
   
-  /*=============== PUBIC METHODS ===============*/
-  
-  public void print() {
-  Country[] country = db.GetAllCountries();
-   
-   
-  
-   for(int i = 0; i < country.length; i++) {
-      //System.out.println(country[i].GetOwner().GetPlayerChar());
-      System.out.println(country[i].GetCountryName());
-   }
+  /*=============== PRIVATE METHODS ===============*/
+  /* Implementation of the Fisher-Yates Shuffle */ 
+  private void shuffleDeck(int[] indexArray) {
+    Random rand = new Random();
+    //Parses through the indexArray backwards
+    for(int i = indexArray.length - 1; i > 0; i--) {
+      int index = rand.nextInt(i + 1);
+      //Swaps the values
+      int temp = indexArray[index];
+      indexArray[index] = indexArray[i];
+      indexArray[i] = temp; 
+    }
   }
   
-  
-  
+  /*=============== PUBIC METHODS ===============*/
   /* gets db
    * @return - returns db */
   public Database GetDb() {
@@ -68,19 +68,6 @@ public class GameSystem {
         // creates producer type player and adds it to allPlayer array
         db.AddPlayer(new Producer(playerChar, playerMission));
         break;
-    }
-  }
-  
-  /* Implementation of the Fisher-Yates Shuffle */ 
-  private void shuffleDeck(int[] indexArray) {
-    Random rand = new Random();
-    //Parses through the indexArray backwards
-    for(int i = indexArray.length - 1; i > 0; i--) {
-      int index = rand.nextInt(i + 1);
-      //Swaps the values
-      int temp = indexArray[index];
-      indexArray[index] = indexArray[i];
-      indexArray[i] = temp; 
     }
   }
    
@@ -234,88 +221,6 @@ public class GameSystem {
       return NOT_ADJACENT;
     }
   }
-
-  /* Compares dice rolls and transfers ownership if attacker successfully conquered the country
-   * @param attack        - attacking player
-   *        defend        - defending player
-   *        numAttackers  - number of troops the attacker is using to battle
-   *        countryAttack - place the attacker is attacking from
-   *        countryDefend - place the attacker wants to conquer
-   * @return              - 1 if successful
-   *                      - 0 if player does not own the country
-   *                      - -1 if player does not have enough troops
-   *                      - -3 if countries are not adjacent */
-  /*public int Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
-    for (int i = 0; i < attack.GetCountryOwned().length; i++) {
-      boolean ownsCountry = false;
-      if (attack.GetCountryOwned()[i] == countryAttack.GetCountryId()) {
-        ownsCountry = true;
-      }
-      if (!ownsCountry) {
-        return INVALID_OWNER;
-      }
-    }
-    for (int i = 0; i < defend.GetCountryOwned().length; i++) {
-      boolean ownsCountry = false;
-      if (defend.GetCountryOwned()[i] == countryDefend.GetCountryId()) {
-        ownsCountry = true;
-      }
-      if (!ownsCountry) {
-        return INVALID_OWNER;
-      }
-    }
-    // checking if both countries are adjacent to one another
-    if (countryAttack.isAdjacent(countryDefend.GetCountryId())) {
-      // creating arrays to store dice roll values for attacker and defender
-      if (countryDefend.GetTroopCount() > numAttackers) {
-        // checking if player has enough troops to attack
-        int[] rollAttack = attack.Attack(numAttackers);
-        int[] rollDefend = defend.Defend(countryDefend.GetTroopCount());
-        if (rollAttack.length < 2 || rollDefend.length < 2) {
-          // if only one roll is compared
-          if (rollAttack[0] > rollDefend[0]) {
-            // if attacker wins, defender loses one troop
-            countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
-          }
-          else {
-            // if defender wins, attacker loses one troop
-            countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
-            numAttackers--;
-          }
-        }
-        else {
-          for (int i = 0; i < rollDefend.length; i++) {
-            // if two rolls are compared
-            if (rollAttack[i] > rollDefend[i]) {
-              // if attacker wins, defender loses one troop
-              countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
-            }
-            else {
-              // if defender wins, attacker loses one troop
-              countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
-              numAttackers--;
-            }
-          }
-        }
-        // if attacker successfully conquered the country
-        if (countryDefend.GetTroopCount() < 1) {
-          // transferring country ownership to attacker
-          countryDefend.SetOwner(attack);
-          // transferring troops over
-          countryDefend.SetTroopCount(numAttackers);
-          countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
-        }
-        return SUCCESSFUL;
-      }
-      else {
-        return INADEQUATE_TROOPS;
-      }
-    }
-    else {
-      // if countries are not adjacent
-      return NOT_ADJACENT;
-    }
-  }*/
   
   /* Compares dice rolls and transfers ownership if attacker successfully conquered the country
    * @param attack        - attacking player

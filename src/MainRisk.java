@@ -23,6 +23,10 @@ public class MainRisk {
       //DisplayMenu
       disp.DisplayMenu();
       
+      //Trading Variables
+      int cardOne, cardTwo, cardThree; 
+      
+      
       //Menu Looping
       do {
          menuOption = scan.nextInt();
@@ -70,19 +74,50 @@ public class MainRisk {
                               
                //Initial Player Turn
                gs.RotatePlayer();
+               disp.DisplayGlobe();
+               
+               /*=============== PHASE 0 ===============*/
                
                //Loops Through all players
                for(int i = 0; i < numPlayer; i++) {
                   //Place until Reinforcements are diminished
                   while(gs.GetCurrPlayer().GetReinforcement() > 0) {
-                  disp.DisplayGlobe();
                   disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
                   gameOption = scan.nextInt();
                   //Placement Option
                      switch(gameOption) {
+                        case Displayer.DISPLAY_GLOBE:
+                           disp.DisplayGlobe();
+                           break;
+                        case Displayer.N_AMERICA:
+                           disp.DisplayNAmerica();
+                           break;
+                        case Displayer.S_AMERICA:
+                           disp.DisplaySAmerica();
+                           break;
+                        case Displayer.EUROPE:
+                           disp.DisplayEurope();
+                           break;
+                        case Displayer.AFRICA:
+                           disp.DisplayAfrica();
+                           break;
+                        case Displayer.ASIA:
+                           disp.DisplayAsia();
+                           break;
+                        case Displayer.SCOREBOARD:
+                           disp.DisplayScoreboard();
+                           break;
                         case Displayer.PLACE:
-                           disp.DisplayPlace();
-                           countryId = scan.nextInt();
+                           //Gurantee Inbound Input Error Checking
+                           do{
+                              disp.DisplayPlace();
+                              countryId = scan.nextInt();
+                              
+                              if(countryId > 42 || countryId < 0) {
+                                 disp.ErrorMessage();
+                              }
+                              
+                           }while(countryId > 42 || countryId < 0);     
                            System.out.print("Selection [Amount of Reinforcement] : ");
                            reinforcementAmount = scan.nextInt();
                            //Places Troops
@@ -108,26 +143,134 @@ public class MainRisk {
                }
                
                
-
-
-               /* PHASE 1
-                * Collect Reinforcement
-                * Trade Card
-                * Place Troops ZOE
-                *
-                * PHASE 2 
-                * attack ZOE WHILE 
-                * Check Loser, Check Winner ZOE
-                * move to phase 3
-                * check for bonus
-                *
-                * PHASE 3
-                * move troops
-                * end turn
-                * switch currPlayer
-                *
-                * */
-               
+               while(true) {
+                  /*=============== PHASE 1 ===============*/
+                     
+                  /* PHASE 1
+                   * Collect Reinforcement
+                   * Trade Card
+                   * Place Troops ZOE
+                   */
+                   
+                   /* Sets Reinforcement for curr Player */
+                   gs.GetCurrPlayer().SetReinforcement(); 
+                   disp.DisplayGlobe();
+                   
+                   while(gs.GetCurrPlayer().GetReinforcement() > 0) {
+                     
+                     disp.DisplayPhase(Displayer.PHASE_ONE);
+                     gameOption = scan.nextInt();
+                     //Placement Option
+                        switch(gameOption) {
+                           case Displayer.DISPLAY_GLOBE:
+                              disp.DisplayGlobe();
+                              break;
+                           case Displayer.N_AMERICA:
+                              disp.DisplayNAmerica();
+                              break;
+                           case Displayer.S_AMERICA:
+                              disp.DisplaySAmerica();
+                              break;
+                           case Displayer.EUROPE:
+                              disp.DisplayEurope();
+                              break;
+                           case Displayer.AFRICA:
+                              disp.DisplayAfrica();
+                              break;
+                           case Displayer.ASIA:
+                              disp.DisplayAsia();
+                              break;
+                           case Displayer.SCOREBOARD:
+                              disp.DisplayScoreboard();
+                              break;
+                           //Trading System displayer
+                           case Displayer.TRADE:
+                              //Error Checking
+                              do {
+                                 //Trading Displayer
+                                 disp.DisplayTrade();
+                                 cardOne = scan.nextInt();
+                                 System.out.printf(" Card 2 [Id] : ");
+                                 cardTwo = scan.nextInt();
+                                 System.out.printf(" Card 3 [Id] : ");
+                                 cardThree = scan.nextInt();
+                                 
+                                 if() {
+                                    disp.ErrorMessage();
+                                 }
+                                 
+                              } while( );
+                              
+                              //Bonus Card Swap Results
+                              switch( gs.GetCurrPlayer().Bonus(cardOne, cardTwo, cardThree) ) {
+                                 
+                                
+                              }
+                              break;  
+                           //Placement of Troops
+                           case Displayer.PLACE:
+                              //Gurantee Inbound Input Error Checking
+                              do{
+                                 disp.DisplayPlace();
+                                 countryId = scan.nextInt();
+                                 
+                                 if(countryId > 42 || countryId < 0) {
+                                    disp.ErrorMessage();
+                                 }
+                                 
+                              }while(countryId > 42 || countryId < 0);     
+                              System.out.print("Selection [Amount of Reinforcement] : ");
+                              reinforcementAmount = scan.nextInt();
+                              //Places Troops
+                              switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
+                                 case GameSystem.SUCCESSFUL:
+                                    System.out.println("\nSuccess\n");
+                                    break;
+                                 case GameSystem.INVALID_OWNER:
+                                    System.out.println("\nCountry Not Owned by Player\n");
+                                    break; 
+                                 case GameSystem.INADEQUATE_TROOPS:
+                                    System.out.println("\nInvalid Amount of Troops\n");
+                                    break;
+                              }
+                              break;
+                            //Invalid Input
+                            default:
+                              disp.ErrorMessage();                 
+                        } 
+                   
+                   }
+                   
+                   
+                
+                  
+                   
+                   
+                   /*=============== PHASE 2 ===============*/
+                   
+                  /* PHASE 2 
+                   * attack ZOE WHILE 
+                   * Check Loser, Check Winner ZOE
+                   * move to phase 3
+                   * check for bonus */
+                   
+                   //disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
+                   
+                   
+                   
+                  /*=============== PHASE 3 ===============*/
+                   
+                  /* PHASE 3
+                   * move troops
+                   * end turn
+                   * switch currPlayer
+                   *
+                   * */
+                   
+                   //disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
+                   
+                   break;
+               }
                
                break;
             //Display Rules

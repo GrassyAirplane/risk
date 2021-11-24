@@ -35,6 +35,12 @@ public class GameSystem {
     return this.db;
   }
   
+  /* gets all players
+   * @return - array that stores all player */
+  public Player[] GetAllPlayer() {
+    return this.allPlayer;
+  }
+  
   /* creates a new player and adds it to allPlayer array
    * @param playerChar - player icon
    *        reinforcement - number of troop reinforcements at beginning of turn

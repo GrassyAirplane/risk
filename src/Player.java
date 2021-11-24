@@ -100,14 +100,16 @@ public abstract class Player {
   
   /*=============== PUBLIC METHODS ===============*/
   
+  /* gets player ID
+   * @return - returns the player ID */
+  public int GetPlayerId() {
+    return this.playerId;
+  }
+  
   /* gets the icon used to represent the player.
    * @return - char that represents player */
   public char GetPlayerChar() {
     return this.playerChar;
-  }
-  
-  public int GetPlayerId() {
-    return this.playerId;
   }
   
   /* gets the number of troops.

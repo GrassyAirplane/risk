@@ -112,6 +112,8 @@ public class Displayer {
       scan.nextLine();
       System.out.println("The Victor is found when they complete their \"Secret\" Mission Objective, or are the last player remaining.");
       scan.nextLine();
+      System.out.println("Be Careful, other players may have the same mission objectives, or similar objectives.");
+      scan.nextLine();
       System.out.println("Player's lose when they no longer have any owned territories");
    }
    

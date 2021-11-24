@@ -14,7 +14,9 @@ public class MainRisk {
       int menuOption, numPlayer, creationCycle = 0, turnPhase; 
       
       //Player Creation
-      disp.DisplayGlobe();
+      int classType; 
+      char playerChar;
+      
 
       
       //DisplayMenu

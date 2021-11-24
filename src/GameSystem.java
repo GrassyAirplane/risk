@@ -151,10 +151,17 @@ public class GameSystem {
     *                  - -1 if player does not have enough troops */
    public int PlaceTroops(Country country, int numTroops) {
      // check if player owns the country
+     boolean ownsCountry = false;
      for (int i = 0; i < this.currPlayer.GetCountryOwned().length; i++) {
        if (this.currPlayer.GetCountryOwned()[i] == country.GetCountryId()) {
+         ownsCountry = true;
          break;
        }
+       else {
+         ownsCountry = false;
+       }
+     }
+     if (!ownsCountry) {
        return INVALID_OWNER;
      }
      // check if player has enough troops

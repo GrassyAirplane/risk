@@ -22,12 +22,8 @@ public class GameSystem {
   
   /* INSTANCE VARIABLES */
   private Player currPlayer;
-  
-  // array to store all players
-  private Player[] allPlayer;
 
-  private Database db = new Database(); 
-  private Displayer disp = new Displayer(db);
+  private Database db = new Database();
   
   /*=============== PUBIC METHODS ===============*/
   
@@ -231,12 +227,39 @@ public class GameSystem {
      // To get number of countries each player should get
      int numCountry = db.GetAllCountries().length / numPlayer;
      
-     // player position to set country to
-     int playerIndex = 0;
+     // To get number of countries left over
+     int remainder = db.GetAllCountries().length % numPlayer;
      
      // Assigns countries to players
-     for (int i = 0; i < db.GetAllCountries().length; i++) {
-       if (db.GetAllPlayer()[playerIndex] >= numCountry) {
+     for (int i = 0; i < numPlayer; i++) {
+       for (int j = (numCountry * i); j < numCountry * (i + 1); j++) {
+         // setting owner
+         db.GetAllCountries()[indexArray[j]].SetOwner(db.GetAllPlayer()[i]);
+         // adding to player's countryOwned array
+         db.GetAllPlayer()[i].AddCountry(db.GetAllCountries()[indexArray[j]].GetCountryId());
+       }
+     }
+     
+     int playerIndex = db.GetAllPlayer().length - 1; // keeps track of player index
+     
+     // Assigns remainder countries
+     if (remainder != 0) {
+       for (int i = db.GetAllCountries().length - 1; i >= 0; i--) {
+         if (db.GetAllCountries()[i].GetOwner() == null) {
+           break;
+         }
+         else {
+           // setting owner
+           db.GetAllCountries()[indexArray[i]].SetOwner(db.GetAllPlayer()[playerIndex]);
+           // adding country to player's countryOwned array
+           db.GetAllPlayer()[playerIndex].AddCountry(db.GetAllCountries()[indexArray[i]].GetCountryId());
+           if (playerIndex == 0) {
+             playerIndex = db.GetAllPlayer().length - 1;
+           }
+           else {
+             playerIndex--;
+           }
+         }
        }
      }
      
@@ -246,16 +269,19 @@ public class GameSystem {
    
   /* switch current player to give next player a turn. */
   public void RotatePlayer() {
-    if (allPlayer[allPlayer.length - 1] == this.currPlayer) {
-      this.currPlayer = allPlayer[0];
+    if (this.currPlayer == null) {
+      // if no current player, set it to the first player
+      this.currPlayer = db.GetAllPlayer()[0];
     }
-    else if (this.currPlayer == null) {
-      this.currPlayer = allPlayer[0];
+    else if (db.GetAllPlayer()[db.GetAllPlayer().length - 1] == this.currPlayer) {
+      // if current player is the last player, rotate it to the first
+      this.currPlayer = db.GetAllPlayer()[0];
     }
     else {
-      for (int i = 0; i < allPlayer.length - 1; i++) {
-        if (allPlayer[i] == this.currPlayer) {
-          this.currPlayer = allPlayer[i + 1];
+      for (int i = 0; i < db.GetAllPlayer().length - 1; i++) {
+        // rotate current player
+        if (db.GetAllPlayer()[i] == this.currPlayer) {
+          this.currPlayer = db.GetAllPlayer()[i + 1];
         }
       }
     }

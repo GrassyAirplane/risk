@@ -62,8 +62,8 @@ public class MainRisk {
                   creationCycle++;
                }
                
-               
-               gs.DistributeCountry();
+               //Distributes Countries
+               gs.DistributeCountry(numPlayer);
                
                disp.DisplayGlobe();
                

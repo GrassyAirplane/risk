@@ -121,13 +121,17 @@ public class GameSystem {
   }
   */
   
+  /*
   public void DistributeCountry() {
     int numCountry = db.GetAllCountries().length / db.GetAllPlayer().length;
     boolean breakStatus = false; // to check if should break when checking if all players have enough countries
     int i;
+    System.out.println("Works 1");
     for (i = 0; i < db.GetAllCountries().length; i++) {
+      System.out.println("Works 2");
       // check if all players have enough countries
       for (int j = 0; j < db.GetAllPlayer().length; j++) {
+         System.out.println("Works 3");
          if(db.GetAllPlayer()[j].GetCountryOwned() == null) {
             breakStatus = false;
         }
@@ -142,6 +146,7 @@ public class GameSystem {
           breakStatus = true;
         }
         if (!breakStatus) {
+          System.out.println("REACHES");
           // breaks out of inner loop for player's that don't have a full list
           break;
         }
@@ -152,21 +157,36 @@ public class GameSystem {
       }
       // randomize player index
       int playerIndex = new Random().nextInt(db.GetAllPlayer().length - 1);
+      System.out.println("REACHES Player");
+      if(db.GetAllPlayer()[playerIndex].GetCountryOwned() == null) {
+         System.out.println("REACHES IF STATEMENT");
+         // set player as owner of the country
+         db.GetAllCountries()[i].SetOwner(db.GetAllPlayer()[playerIndex]);
+         // add country to player's country list
+         db.GetAllPlayer()[playerIndex].AddCountry(db.GetAllCountries()[i].GetCountryId());
+      }
       // check if player's list is full
-      if (db.GetAllPlayer()[playerIndex].GetCountryOwned().length < numCountry) {
+      else if (db.GetAllPlayer()[playerIndex].GetCountryOwned().length < numCountry) {
+         System.out.println("REACHES ELSEIF");
         // set player as owner of the country
         db.GetAllCountries()[i].SetOwner(db.GetAllPlayer()[playerIndex]);
         // add country to player's country list
         db.GetAllPlayer()[playerIndex].AddCountry(db.GetAllCountries()[i].GetCountryId());
       }
       else {
+        System.out.println("REACHES ELSE");
         // if full
+        /*
         i--; // don't increment i to find another player to add the country to
+        */
+    /*
       }
     }
+    
     int playerIndex = db.GetAllPlayer().length - 1; // set player index to the last position
     // assigns remaining countries to players starting from the last position
     for (int j = i; j < db.GetAllCountries().length; j++) {
+      System.out.println("Works 4");
       // set player as owner of the country
       db.GetAllCountries()[j].SetOwner(db.GetAllPlayer()[playerIndex]);
       // add country to player's country list
@@ -180,7 +200,42 @@ public class GameSystem {
       }
     }
   }
-
+  */
+  
+   /* Implementation of the Fisher-Yates Shuffle */ 
+   private void shuffleDeck(int[] indexArray) {
+      Random rand = new Random();
+      //Parses through the indexArray backwards
+      for(int i = indexArray.length - 1; i > 0; i--) {
+         int index = rand.nextInt(i + 1);
+         //Swaps the values
+         int temp = indexArray[index];
+         indexArray[index] = indexArray[i];
+         indexArray[i] = temp; 
+      }
+   }
+   
+  
+   public void DistributeCountry(int numPlayer) {
+      Country[] allCountries = db.GetAllCountries();
+      //Creates an index Array with the same size of countriest
+      int[] indexArray = new int[allCountries.length];
+      
+      //Populates the array with values 0-41 based on the index position
+      for(int i = 0; i < allCountries.length; i++) {
+         indexArray[i] = i;
+      }
+      
+      //Shuffles the array of 0-41
+      shuffleDeck(indexArray);
+     
+    
+            
+     
+   }
+   
+   
+   
   /* switch current player to give next player a turn.
    * @param currPlayer - player object of current player that just played their turn */
   public void RotatePlayer(Player currPlayer) {

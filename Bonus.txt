@@ -1,12 +1,12 @@
 Alaska:1
-North-West-Territory:1
+N.W.Territory:1
 Greenland:1
 Alberta:1
 Ontario:1
 Quebec:1
 Western-US:1
 Eastern-US:1
-Central-America:1
+C. America:1
 Venezuela:1
 Brazil:1
 Peru:1
@@ -14,16 +14,16 @@ Argentina:1
 
 Iceland:2
 Scandinavia:2
-Great-Britain:2
-Northern-Europe:2
+G. Britain:2
+N. Europe:2
 Ukraine:2
-Western-Europe:2
-Southern-Europe:2
-North-Africa:2
+W. Europe:2
+S. Europe:2
+N. Africa:2
 Egypt:2
 Congo:2
-East-Africa:2
-South-Africa:2
+E. Africa:2
+S. Africa:2
 Madagascar:2
 
 Ural:3
@@ -41,5 +41,5 @@ Siam:3
 Indonesia:3
 
 New-Guinea:1
-Western-Australia:2
-Eastern-Australia:3
+W. Australia:2
+E. Australia:3

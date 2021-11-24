@@ -32,7 +32,7 @@ public class GameSystem {
   /*=============== PUBIC METHODS ===============*/
   
   public void print() {
-   Country[] country = db.GetAllCountries();
+  Country[] country = db.GetAllCountries();
    
    
   

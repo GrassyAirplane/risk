@@ -7,11 +7,11 @@ public class MainRisk {
    public static void main(String [] args) {
       //Initial Variables
       GameSystem gs = new GameSystem(); 
-      Displayer disp = new Displayer(gs.GetDb());
+      Displayer disp = new Displayer(gs, gs.GetDb());
       Scanner scan = new Scanner(System.in);
       
       //Game Variables      
-      int menuOption, numPlayer, creationCycle = 0, turnPhase; 
+      int menuOption, numPlayer, creationCycle = 0, turnPhase, gameOption; 
       
       //Player Creation
       int classType; 
@@ -65,7 +65,26 @@ public class MainRisk {
                
                gs.DistributeCountry();
                
-     
+               /* Place Troops
+                * Swich currPlayer*/
+                
+               /* PHASE 1
+                * Collect Reinforcement
+                * Trade Card
+                * Place Troops
+                *
+                * PHASE 2 
+                * attack
+                * Check Loser, Check Winner
+                * move to phase 3
+                * check for bonus
+                *
+                * PHASE 3
+                * move troops
+                * end turn
+                * switch currPlayer
+                *
+                * */
                
                
                break;

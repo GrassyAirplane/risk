@@ -131,12 +131,7 @@ public class Displayer {
       char icon = 't';
       
       String[] player = new String[6]; 
-      Player[] allPlayer = gs.GetAllPlayer(); 
-      
-      
-      for(int i = 0; i < Player.PlayerCount(); i++) {
-         
-      }
+      Player[] allPlayer = db.GetAllPlayer(); 
       
       System.out.printf("_____________________________________________________________________________________              \n");
       System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|-Player-                                \n");

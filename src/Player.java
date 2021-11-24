@@ -1,5 +1,5 @@
 /* Developed By: Zoe Tay Shiao Shuen
- * Revised Date: Nov 23, 2021 */
+ * Revised Date: Nov 24, 2021 */
 
 import java.util.Random;
 
@@ -41,31 +41,6 @@ public abstract class Player {
     this.playerId = this.PlayerCount;
   }
   
-  /*=============== PRIVATE METHODS ===============*/
-  
-  /* checks if a list of countries that make a continent 
-   * is within the the list of countries that the player owns
-   * @param list1 - list to check if it is in another list
-   *        list2 - list to check if it contains list1
-   * @return      - true or false depending on whether the player
-   *                has all the countries in the list */
-  private boolean checkContinent(int[] list) {
-    boolean hasList = false;
-    for (int i = 0; i < list.length; i++) {
-      hasList = false;
-      for (int j = 0; j < this.countryOwned.length; j++) {
-        if (list[i] == this.countryOwned[i]) {
-          hasList = true;
-          break;
-        }
-      }
-      if (!hasList) {
-        break;
-      }
-    }
-    return hasList;
-  }
-  
   /*=============== PUBLIC METHODS ===============*/
   
   /* gets player ID
@@ -78,6 +53,12 @@ public abstract class Player {
    * @return - char that represents player */
   public char GetPlayerChar() {
     return this.playerChar;
+  }
+  
+  /* gets the player mission
+   * @return - the mission object that is the player's mission */
+  public Mission GetPlayerMission() {
+    return this.playerMission;
   }
   
   /* gets the number of troops.
@@ -99,15 +80,37 @@ public abstract class Player {
       tempReinforcement = (this.countryOwned.length / 3);
     }
     // adding continent bonus to reinforcement
-    tempReinforcement += continentBonus();
+    tempReinforcement += ContinentBonus();
     // assigning to reinforcement instance variable
     this.reinforcement = tempReinforcement;
+  }
+  
+  /* Checks if the player owns a countinent by checking if a list of countries 
+   * that make a continent is within the the list of countries that the player owns
+   * @param list - continent array to check if it exists in the player's countries list
+   * @return     - true or false depending on whether the player
+   *               has all the countries in the list */
+  public boolean CheckContinent(int[] list) {
+    boolean hasList = false;
+    for (int i = 0; i < list.length; i++) {
+      hasList = false;
+      for (int j = 0; j < this.countryOwned.length; j++) {
+        if (list[i] == this.countryOwned[i]) {
+          hasList = true;
+          break;
+        }
+      }
+      if (!hasList) {
+        break;
+      }
+    }
+    return hasList;
   }
   
   /* checks if player owns a continent and gets the number of bonus troops
    * @return - number of bonus troops the player gets by owning the continent
    *           returns 0 if player does not own any continents */
-  public int continentBonus() {
+  public int ContinentBonus() {
     int sumBonus = 0;
     int[] nAmerica = {0, 1, 2, 3, 4, 5, 6, 7, 8};
     int[] sAmerica = {9, 10, 11, 12};
@@ -115,22 +118,22 @@ public abstract class Player {
     int[] africa = {20, 21, 22, 23, 24, 25};
     int[] asia = {26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37};
     int[] australia = {38, 39, 40, 41};
-    if (checkContinent(nAmerica)) {
+    if (CheckContinent(nAmerica)) {
       sumBonus += Country.NORTH_AMERICA_BONUS;
     }
-    if (checkContinent(sAmerica)) {
+    if (CheckContinent(sAmerica)) {
       sumBonus += Country.SOUTH_AMERICA_BONUS;
     }
-    if (checkContinent(europe)) {
+    if (CheckContinent(europe)) {
       sumBonus += Country.EUROPE_BONUS;
     }
-    if (checkContinent(africa)) {
+    if (CheckContinent(africa)) {
       sumBonus += Country.AFRICA_BONUS;
     }
-    if (checkContinent(asia)) {
+    if (CheckContinent(asia)) {
       sumBonus += Country.ASIA_BONUS;
     }
-    if (checkContinent(australia)) {
+    if (CheckContinent(australia)) {
       sumBonus += Country.AUSTRALIA_BONUS;
     }
     return sumBonus;

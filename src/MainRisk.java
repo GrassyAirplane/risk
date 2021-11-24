@@ -65,7 +65,26 @@ public class MainRisk {
                
                gs.DistributeCountry();
                
-     
+               /* Place Troops
+                * Swich currPlayer*/
+                
+               /* PHASE 1
+                * Collect Reinforcement
+                * Trade Card
+                * Place Troops
+                *
+                * PHASE 2 
+                * attack
+                * Check Loser, Check Winner
+                * move to phase 3
+                * check for bonus
+                *
+                * PHASE 3
+                * move troops
+                * end turn
+                * switch currPlayer
+                *
+                * */
                
                
                break;

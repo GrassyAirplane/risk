@@ -198,8 +198,11 @@ public class MainRisk {
                                  if() {
                                     disp.ErrorMessage();
                                  }
-                                 
-                              } while( );
+                                 else {
+                                    break;
+                                 }
+                                      
+                              } while(true);
                               
                               //Bonus Card Swap Results
                               switch( gs.GetCurrPlayer().Bonus(cardOne, cardTwo, cardThree) ) {

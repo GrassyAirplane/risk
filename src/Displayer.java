@@ -354,4 +354,14 @@ public class Displayer {
    
    }
    
+   /* Displays Mission Objective */
+   public void DisplayMission() {
+      Scanner scan = new Scanner(System.in);
+      Player currPlayer = gs.GetCurrPlayer();
+      Mission playerMission = currPlayer.GetPlayerMission();
+      
+      System.out.printf("\n        MISSION OBJECTIVE\n");
+      System.out.printf("CONFIDENTIAL: READ THIS IN PRIVATE, ENTER WHEN READY");
+      scan.nextLine(); 
+   }
 }

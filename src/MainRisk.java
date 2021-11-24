@@ -43,10 +43,23 @@ public class MainRisk {
                //Player Creation
                while(creationCycle < numPlayer) {
                   
-                  /* Insert Code */
                   disp.DisplayClassType();
-                  classType = scan.nextInt();
+                  while(true) {       
+                     classType = scan.nextInt();
+                     if(classType < 4 && classType > 0) {
+                        break;
+                     }
+                     disp.ErrorMessage();
+                     System.out.print("\nClass Selection : ");
+                  }
                   
+                  disp.DisplayPlayerChar(); 
+                  playerChar = scan.next().charAt(0); 
+                  
+                  //Creates Player Instance
+                  gs.CreatePlayer(classType, playerChar); 
+                                
+                  //Cycle increments
                   creationCycle++;
                }
                

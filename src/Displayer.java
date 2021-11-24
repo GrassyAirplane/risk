@@ -135,10 +135,11 @@ public class Displayer {
       
    }
    
-   public void DisplayPlayerCreation() {
-      
-   
+   /* Displays the playerCreation char */
+   public void DisplayPlayerChar() {
+      System.out.print("Enter a unique player char [i.e 'k' or '#' ] : ");
    }
+   
    
    
    /* Displays Globe and information */

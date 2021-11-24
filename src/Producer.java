@@ -1,5 +1,5 @@
-/* Developed By: Zoe
- * Revised Date: Nov 22, 2021 */
+/* Developed By: Zoe Tay Shiao Shuen
+ * Revised Date: Nov 24, 2021 */
 
 /* Producer Player Class
  * Ability:  */
@@ -22,7 +22,7 @@ public class Producer extends Player {
       tempReinforcement = ((GetCountryOwned().length / 2) - 1);
     }
     // adding continent bonus to reinforcement
-    tempReinforcement += continentBonus();
+    tempReinforcement += ContinentBonus();
     // setting temp reinforcement to reinforcement
     SetReinforcement(tempReinforcement);
   }

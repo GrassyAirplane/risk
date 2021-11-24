@@ -366,5 +366,73 @@ public class GameSystem {
    public Country GetCountryByPos(int countryPos) {
       return db.GetAllCountries()[countryPos]; 
    }
+   
+   /* Checks if current player has won.
+    * @return - 1 if player won by world domination.
+    *         - 0 if player won by completing mission.
+    *         - -1 if player has not won. */
+   public int CheckWinner() {
+     // arrays to check if the player owns any of these specific continents
+     int[] nAmerica = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+     int[] sAmerica = {9, 10, 11, 12};
+     int[] europe = {13, 14, 15, 16, 17, 18, 19};
+     int[] africa = {20, 21, 22, 23, 24, 25};
+     int[] asia = {26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37};
+     int[] australia = {38, 39, 40, 41};
+     if (this.currPlayer.GetCountryOwned().length == db.GetAllCountries().length) {
+       return 1;
+     }
+     else if (this.currPlayer.GetPlayerMission().GetMissionId() == 0) {
+       if (this.currPlayer.CheckContinent(europe) && this.currPlayer.CheckContinent(nAmerica) && this.currPlayer.CheckContinent(africa)) {
+         return 0;
+       }
+       else {
+         return -1;
+       }
+     }
+     else if (this.currPlayer.GetPlayerMission().GetMissionId() == 1) {
+       if (this.currPlayer.CheckContinent(asia) && this.currPlayer.CheckContinent(nAmerica)) {
+         return 0;
+       }
+       else {
+         return -1;
+       }
+     }
+     else if (this.currPlayer.GetPlayerMission().GetMissionId() == 2) {
+       if (this.currPlayer.CheckContinent(europe) && this.currPlayer.CheckContinent(asia)) {
+         return 0;
+       }
+       else {
+         return -1;
+       }
+     }
+     else if (this.currPlayer.GetPlayerMission().GetMissionId() == 3) {
+       if (this.currPlayer.CheckContinent(australia) && this.currPlayer.CheckContinent(africa) && this.currPlayer.CheckContinent(sAmerica)) {
+         return 0;
+       }
+       else {
+         return -1;
+       }
+     }
+     else if (this.currPlayer.GetPlayerMission().GetMissionId() == 4) {
+       if (this.currPlayer.CheckContinent(africa) && this.currPlayer.CheckContinent(europe) && this.currPlayer.CheckContinent(sAmerica)) {
+         return 0;
+       }
+       else {
+         return -1;
+       }
+     }
+     else if (this.currPlayer.GetPlayerMission().GetMissionId() == 5) {
+       if (this.currPlayer.CheckContinent(europe) && this.currPlayer.CheckContinent(africa) && this.currPlayer.CheckContinent(asia)) {
+         return 0;
+       }
+       else {
+         return -1;
+       }
+     }
+     else {
+       return -1;
+     }
+   }
   
 }

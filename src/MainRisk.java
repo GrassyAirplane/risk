@@ -42,7 +42,7 @@ public class MainRisk {
                while(creationCycle < numPlayer) {
                   
                   /* Insert Code */
-                  
+                  disp.DisplayClassType();
                   creationCycle++;
                }
                

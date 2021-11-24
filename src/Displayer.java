@@ -28,13 +28,6 @@ public class Displayer {
       return db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
    }
    
-   /* Retrieves the players char, by their id
-    * 
-    * */
-   private char getPlayerCharByPlayerId( int playerId) {
-      return '3';
-   }
-   
    /*=============== PUBLIC METHODS ===============*/
    /* Displaying the Menu*/ 
    public void DisplayMenu() {
@@ -122,12 +115,26 @@ public class Displayer {
       System.out.println("Player's lose when they no longer have any owned territories");
    }
    
+   /* Initalizer Code */
    public void DisplayInitialiser() {
       System.out.println("\n█ █▄░█ █ ▀█▀ █ ▄▀█ █░░ █ ▀█ █▀▀   █▀█ █░░ ▄▀█ █▄█ █▀▀ █▀█ █▀");
       System.out.println("█ █░▀█ █ ░█░ █ █▀█ █▄▄ █ █▄ ██▄   █▀▀ █▄▄ █▀█ ░█░ ██▄ █▀▄ ▄█\n");
       System.out.print("Insert Number of Players [Must be 2 or More]: "); 
    }
    
+   /* Displays Class Types*/
+   public void DisplayClassType() {
+      System.out.println("_____________________________________________________________________________________________________________________ ");
+      System.out.println("\n▄▀█ ▀█▀ ▀█▀ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█     |     █▀▄ █▀▀ █▀▀ █▀▀ █▄░█ █▀▄ █▀▀ █▀█     |     █▀█ █▀█ █▀█ █▀▄ █░█ █▀▀ █▀▀ █▀█ ");
+      System.out.println("█▀█ ░█░ ░█░ █▀█ █▄▄ █░█ ██▄ █▀▄     |     █▄▀ ██▄ █▀░ ██▄ █░▀█ █▄▀ ██▄ █▀▄     |     █▀▀ █▀▄ █▄█ █▄▀ █▄█ █▄▄ ██▄ █▀▄\n ");   
+      System.out.println(" 1. Attack Bonus when attacking     | 2. Defend Bonus when Defending           | 3. Producing Bonus Every Turn         "); 
+      System.out.println("    Rolls [+1] Extra Dice           |    Rolls [+1] Extra Dice                 |    Formula [Countries Owned/2] -1     ");
+      System.out.print(  "\nClass Selection : ");
+      
+   }
+   
+   
+   /* Displays Globe and information */
    public void DisplayGlobe() {
       char icon = 't';
       
@@ -159,5 +166,34 @@ public class Displayer {
 
    }
    
+   /* Displays NAmerica */
+   public void DisplayNAmerica() {
+   
+   }
+   
+   /* Displays SAmerica */
+   public void DisplaySAmerica() {
+   
+   }
+   
+   /* Displays Europe */
+   public void DisplayEurope() {
+   
+   }
+   
+   /* Displays Africa */
+   public void DisplayAfrica() {
+   
+   }
+   
+   /* Displays Asia */
+   public void DisplayAsia() {
+   
+   }
+   
+   /* Displays Australia */
+   public void DisplayAustralia() {
+   
+   }
    
 }

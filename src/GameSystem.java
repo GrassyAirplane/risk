@@ -151,10 +151,17 @@ public class GameSystem {
     *                  - -1 if player does not have enough troops */
    public int PlaceTroops(Country country, int numTroops) {
      // check if player owns the country
+     boolean ownsCountry = false;
      for (int i = 0; i < this.currPlayer.GetCountryOwned().length; i++) {
        if (this.currPlayer.GetCountryOwned()[i] == country.GetCountryId()) {
+         ownsCountry = true;
          break;
        }
+       else {
+         ownsCountry = false;
+       }
+     }
+     if (!ownsCountry) {
        return INVALID_OWNER;
      }
      // check if player has enough troops
@@ -323,24 +330,32 @@ public class GameSystem {
    *                      - -3 if countries are not adjacent */
   public int Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
     // check if attacker owns country
+    boolean ownsCountry = false;
     for (int i = 0; i < attack.GetCountryOwned().length; i++) {
-      boolean ownsCountry = false;
       if (attack.GetCountryOwned()[i] == countryAttack.GetCountryId()) {
         ownsCountry = true;
+        break;
       }
-      if (!ownsCountry) {
-        return INVALID_OWNER;
+      else {
+        ownsCountry = false;
       }
     }
+    if (!ownsCountry) {
+      return INVALID_OWNER;
+    }
+    ownsCountry = false;
     // check if defender owns country
     for (int i = 0; i < defend.GetCountryOwned().length; i++) {
-      boolean ownsCountry = false;
       if (defend.GetCountryOwned()[i] == countryDefend.GetCountryId()) {
         ownsCountry = true;
+        break;
       }
-      if (!ownsCountry) {
-        return INVALID_OWNER;
+      else {
+        ownsCountry = false;
       }
+    }
+    if (!ownsCountry) {
+      return INVALID_OWNER;
     }
     // checking if both countries are adjacent to one another
     if (countryAttack.isAdjacent(countryDefend.GetCountryId())) {

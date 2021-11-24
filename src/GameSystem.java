@@ -192,6 +192,7 @@ public class GameSystem {
           countryDefend.SetTroopCount(numAttackers);
           countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
         }
+        return SUCCESSFUL;
       }
       else {
         return INADEQUATE_TROOPS;

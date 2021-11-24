@@ -263,14 +263,36 @@ public class GameSystem {
        }
      }
      
+     // Setting initial reinforcements for each player
+     for (int i = 0; i < db.GetAllPlayer().length; i++) {
+       db.GetAllPlayer()[i].SetReinforcement(db.GetAllPlayer()[i].GetCountryOwned().length * 2);
+     }
+     
    }
    
    /* Places troops in a country.
-    * @param country - country to place the troops in
+    * @param country   - country to place the troops in
     *        numTroops - number of troops to place
-    * @return          - */
+    * @return          - 1 if successful
+    *                  - 0 if player does not own the country
+    *                  - -1 if player does not have enough troops */
    public int PlaceTroops(Country country, int numTroops) {
-     return 0; // default return
+     // check if player owns the country
+     for (int i = 0; i < this.currPlayer.GetCountryOwned().length; i++) {
+       if (this.currPlayer.GetCountryOwned()[i] == country.GetCountryId()) {
+         break;
+       }
+       return INVALID_OWNER;
+     }
+     // check if player has enough troops
+     if (this.currPlayer.GetReinforcement() < numTroops) {
+       return INADEQUATE_TROOPS;
+     }
+     // adding troops
+     country.SetTroopCount(country.GetTroopCount() + numTroops);
+     // subtracting added troops from reinforcements
+     this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() - numTroops);
+     return SUCCESSFUL;
    }
    
   /* switch current player to give next player a turn. */

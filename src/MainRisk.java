@@ -9,13 +9,14 @@ public class MainRisk {
       GameSystem gs = new GameSystem(); 
       Displayer disp = new Displayer(gs.GetDb());
       Scanner scan = new Scanner(System.in);
-   
+      
       //Game Variables      
       int menuOption, numPlayer, creationCycle = 0, turnPhase; 
       
       //Player Creation
       int classType; 
       char playerChar;
+      
       
       //DisplayMenu
       disp.DisplayMenu();
@@ -61,12 +62,10 @@ public class MainRisk {
                   creationCycle++;
                }
                
+               
                gs.DistributeCountry();
-               disp.DisplayGlobe();
                
-               
-               
-               
+     
                
                
                break;

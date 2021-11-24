@@ -61,14 +61,6 @@ public class MainRisk {
                   creationCycle++;
                }
                
-               gs.DistributeCountry();
-               disp.DisplayGlobe();
-               
-               
-               
-               
-               
-               
                break;
             //Display Rules
             case 2:

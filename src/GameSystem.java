@@ -65,9 +65,34 @@ public class GameSystem {
   /* distribute countries among players at the start of game */
   public void DistributeCountry() {
     int numCountry = db.GetAllCountries().length / db.GetAllPlayer().length; // number of countries each player gets
-    for (int i = 0; i < GetAllPlayer().length; i++) {
+    for (int i = 0; i < db.GetAllPlayer().length; i++) {
       for (int j = 0; j <= numCountry; j++) {
-        
+        // randomly choose a country by randomizing the index
+        Country countryAdd = db.GetAllCountries()[new Random().nextInt(db.GetAllCountries().length - 1)];
+        // check if the country has an owner already
+        if (countryAdd.GetOwner() == null) {
+          // setting owner to player if there is no owner
+          countryAdd.SetOwner(db.GetAllPlayer()[i]);
+          // adding country to player's individual list of countries
+          db.GetAllPlayer()[i].AddCountry(countryAdd.GetCountryId());
+        }
+        else {
+          // don't do anything and repeat the process of taking a random country from list
+          // j has to be decremented for player to end up with the same number of countries as intended
+          j--;
+        }
+      }
+    }
+    int playerIndex = 0; // keeps track of player index
+    // gets the remainder countries that are not assigned and assigns to players
+    // players getting assigned the remainder countries are rotated
+    for (int i = 0; i < db.GetAllCountries().length; i++) {
+      if (db.GetAllCountries()[i].GetOwner() == null) {
+        // sets owner to player
+        db.GetAllCountries()[i].SetOwner(db.GetAllPlayer()[playerIndex]);
+        // adds country to player's list of countries
+        db.GetAllPlayer()[playerIndex].AddCountry(db.GetAllCountries()[i].GetCountryId());
+        playerIndex++; // increments player index for rotation
       }
     }
   }
@@ -139,7 +164,7 @@ public class GameSystem {
    *                      - -3 if countries are not adjacent */
   public int Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
     for (int i = 0; i < attack.GetCountryOwned().length; i++) {
-      boolean ownsCountry = false;X
+      boolean ownsCountry = false;
       if (attack.GetCountryOwned()[i] == countryAttack.GetCountryId()) {
         ownsCountry = true;
       }

@@ -106,6 +106,10 @@ public abstract class Player {
     return this.playerChar;
   }
   
+  public int GetPlayerId() {
+    return this.playerId;
+  }
+  
   /* gets the number of troops.
    * @return - value of reinforcement variable. */
   public int GetReinforcement() {

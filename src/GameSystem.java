@@ -109,16 +109,16 @@ public class GameSystem {
   
   /* checks if player being attacked has lost
    * @param player - player to check if eliminated
-   * @return       - 1 if player has lost and is removed
-   *                 -1 if player has not lost */
-  public int RemoveLoser(Player player) {
+   * @return       - true if player has lost and is removed
+   *                 false if player has not lost */
+  public boolean RemoveLoser(Player player) {
     // checks if player is eliminated by seeing if they no longer own any countries
     if (player.GetCountryOwned().length == 0) {
       RemovePlayer(player);
-      return SUCCESSFUL;
+      return true;
     }
     else {
-      return -1;
+      return false;
     }
   }
 
@@ -126,7 +126,8 @@ public class GameSystem {
    * @param fromCountry - ID of country the troops are moved from
    *        toCountry   - ID country the troops are moving to
    *        numTroops   - number of troops being moved
-   * @return            - 1 if successful, -1 if unsuccessful */
+   * @return            - 1 if successful,
+   *                    - 
   public int Move(Country fromCountry, Country toCountry, int numTroops) {
     // checks if countries are adjacents of one another
     if (fromCountry.isAdjacent(toCountry.GetCountryId())) {
@@ -134,14 +135,14 @@ public class GameSystem {
       if (fromCountry.GetTroopCount() > numTroops) {
         fromCountry.SetTroopCount(fromCountry.GetTroopCount() - numTroops); // subtracting number of troops
         toCountry.SetTroopCount(toCountry.GetTroopCount() + numTroops); // adding troops to destination country
-        return 1;
+        return SUCCESSFUL;
       }
       else {
         return INADEQUATE_TROOPS;
       }
     }
     else {
-      return -1;
+      return NOT_ADJACENT;
     }
   }
 

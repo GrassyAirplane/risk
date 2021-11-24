@@ -130,14 +130,13 @@ public class Displayer {
    public void DisplayGlobe() {
       char icon = 't';
       
-      String player1;
-      String player2;
-      String player3;
-      String player4;
-      String player5;
-      String player6;
+      String[] player = new String[6]; 
+      Player[] allPlayer = gs.GetAllPlayer(); 
       
-  
+      
+      for(int i = 0; i < Player.PlayerCount(); i++) {
+         
+      }
       
       System.out.printf("_____________________________________________________________________________________              \n");
       System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|-Player-                                \n");

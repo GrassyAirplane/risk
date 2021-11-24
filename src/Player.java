@@ -404,5 +404,4 @@ public abstract class Player {
     // setting deck to temp
     this.deck = temp;
   }
-  
 }

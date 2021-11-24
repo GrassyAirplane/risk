@@ -1,4 +1,4 @@
-2d/* Developed By: Euan
+/* Developed By: Euan
  * Revised Date: Nov 23, 2021 */
 
 import java.util.Scanner; 

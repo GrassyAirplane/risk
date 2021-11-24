@@ -211,7 +211,7 @@ public class GameSystem {
     }
   }
    
-   
+   /* distribute countries among players at the start of game */
    public void DistributeCountry(int numPlayer) {
      // Creates an index Array with the same size of countries
      int[] indexArray = new int[db.GetAllCountries().length];
@@ -265,7 +265,13 @@ public class GameSystem {
      
    }
    
-   
+   /* Places troops in a country.
+    * @param country - country to place the troops in
+    *        numTroops - number of troops to place
+    * @return          - */
+   public int PlaceTroops(Country country, int numTroops) {
+     return 0; // default return
+   }
    
   /* switch current player to give next player a turn. */
   public void RotatePlayer() {

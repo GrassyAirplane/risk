@@ -238,15 +238,14 @@ public class GameSystem {
    
    
    
-  /* switch current player to give next player a turn.
-   * @param currPlayer - player object of current player that just played their turn */
-  public void RotatePlayer(Player currPlayer) {
-    if (allPlayer[allPlayer.length - 1] == currPlayer) {
+  /* switch current player to give next player a turn. */
+  public void RotatePlayer() {
+    if (allPlayer[allPlayer.length - 1] == this.currPlayer) {
       this.currPlayer = allPlayer[0];
     }
     else {
       for (int i = 0; i < allPlayer.length - 1; i++) {
-        if (allPlayer[i] == currPlayer) {
+        if (allPlayer[i] == this.currPlayer) {
           this.currPlayer = allPlayer[i + 1];
         }
       }

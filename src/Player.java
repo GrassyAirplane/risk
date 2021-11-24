@@ -143,7 +143,7 @@ public abstract class Player {
    *        t2 - position in deck array of second bonus card to cash in
    *        t3 - position in deck array of third bonus card to cash in
    * @return   - 1 if bonus troops are successfully added to reinforcements
-   *           - -1 if the player do not have the required bonuses to cash in */
+   *           - -2 if the player do not have the required bonuses to cash in */
   public int Bonus(int t1, int t2, int t3) {
     int numInfantry = 0; // keeps track of number of infantry bonuses
     int numHorse = 0; // keeps track of number of horse bonuses
@@ -171,10 +171,10 @@ public abstract class Player {
           RemoveBonus(t1);
           RemoveBonus(t2);
           RemoveBonus(t3);
-          return 1;
+          return GameSystem.SUCCESSFUL;
         }
         else {
-          return -1;
+          return GameSystem.INADEQUATE_BONUS;
         }
       }
       else if (deck[t1].GetTroopBonusType() == GameSystem.HORSE_TROOP) {
@@ -184,10 +184,10 @@ public abstract class Player {
           RemoveBonus(t1);
           RemoveBonus(t2);
           RemoveBonus(t3);
-          return 1;
+          return GameSystem.SUCCESSFUL;
         }
         else {
-          return -1;
+          return GameSystem.INADEQUATE_BONUS;
         }
       }
       else if (deck[t1].GetTroopBonusType() == GameSystem.CANNON_TROOP) {
@@ -197,14 +197,14 @@ public abstract class Player {
           RemoveBonus(t1);
           RemoveBonus(t2);
           RemoveBonus(t3);
-          return 1;
+          return GameSystem.SUCCESSFUL;
         }
         else {
-          return -1;
+          return GameSystem.INADEQUATE_BONUS;
         }
       }
       else {
-        return -1;
+        return GameSystem.INADEQUATE_BONUS;
       }
     }
     else if (deck[t1].GetTroopBonusType() != deck[t2].GetTroopBonusType() && 

@@ -228,35 +228,34 @@ public class Database {
     * @param countryName  -  name of Counrty
     * @return             -  position of country in allCountries
     *                     -1 if country doesn't exist */
-   public int GetCountryPos(String countryName) {   
+   /*public int GetCountryPos(String countryName) {   
       for( int i = 0; i < allCountries.length; i++ ) {
          if( allCountries[i].GetCountryName().toUpperCase().equals(countryName.toUpperCase()) ) {
             return i; 
          }
       }
       return -1;
-   }
+   }*/
    
    /* Gets Country Position in allCountries array by country id
     * @param countryId    -  id of Country 
     * @return             -  position of country in allCountries
     *                     -1 if country doesn't exist */
-   public int GetCountryPos(int countryId) {
+   /*public int GetCountryPos(int countryId) {
       for( int i = 0; i < allCountries.length; i++ ) {
          if( allCountries[i].GetCountryId() == countryId) {
             return i; 
          }
       }
       return -1; 
-   }
+   }*/
    
    /* Gets Country in allCountries array by its pos index
     * @param countryPos   -  position of countrin in allCountries
     * @return             -  country in the position of allCountries*/
-   public Country GetCountryByPos(int countryPos) {
+   /*public Country GetCountryByPos(int countryPos) {
       return allCountries[countryPos]; 
-   }
-   
+   }*/
   
    /* Gets Bonus Card Position in allBonus array by card id 
     * @param cardId       -  id of Card 

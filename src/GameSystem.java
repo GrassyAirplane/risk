@@ -85,7 +85,7 @@ public class GameSystem {
   }
    
    /* distribute countries among players at the start of game */
-   public void DistributeCountry(int numPlayer) {
+   public void DistributeCountry() {
      // Creates an index Array with the same size of countries
      int[] indexArray = new int[db.GetAllCountries().length];
      
@@ -98,13 +98,13 @@ public class GameSystem {
      shuffleDeck(indexArray);
      
      // To get number of countries each player should get
-     int numCountry = db.GetAllCountries().length / numPlayer;
+     int numCountry = db.GetAllCountries().length / db.GetAllPlayer().length;
      
      // To get number of countries left over
-     int remainder = db.GetAllCountries().length % numPlayer;
+     int remainder = db.GetAllCountries().length % db.GetAllPlayer().length;
      
      // Assigns countries to players
-     for (int i = 0; i < numPlayer; i++) {
+     for (int i = 0; i < db.GetAllPlayer().length; i++) {
        for (int j = (numCountry * i); j < numCountry * (i + 1); j++) {
          // setting owner
          db.GetAllCountries()[indexArray[j]].SetOwner(db.GetAllPlayer()[i]);
@@ -321,5 +321,38 @@ public class GameSystem {
   public void SetCurrPlayer(Player player) {
     this.currPlayer = player;
   }
+  
+  /* Gets Country Position in allCountries array by country name
+    * @param countryName  -  name of Counrty
+    * @return             -  position of country in allCountries
+    *                     -1 if country doesn't exist */
+   public int GetCountryPos(String countryName) {   
+      for( int i = 0; i < db.GetAllCountries().length; i++ ) {
+         if( db.GetAllCountries()[i].GetCountryName().toUpperCase().equals(countryName.toUpperCase()) ) {
+            return i; 
+         }
+      }
+      return -1;
+   }
+   
+   /* Gets Country Position in allCountries array by country id
+    * @param countryId    -  id of Country 
+    * @return             -  position of country in allCountries
+    *                     -1 if country doesn't exist */
+   public int GetCountryPos(int countryId) {
+      for( int i = 0; i < db.GetAllCountries().length; i++ ) {
+         if( db.GetAllCountries()[i].GetCountryId() == countryId) {
+            return i; 
+         }
+      }
+      return -1; 
+   }
+   
+   /* Gets Country in allCountries array by its pos index
+    * @param countryPos   -  position of countrin in allCountries
+    * @return             -  country in the position of allCountries*/
+   public Country GetCountryByPos(int countryPos) {
+      return db.GetAllCountries()[countryPos]; 
+   }
   
 }

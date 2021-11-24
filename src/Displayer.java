@@ -29,10 +29,10 @@ public class Displayer {
     * @return            -   */
    private char getPlayerCharByCountryId( int countryId ) {
       //Checks if no current owner 
-      if (db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner() == null) {
+      if (gs.GetCountryByPos(gs.GetCountryPos(countryId)).GetOwner() == null) {
          return '#';
       }
-      return db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
+      return gs.GetCountryByPos(gs.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
    }
    
    /*=============== PUBLIC METHODS ===============*/

@@ -118,6 +118,10 @@ public abstract class Player {
     return this.reinforcement;
   }
   
+  public void SetReinforcement(int reinforcement) {
+    this.reinforcement = reinforcement;
+  }
+  
   /* calculates number of troop reinforcements player should have */
   public void SetReinforcement() {
     // setting the minimum number of reinforcements at the beginning of each turn

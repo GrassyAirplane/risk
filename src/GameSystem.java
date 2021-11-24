@@ -231,8 +231,14 @@ public class GameSystem {
      // To get number of countries each player should get
      int numCountry = db.GetAllCountries().length / numPlayer;
      
-     // Assigns countries to players
+     // player position to set country to
+     int playerIndex = 0;
      
+     // Assigns countries to players
+     for (int i = 0; i < db.GetAllCountries().length; i++) {
+       if (db.GetAllPlayer()[playerIndex] >= numCountry) {
+       }
+     }
      
    }
    
@@ -241,6 +247,9 @@ public class GameSystem {
   /* switch current player to give next player a turn. */
   public void RotatePlayer() {
     if (allPlayer[allPlayer.length - 1] == this.currPlayer) {
+      this.currPlayer = allPlayer[0];
+    }
+    else if (this.currPlayer == null) {
       this.currPlayer = allPlayer[0];
     }
     else {

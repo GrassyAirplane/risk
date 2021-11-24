@@ -106,7 +106,7 @@ public class Displayer {
       scan.nextLine();
       System.out.println("Specific combiantions of cards can be traded for additional reinforcements.");
       scan.nextLine();
-      System.out.println("All of the Mission Objectives rely on capturing sppecific combinations of continents");
+      System.out.println("All of the Mission Objectives rely on capturing specific combinations of continents");
       scan.nextLine();
       System.out.println("Alliances are allowed, though there will only be a single Victor.");
       scan.nextLine();

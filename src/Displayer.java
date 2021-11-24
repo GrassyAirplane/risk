@@ -1,5 +1,5 @@
 /* Developed By: Euan Lim
- * Revised Date: Nov 23, 2021 */
+ * Revised Date: Nov 24, 2021 */
 
 import java.util.Scanner; 
 
@@ -25,6 +25,13 @@ public class Displayer {
          return '#';
       }
       return db.GetCountryByPos(db.GetCountryPos(countryId)).GetOwner().GetPlayerChar(); 
+   }
+   
+   /* Retrieves the players char, by their id
+    * 
+    * */
+   private char getPlayerCharByPlayerId( int playerId) {
+      return '3';
    }
    
    /*=============== PUBLIC METHODS ===============*/
@@ -122,6 +129,16 @@ public class Displayer {
    
    public void DisplayGlobe() {
       char icon = 't';
+      
+      String player1;
+      String player2;
+      String player3;
+      String player4;
+      String player5;
+      String player6;
+      
+  
+      
       System.out.printf("_____________________________________________________________________________________              \n");
       System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|-Player-                                \n");
       System.out.printf(".. . . . . . . .%c%c%c%c%c%c . %c . . . . . . . . . . . . . . . .|1.                               \n", getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2), getPlayerCharByCountryId(2)/*Greenland 2*/,getPlayerCharByCountryId(13)/*Iceland 13*/);

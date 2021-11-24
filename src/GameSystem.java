@@ -31,6 +31,19 @@ public class GameSystem {
   
   /*=============== PUBIC METHODS ===============*/
   
+  public void print() {
+   Country[] country = db.GetAllCountries();
+   
+   
+  
+   for(int i = 0; i < country.length; i++) {
+      //System.out.println(country[i].GetOwner().GetPlayerChar());
+      System.out.println(country[i].GetCountryName());
+   }
+  }
+  
+  
+  
   /* gets db
    * @return - returns db */
   public Database GetDb() {
@@ -66,24 +79,33 @@ public class GameSystem {
   /*
   public void DistributeCountry() {
     int numCountry = db.GetAllCountries().length / db.GetAllPlayer().length; // number of countries each player gets
+    
+    System.out.println("works");
+    
     for (int i = 0; i < db.GetAllPlayer().length; i++) {
+      System.out.println("works 2");
       for (int j = 0; j <= numCountry; j++) {
+         System.out.println("works 3");
         // randomly choose a country by randomizing the index
         Country countryAdd = db.GetAllCountries()[new Random().nextInt(db.GetAllCountries().length - 1)];
         // check if the country has an owner already
         if (countryAdd.GetOwner() == null) {
+        System.out.println("works 4");
           // setting owner to player if there is no owner
           countryAdd.SetOwner(db.GetAllPlayer()[i]);
           // adding country to player's individual list of countries
           db.GetAllPlayer()[i].AddCountry(countryAdd.GetCountryId());
         }
         else {
+          System.out.println("works 5");
           // don't do anything and repeat the process of taking a random country from list
           // j has to be decremented for player to end up with the same number of countries as intended
           j--;
         }
       }
     }
+    System.out.println("works 6");
+    
     int playerIndex = 0; // keeps track of player index
     // gets the remainder countries that are not assigned and assigns to players
     // players getting assigned the remainder countries are rotated

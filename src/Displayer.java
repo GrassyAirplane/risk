@@ -204,4 +204,8 @@ public class Displayer {
    
    }
    
+   /* Displays Player information */
+   public void DisplayPlayerInfo() {
+   
+   }
 }

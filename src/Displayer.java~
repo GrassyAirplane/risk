@@ -131,7 +131,7 @@ public class Displayer {
       char icon = 't';
       
       String[] player = new String[6]; 
-      Player[] allPlayer = db.GetAllPlayer(); 
+      Player[] allPlayer = gs.GetAllPlayer(); 
       
       
       for(int i = 0; i < Player.PlayerCount(); i++) {

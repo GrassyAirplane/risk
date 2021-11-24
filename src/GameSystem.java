@@ -202,35 +202,37 @@ public class GameSystem {
   }
   */
   
-   /* Implementation of the Fisher-Yates Shuffle */ 
-   private void shuffleDeck(int[] indexArray) {
-      Random rand = new Random();
-      //Parses through the indexArray backwards
-      for(int i = indexArray.length - 1; i > 0; i--) {
-         int index = rand.nextInt(i + 1);
-         //Swaps the values
-         int temp = indexArray[index];
-         indexArray[index] = indexArray[i];
-         indexArray[i] = temp; 
-      }
-   }
+  /* Implementation of the Fisher-Yates Shuffle */ 
+  private void shuffleDeck(int[] indexArray) {
+    Random rand = new Random();
+    //Parses through the indexArray backwards
+    for(int i = indexArray.length - 1; i > 0; i--) {
+      int index = rand.nextInt(i + 1);
+      //Swaps the values
+      int temp = indexArray[index];
+      indexArray[index] = indexArray[i];
+      indexArray[i] = temp; 
+    }
+  }
    
-  
+   
    public void DistributeCountry(int numPlayer) {
-      Country[] allCountries = db.GetAllCountries();
-      //Creates an index Array with the same size of countriest
-      int[] indexArray = new int[allCountries.length];
-      
-      //Populates the array with values 0-41 based on the index position
-      for(int i = 0; i < allCountries.length; i++) {
-         indexArray[i] = i;
-      }
-      
-      //Shuffles the array of 0-41
-      shuffleDeck(indexArray);
+     // Creates an index Array with the same size of countries
+     int[] indexArray = new int[db.GetAllCountries().length];
      
-    
-            
+     // Populates the array with values 0-41 based on the index position
+     for(int i = 0; i < db.GetAllCountries().length; i++) {
+       indexArray[i] = i;
+     }
+     
+     // Shuffles the array of 0-41
+     shuffleDeck(indexArray);
+     
+     // To get number of countries each player should get
+     int numCountry = db.GetAllCountries().length / numPlayer;
+     
+     // Assigns countries to players
+     
      
    }
    

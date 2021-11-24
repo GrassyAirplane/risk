@@ -31,6 +31,7 @@ public class MainRisk {
          switch(menuOption) {
             //Start Game
             case 1: 
+               
                //Makes sure the number of Players is 2 - 6
                while(true) {
                   disp.DisplayInitialiser();
@@ -66,46 +67,49 @@ public class MainRisk {
                
                //Distributes Countries
                gs.DistributeCountry();
-               
-               //Initial Globe Display
-               disp.DisplayGlobe();
-               
+                              
                //Initial Player Turn
                gs.RotatePlayer();
                
-               //Place until Reinforcements are diminished
-               while(gs.GetCurrPlayer().GetReinforcement() > 0) {
+               //Loops Through all players
+               for(int i = 0; i < numPlayer; i++) {
+                  //Place until Reinforcements are diminished
+                  while(gs.GetCurrPlayer().GetReinforcement() > 0) {
+                  disp.DisplayGlobe();
                   disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
                   gameOption = scan.nextInt();
                   //Placement Option
-                  switch(gameOption) {
-                     case Displayer.PLACE:
-                        disp.DisplayPlace();
-                        countryId = scan.nextInt();
-                        System.out.print("Selection [Amount of Reinforcement] : ");
-                        reinforcementAmount = scan.nextInt();
-                        //Places Troops
-                        switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
-                           case GameSystem.SUCCESSFUL:
-                              System.out.println("\nSuccess\n");
-                              break;
-                           case GameSystem.INVALID_OWNER:
-                              System.out.println("\nCountry Not Owned by Player\n");
-                              break; 
-                           case GameSystem.INADEQUATE_TROOPS:
-                              System.out.println("\nInvalid Amount of Troops\n");
-                              break;
-                        }
-                        break;
-                     default:
-                        disp.ErrorMessage();                 
-                  }            
+                     switch(gameOption) {
+                        case Displayer.PLACE:
+                           disp.DisplayPlace();
+                           countryId = scan.nextInt();
+                           System.out.print("Selection [Amount of Reinforcement] : ");
+                           reinforcementAmount = scan.nextInt();
+                           //Places Troops
+                           switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
+                              case GameSystem.SUCCESSFUL:
+                                 System.out.println("\nSuccess\n");
+                                 break;
+                              case GameSystem.INVALID_OWNER:
+                                 System.out.println("\nCountry Not Owned by Player\n");
+                                 break; 
+                              case GameSystem.INADEQUATE_TROOPS:
+                                 System.out.println("\nInvalid Amount of Troops\n");
+                                 break;
+                           }
+                           break;
+                         //Invalid Input
+                         default:
+                           disp.ErrorMessage();                 
+                     }             
+                  }
+                  //Rotates Player
+                  gs.RotatePlayer();
                }
                
+               
 
-               /* Place Troops ZOE
-                * Swich currPlayer*/
-                
+
                /* PHASE 1
                 * Collect Reinforcement
                 * Trade Card

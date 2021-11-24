@@ -25,7 +25,7 @@ public abstract class Player {
   private boolean bonusStatus;
   
   // keeps track of number of players created
-  public static int PlayerCount = 0;
+  private static int PlayerCount = 0;
   
   /*=============== CONSTRUCTOR ===============*/
   /* @param playerId      - ID of player

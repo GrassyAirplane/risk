@@ -11,13 +11,6 @@ public class GameSystem {
   public final static int HORSE_TROOP    = 2;
   public final static int CANNON_TROOP   = 3;
   
-  // return values for error checking
-  public final static int SUCCESSFUL        = 1;
-  public final static int INVALID_OWNER     = 0;
-  //public final static int INVALID_       = -1;
-  public final static int INADEQUATE_TROOPS = -2;
-  public final static int NOT_ADJACENT      = -3;
-  
   /* INSTANCE VARIABLES */
   private Player currPlayer;
   
@@ -115,7 +108,7 @@ public class GameSystem {
     // checks if player is eliminated by seeing if they no longer own any countries
     if (player.GetCountryOwned().length == 0) {
       RemovePlayer(player);
-      return SUCCESSFUL;
+      return 1;
     }
     else {
       return -1;
@@ -137,7 +130,7 @@ public class GameSystem {
         return 1;
       }
       else {
-        return INADEQUATE_TROOPS;
+        return -1;
       }
     }
     else {
@@ -150,9 +143,7 @@ public class GameSystem {
    *        defend        - defending player
    *        numAttackers  - number of troops the attacker is using to battle
    *        countryAttack - place the attacker is attacking from
-   *        countryDefend - place the attacker wants to conquer
-   * @return              - 1 if successful
-   *                      - 
+   *        countryDefend - place the attacker wants to conquer */
   public void Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
     // checking if both countries are adjacent to one another
     if (countryAttack.isAdjacent(countryDefend.GetCountryId())) {

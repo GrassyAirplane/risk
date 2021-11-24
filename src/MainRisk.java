@@ -7,7 +7,7 @@ public class MainRisk {
    public static void main(String [] args) {
       //Initial Variables
       GameSystem gs = new GameSystem(); 
-      Displayer disp = new Displayer(gs.GetDb());
+      Displayer disp = new Displayer(gs, gs.GetDb());
       Scanner scan = new Scanner(System.in);
       
       //Game Variables      
@@ -67,17 +67,19 @@ public class MainRisk {
                
                disp.DisplayGlobe();
                
-               /* Place Troops
+               gs.RotatePlayer();
+
+               /* Place Troops ZOE
                 * Swich currPlayer*/
                 
                /* PHASE 1
                 * Collect Reinforcement
                 * Trade Card
-                * Place Troops
+                * Place Troops ZOE
                 *
                 * PHASE 2 
-                * attack
-                * Check Loser, Check Winner
+                * attack ZOE WHILE 
+                * Check Loser, Check Winner ZOE
                 * move to phase 3
                 * check for bonus
                 *

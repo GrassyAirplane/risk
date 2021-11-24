@@ -8,6 +8,7 @@ public class Displayer {
    
    /* INSTANCE VARIABLE */
    Database db; 
+   GameSystem gs;
    
    /* GLOBAL CONSTANT VARIABLES */
    public final static int PHASE_ONE = 1; 
@@ -17,7 +18,8 @@ public class Displayer {
    /*=============== CONSTRUCTOR ===============*/
    /* Displayer Constructor
     * @param db  - Database instance */
-   public Displayer(Database db) {
+   public Displayer(GameSystem gs, Database db) {
+      this.gs = gs;
       this.db = db; 
    }
    
@@ -214,11 +216,31 @@ public class Displayer {
       
       //Card Name Array
       String[] cardName = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
-      String[] cardId = {"N/A", "N/A", "N/A", "N/A", "N/A"};
-      String[] cardType = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
+      String[] cardPos = {"N/A", "N/A", "N/A", "N/A", "N/A"};
+      String[] cardType = {"", "", "", "", ""};
       
       //Current Player
       Player currPlayer = gs.GetCurrPlayer();
+      Bonus[] currPlayerDeck = currPlayer.GetBonusDeck();
+      
+      //Adds card variables into deck
+      for(int i = 0; i < currPlayerDeck.length; i++) {
+         Bonus currCard = currPlayerDeck[i];
+         cardName[i] = currCard.GetCardName();
+         cardPos[i] = cardPos[i] = Integer.toString(i);
+         //Converts the value into the troop type string
+         switch(currCard.GetTroopBonusType()) {
+            case GameSystem.INFANTRY_TROOP:
+               cardType[i] = "Infantry";
+               break;
+            case GameSystem.HORSE_TROOP:
+               cardType[i] = "Horse";
+               break;
+            case GameSystem.CANNON_TROOP:
+               cardType[i] = "Cannon";
+               break;
+         }
+      }
       
    
       //Checks PhaseNumber
@@ -226,7 +248,7 @@ public class Displayer {
          case PHASE_ONE:
             System.out.printf("        TURN PHASE ONE         ________________________________________________________________ \n");
             System.out.printf("Receiving a total of x Troops |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-            System.out.printf("Options:                      |     %s     |     %s     |     %s     |     %s     |     %s     |\n", cardId[0], cardId[1], cardId[2], cardId[3], cardId[4]); //Card Id
+            System.out.printf("Options:                      |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  Trade   12. ------        |            |            |            |            |            |\n");
             System.out.printf("10. Place   13. ----          |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
             System.out.printf("11. Mission 14. --- -----     |____________|____________|____________|____________|____________|\n");
@@ -235,7 +257,7 @@ public class Displayer {
          case PHASE_TWO:
             System.out.printf("        TURN PHASE TWO         ________________________________________________________________ \n");
             System.out.printf("                              |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-            System.out.printf("Options:                      |     %s     |     %s     |     %s     |     %s     |     %s     |\n", cardId[0], cardId[1], cardId[2], cardId[3], cardId[4]); //Card Id
+            System.out.printf("Options:                      |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  -----   12. Attack        |            |            |            |            |            |\n");
             System.out.printf("10. -----   13. ----          |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
             System.out.printf("11. Mission 14. End Phase     |____________|____________|____________|____________|____________|\n");
@@ -244,7 +266,7 @@ public class Displayer {
          case PHASE_THREE:
             System.out.printf("       TURN PHASE THREE        ________________________________________________________________ \n");
             System.out.printf("                              |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-            System.out.printf("Options:                      |     %s     |     %s     |     %s     |     %s     |     %s     |\n", cardId[0], cardId[1], cardId[2], cardId[3], cardId[4]); //Card Id
+            System.out.printf("Options:                      |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  -----   12. ------        |            |            |            |            |            |\n");
             System.out.printf("10. -----   13. Move          |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
             System.out.printf("11. Mission 14. End Turn      |____________|____________|____________|____________|____________|\n");
@@ -257,16 +279,39 @@ public class Displayer {
       
       //Card Name Array
       String[] cardName = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
-      String[] cardId = {"N/A", "N/A", "N/A", "N/A", "N/A"};
-      String[] cardType = {"EMPTY", "EMPTY", "EMPTY", "EMPTY", "EMPTY"};
+      String[] cardPos = {"N/A", "N/A", "N/A", "N/A", "N/A"};
+      String[] cardType = {"", "", "", "", ""};
       
-      System.out.printf("       TURN PHASE THREE        ________________________________________________________________ \n");
-      System.out.printf("                              |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-      System.out.printf("Options:                      |     %s     |     %s     |     %s     |     %s     |     %s     |\n", cardId[0], cardId[1], cardId[2], cardId[3], cardId[4]); //Card Id
-      System.out.printf("9.  -----   12. ------        |            |            |            |            |            |\n");
-      System.out.printf("10. -----   13. Move          |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
-      System.out.printf("11. Mission 14. End Turn      |____________|____________|____________|____________|____________|\n");
-   
+      //Current Player
+      Player currPlayer = gs.GetCurrPlayer();
+      Bonus[] currPlayerDeck = currPlayer.GetBonusDeck();
+      
+      //Adds card variables into deck
+      for(int i = 0; i < currPlayerDeck.length; i++) {
+         Bonus currCard = currPlayerDeck[i];
+         cardName[i] = currCard.GetCardName();
+         cardPos[i] = Integer.toString(i);
+         //Converts the value into the troop type string
+         switch(currCard.GetTroopBonusType()) {
+            case GameSystem.INFANTRY_TROOP:
+               cardType[i] = "Infantry";
+               break;
+            case GameSystem.HORSE_TROOP:
+               cardType[i] = "Horse";
+               break;
+            case GameSystem.CANNON_TROOP:
+               cardType[i] = "Cannon";
+               break;
+         }
+      }
+      
+      System.out.printf("       TRADE SCHEMEATIC            ________________________________________________________________ \n");
+      System.out.printf("   Options:                       |%s          |%s          |%s          |%s          |%s          |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
+      System.out.printf("   Infantry X 3  = 4              |   ID%s     |   ID%s     |   ID%s     |   ID%s     |   ID%s     |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
+      System.out.printf("   Horse X 3     = 6              |            |            |            |            |            |\n");
+      System.out.printf("   Cannon X 3    = 8              |  %s        |  %s        |  %s        |  %s        |  %s        |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
+      System.out.printf("   One of Each   = 10             |____________|____________|____________|____________|____________|\n");
+      System.out.printf(" Card 1 [Id] : ");
    
    }
 }

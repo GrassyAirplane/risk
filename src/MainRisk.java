@@ -149,7 +149,7 @@ public class MainRisk {
                            //Places Troops
                            switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
                               case GameSystem.SUCCESSFUL:
-                                 System.out.println("\nSuccess\n");
+                                 System.out.println("\nSuccessful Placement\n");
                                  break;
                               case GameSystem.INVALID_OWNER:
                                  System.out.println("\nCountry Not Owned by Player\n");
@@ -249,7 +249,7 @@ public class MainRisk {
                               //Bonus Card Swap Results
                               switch( gs.Bonus(cardOne, cardTwo, cardThree) ) {
                                  case GameSystem.SUCCESSFUL:
-                                    System.out.println("\nSuccess\n");
+                                    System.out.println("\nSuccessful Placement\n");
                                     break;
                                  case GameSystem.INADEQUATE_BONUS:
                                     System.out.println("\nIncorrect Combination\n");
@@ -393,6 +393,9 @@ public class MainRisk {
                                  //Gets curr plauer char & Gets country name by id
                                  System.out.printf("\n %c Has Successfully Conquered %s\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName() );
                                  System.out.print("\n");
+                                 
+                                 
+                                 
                                  break;
                               //Defender Wins
                               case 2:
@@ -418,6 +421,7 @@ public class MainRisk {
                                  System.out.print("\n");
                                  break;
                            }
+                        
                         //Attack Break
                         break;            
                            
@@ -434,8 +438,11 @@ public class MainRisk {
                      }             
                    }
                    
-                   //Test
-                   disp.DisplayPhase(Displayer.PHASE_TWO);
+                   /*=============== CHECKS WINNER ===============*/
+                   if(hasWinner) {
+                     break;
+                   }
+                   
                    
                   /*=============== PHASE 3 ===============*/
                    
@@ -446,11 +453,57 @@ public class MainRisk {
                    *
                    * */
                    
-                   //disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
+                   //Sets Exit Phase to false
+                   exitPhase = false;
                    
                    
+                   while(!exitPhase) {
+                     disp.DisplayPhase(Displayer.PHASE_THREE);
+                     gameOption = scan.nextInt();
+                     
+                     //PHASE 2 Option
+                     switch(gameOption) {
+                        case Displayer.DISPLAY_GLOBE:
+                           disp.DisplayGlobe();
+                           break;
+                        case Displayer.N_AMERICA:
+                           disp.DisplayNAmerica();
+                           break;
+                        case Displayer.S_AMERICA:
+                           disp.DisplaySAmerica();
+                           break;
+                        case Displayer.EUROPE:
+                           disp.DisplayEurope();
+                           break;
+                        case Displayer.AFRICA:
+                           disp.DisplayAfrica();
+                           break;
+                        case Displayer.ASIA:
+                           disp.DisplayAsia();
+                           break;
+                        case Displayer.SCOREBOARD:
+                           disp.DisplayScoreboard();
+                           break;
+                        //Mission Option
+                        case Displayer.MISSION:
+                           disp.DisplayMission();
+                           break;
+                        
+                        case Displayer.END:
+                           //Rotates Player
+                           gs.RotatePlayer();
+                           exitPhase = true; 
+                           break;
+                        
+                        //Invalid Input
+                        default:
+                           disp.ErrorMessage(); 
+                           System.out.print("\n");             
+                     }   
+                  }
                }
                
+               //Break Out of Game Loop
                break;
             //Display Rules
             case 2:

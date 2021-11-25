@@ -19,6 +19,7 @@ public class GameSystem {
   public final static int INADEQUATE_TROOPS = -1;
   public final static int INADEQUATE_BONUS  = -2;
   public final static int NOT_ADJACENT      = -3;
+  public final static int SAME_COUNTRY      = -4;
   
   /* INSTANCE VARIABLES */
   private Player currPlayer;
@@ -236,7 +237,7 @@ public class GameSystem {
   public int Battle(int countryAttack, int countryDefend, int numAttackers) {
     // check if countryAttack and countryDefend are the same
     if (countryAttack == countryDefend) {
-      return -2;
+      return SAME_COUNTRY;
     }
     // check if attacker owns country
     boolean ownsCountry = false;
@@ -319,9 +320,15 @@ public class GameSystem {
    *         - 0 if bonus status is false, so player cannot collect bonus */
   public int GetBonusCard() {
     if (this.currPlayer.GetBonusStatus()) {
-      
+      // selecting random bonus card from allBonus array
+      Bonus bonus = db.GetAllBonus()[new Random().nextInt(db.GetAllBonus().length - 1)];
+      // adding bonus to player's bonus deck
+      this.currPlayer.AddBonusToPlayer(bonus);
+      return SUCCESSFUL;
     }
-    return 0; // default return
+    else {
+      return 0;
+    }
   }
   
   /* gets the current player

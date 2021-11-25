@@ -394,8 +394,13 @@ public class MainRisk {
                                  System.out.printf("\n %c Has Successfully Conquered %s\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName() );
                                  System.out.print("\n");
                                  
+                                 /*============ Player Elimination ===============*/
                                  
-                                 
+                                 //Checks if Defender Loses all Territories
+                                 if (gs.RemoveLoser(gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetOwner())) {
+                                    System.out.printf(" Player %c Has Been Eliminated\n", gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetOwner().GetPlayerChar());
+                                 }
+                                              
                                  break;
                               //Defender Wins
                               case 2:
@@ -426,7 +431,7 @@ public class MainRisk {
                         break;            
                            
                         case Displayer.END:
-                           //Gets Bonus Card if bonus status is true.
+                           //Gets Bonus Card if conquered new country.
                            gs.GetBonusCard();
                            exitPhase = true; 
                            break;
@@ -440,6 +445,7 @@ public class MainRisk {
                    
                    /*=============== CHECKS WINNER ===============*/
                    if(hasWinner) {
+                     System.out.printf("\n Player %c Has Won the Game.\n", gs.GetCurrPlayer().GetPlayerChar());
                      break;
                    }
                    

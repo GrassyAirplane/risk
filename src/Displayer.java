@@ -208,27 +208,48 @@ public class Displayer {
    
    /* Displays SAmerica */
    public void DisplaySAmerica() {
-   
+      System.out.println("________________________________________________________________________________________________");
+      for(int i = 9; i < 13; i++) {
+         Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+      }
+      System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
    
    /* Displays Europe */
    public void DisplayEurope() {
-   
+      System.out.println("________________________________________________________________________________________________");
+      for(int i =13; i < 20; i++) {
+         Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+      }
    }
    
    /* Displays Africa */
    public void DisplayAfrica() {
-   
+      System.out.println("________________________________________________________________________________________________");
+      for(int i = 20; i < 26; i++) {
+         Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+      }
    }
    
    /* Displays Asia */
    public void DisplayAsia() {
-   
+      System.out.println("________________________________________________________________________________________________");
+      for(int i = 26; i < 38; i++) {
+         Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+      }
    }
    
    /* Displays Australia */
    public void DisplayAustralia() {
-   
+   System.out.println("________________________________________________________________________________________________");
+      for(int i = 38; i < 42; i++) {
+         Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+      }
    }
    
    /* Displays Scoreboard */

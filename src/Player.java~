@@ -157,7 +157,7 @@ public abstract class Player {
    *        t3 - position in deck array of third bonus card to cash in
    * @return   - 1 if bonus troops are successfully added to reinforcements
    *           - -2 if the player do not have the required bonuses to cash in */
-  /*public int Bonus(int t1, int t2, int t3) {
+  public int Bonus(int t1, int t2, int t3) {
     int numInfantry = 0; // keeps track of number of infantry bonuses
     int numHorse = 0; // keeps track of number of horse bonuses
     int numCannon = 0; // keeps track of number of cannon bonuses
@@ -181,15 +181,9 @@ public abstract class Player {
         // checking for infantry bonus
         if (numInfantry >= 3) {
           this.reinforcement += 4;
-          // adding bonus cards back to main bonus deck
-          db.AddBonus(db.GetBonusByPos(t1));
-          db.AddBonus(db.GetBonusByPos(t2));
-          db.AddBonus(db.GetBonusByPos(t3));
-          // removing the bonus cards from the player
           RemoveBonus(t1);
           RemoveBonus(t2);
           RemoveBonus(t3);
-          
           return GameSystem.SUCCESSFUL;
         }
         else {
@@ -200,11 +194,6 @@ public abstract class Player {
         // checking for horse bonus
         if (numHorse >= 3) {
           this.reinforcement += 6;
-          // adding bonus cards back to main bonus deck
-          db.AddBonus(db.GetBonusByPos(t1));
-          db.AddBonus(db.GetBonusByPos(t2));
-          db.AddBonus(db.GetBonusByPos(t3));
-          // removing bonuses from player deck
           RemoveBonus(t1);
           RemoveBonus(t2);
           RemoveBonus(t3);
@@ -218,11 +207,6 @@ public abstract class Player {
         // checking for cannon bonus
         if (numCannon >= 3) {
           this.reinforcement += 8;
-          // adding bonuses back to main bonus deck
-          db.AddBonus(db.GetBonusByPos(t1));
-          db.AddBonus(db.GetBonusByPos(t2));
-          db.AddBonus(db.GetBonusByPos(t3));
-          // removing bonuses from player deck
           RemoveBonus(t1);
           RemoveBonus(t2);
           RemoveBonus(t3);
@@ -241,11 +225,6 @@ public abstract class Player {
              deck[t1].GetTroopBonusType() != deck[t3].GetTroopBonusType()) {
       if (numInfantry > 0 && numHorse > 0 && numCannon > 0) {
         this.reinforcement += 10;
-        // adding bonuses back to main bonus deck
-        db.AddBonus(db.GetBonusByPos(t1));
-        db.AddBonus(db.GetBonusByPos(t2));
-        db.AddBonus(db.GetBonusByPos(t3));
-        // removing bonuses from player deck
         RemoveBonus(t1);
         RemoveBonus(t2);
         RemoveBonus(t3);
@@ -258,7 +237,7 @@ public abstract class Player {
     else {
       return GameSystem.INADEQUATE_BONUS;
     }
-  }*/
+  }
   
   /* gets the status indicating if player can get a bonus,
    * the condition being that the player has conquered at least
@@ -396,7 +375,7 @@ public abstract class Player {
   
   /* adds bonus card to player's bonus deck.
    * @param bonus - bonus object to add */
-  public void AddBonusToPlayer(Bonus bonus) {
+  public void AddBonus(Bonus bonus) {
     Bonus[] temp;
     if (this.deck == null) {
       temp = new Bonus[1];

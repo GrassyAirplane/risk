@@ -231,8 +231,13 @@ public class GameSystem {
    *                      - 2 if defender wins
    *                      - 0 if player does not own the country
    *                      - -1 if player does not have enough troops
+   *                      - -2 if both countries are the same country
    *                      - -3 if countries are not adjacent */
   public int Battle(int countryAttack, int countryDefend, int numAttackers) {
+    // check if countryAttack and countryDefend are the same
+    if (countryAttack == countryDefend) {
+      return -2;
+    }
     // check if attacker owns country
     boolean ownsCountry = false;
     for (int i = 0; i < this.currPlayer.GetCountryOwned().length; i++) {
@@ -431,5 +436,115 @@ public class GameSystem {
        return -1;
      }
    }
+   
+   /* cashes in card bonuses for extra troops.
+   * @param t1 - position in deck array of first bonus card to cash in
+   *        t2 - position in deck array of second bonus card to cash in
+   *        t3 - position in deck array of third bonus card to cash in
+   * @return   - 1 if bonus troops are successfully added to reinforcements
+   *           - -2 if the player do not have the required bonuses to cash in */
+  public int Bonus(int t1, int t2, int t3) {
+    int numInfantry = 0; // keeps track of number of infantry bonuses
+    int numHorse = 0; // keeps track of number of horse bonuses
+    int numCannon = 0; // keeps track of number of cannon bonuses
+    
+    // counting number of troops for each type
+    for (int i = 0; i < this.currPlayer.GetBonusDeck().length; i++) {
+      if (this.currPlayer.GetBonusDeck()[i].GetTroopBonusType() == INFANTRY_TROOP) {
+        numInfantry++;
+      }
+      else if (this.currPlayer.GetBonusDeck()[i].GetTroopBonusType() == HORSE_TROOP) {
+        numHorse++;
+      }
+      else if (this.currPlayer.GetBonusDeck()[i].GetTroopBonusType() == CANNON_TROOP) {
+        numCannon++;
+      }
+    }
+    
+    // checking if all troops are the same type
+    if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == this.currPlayer.GetBonusDeck()[t2].GetTroopBonusType() 
+        && this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == this.currPlayer.GetBonusDeck()[t3].GetTroopBonusType()) {
+      if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == INFANTRY_TROOP) {
+        // checking for infantry bonus
+        if (numInfantry >= 3) {
+          this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() + 4);
+          // adding bonus cards back to main bonus deck
+          db.AddBonus(db.GetBonusByPos(t1));
+          db.AddBonus(db.GetBonusByPos(t2));
+          db.AddBonus(db.GetBonusByPos(t3));
+          // removing the bonus cards from the player
+          this.currPlayer.RemoveBonus(t1);
+          this.currPlayer.RemoveBonus(t2);
+          this.currPlayer.RemoveBonus(t3);
+          
+          return SUCCESSFUL;
+        }
+        else {
+          return INADEQUATE_BONUS;
+        }
+      }
+      else if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == HORSE_TROOP) {
+        // checking for horse bonus
+        if (numHorse >= 3) {
+          this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() + 6);
+          // adding bonus cards back to main bonus deck
+          db.AddBonus(db.GetBonusByPos(t1));
+          db.AddBonus(db.GetBonusByPos(t2));
+          db.AddBonus(db.GetBonusByPos(t3));
+          // removing bonuses from player deck
+          this.currPlayer.RemoveBonus(t1);
+          this.currPlayer.RemoveBonus(t2);
+          this.currPlayer.RemoveBonus(t3);
+          return SUCCESSFUL;
+        }
+        else {
+          return INADEQUATE_BONUS;
+        }
+      }
+      else if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == CANNON_TROOP) {
+        // checking for cannon bonus
+        if (numCannon >= 3) {
+          this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() + 8);
+          // adding bonuses back to main bonus deck
+          db.AddBonus(db.GetBonusByPos(t1));
+          db.AddBonus(db.GetBonusByPos(t2));
+          db.AddBonus(db.GetBonusByPos(t3));
+          // removing bonuses from player deck
+          this.currPlayer.RemoveBonus(t1);
+          this.currPlayer.RemoveBonus(t2);
+          this.currPlayer.RemoveBonus(t3);
+          return SUCCESSFUL;
+        }
+        else {
+          return INADEQUATE_BONUS;
+        }
+      }
+      else {
+        return INADEQUATE_BONUS;
+      }
+    }
+    else if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() != this.currPlayer.GetBonusDeck()[t2].GetTroopBonusType() && 
+             this.currPlayer.GetBonusDeck()[t2].GetTroopBonusType() != this.currPlayer.GetBonusDeck()[t3].GetTroopBonusType() && 
+             this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() != this.currPlayer.GetBonusDeck()[t3].GetTroopBonusType()) {
+      if (numInfantry > 0 && numHorse > 0 && numCannon > 0) {
+        this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() + 10);
+        // adding bonuses back to main bonus deck
+        db.AddBonus(db.GetBonusByPos(t1));
+        db.AddBonus(db.GetBonusByPos(t2));
+        db.AddBonus(db.GetBonusByPos(t3));
+        // removing bonuses from player deck
+        this.currPlayer.RemoveBonus(t1);
+        this.currPlayer.RemoveBonus(t2);
+        this.currPlayer.RemoveBonus(t3);
+        return SUCCESSFUL;
+      }
+      else {
+        return INADEQUATE_BONUS;
+      }
+    }
+    else {
+      return INADEQUATE_BONUS;
+    }
+  }
   
 }

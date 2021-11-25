@@ -1,5 +1,5 @@
 /* Developed By: Euan
- * Revised Date: Nov 23, 2021 */
+ * Revised Date: Nov 25, 2021 */
 
 import java.util.Scanner; 
 
@@ -26,6 +26,10 @@ public class MainRisk {
       //Trading Variables
       int cardOne, cardTwo, cardThree; 
       boolean canTrade;
+      
+      /* PHASE TWO VARIABLES */
+      
+      boolean exitPhase; 
       
       
       //Menu Looping
@@ -130,6 +134,7 @@ public class MainRisk {
                               }
                               
                               disp.ErrorMessage();
+                              System.out.print("\n");
                               
                            }
                            
@@ -163,7 +168,8 @@ public class MainRisk {
                   /* PHASE 1
                    * Collect Reinforcement
                    * Trade Card
-                   * Place Troops ZOE
+                   * Place Troops 
+                   * Read Mission
                    */
                    
                    /* Sets Reinforcement for curr Player */
@@ -175,128 +181,172 @@ public class MainRisk {
                      disp.DisplayPhase(Displayer.PHASE_ONE);
                      gameOption = scan.nextInt();
                      //Placement Option
-                        switch(gameOption) {
-                           case Displayer.DISPLAY_GLOBE:
-                              disp.DisplayGlobe();
-                              break;
-                           case Displayer.N_AMERICA:
-                              disp.DisplayNAmerica();
-                              break;
-                           case Displayer.S_AMERICA:
-                              disp.DisplaySAmerica();
-                              break;
-                           case Displayer.EUROPE:
-                              disp.DisplayEurope();
-                              break;
-                           case Displayer.AFRICA:
-                              disp.DisplayAfrica();
-                              break;
-                           case Displayer.ASIA:
-                              disp.DisplayAsia();
-                              break;
-                           case Displayer.SCOREBOARD:
-                              disp.DisplayScoreboard();
-                              break;
+                     switch(gameOption) {
+                        case Displayer.DISPLAY_GLOBE:
+                           disp.DisplayGlobe();
+                           break;
+                        case Displayer.N_AMERICA:
+                           disp.DisplayNAmerica();
+                           break;
+                        case Displayer.S_AMERICA:
+                           disp.DisplaySAmerica();
+                           break;
+                        case Displayer.EUROPE:
+                           disp.DisplayEurope();
+                           break;
+                        case Displayer.AFRICA:
+                           disp.DisplayAfrica();
+                           break;
+                        case Displayer.ASIA:
+                           disp.DisplayAsia();
+                           break;
+                        case Displayer.SCOREBOARD:
+                           disp.DisplayScoreboard();
+                           break;
                            //Trading System displayer
-                           case Displayer.TRADE:
+                        case Displayer.TRADE:
                                  
-                              //Checks if deck is null
-                              if(gs.GetCurrPlayer().GetBonusDeck() == null) {
-                                 System.out.println("\nNo Cards In Deck\n");
-                                 //breaks out of trade
-                                 break;
-                              }
+                           //Checks if deck is null
+                           if(gs.GetCurrPlayer().GetBonusDeck() == null) {
+                              System.out.println("\nNo Cards In Deck\n");
+                              //breaks out of trade
+                              break;
+                           }
                               
-                              int deckLength = gs.GetCurrPlayer().GetBonusDeck().length - 1;
+                           int deckLength = gs.GetCurrPlayer().GetBonusDeck().length - 1;
 
-                              //Trading Displayer
-                              disp.DisplayTrade();
-                              cardOne = scan.nextInt();
-                              System.out.printf(" Card 2 [Id] : ");
-                              cardTwo = scan.nextInt();
-                              System.out.printf(" Card 3 [Id] : ");
-                              cardThree = scan.nextInt();
+                           //Trading Displayer
+                           disp.DisplayTrade();
+                           cardOne = scan.nextInt();
+                           System.out.printf(" Card 2 [Id] : ");
+                           cardTwo = scan.nextInt();
+                           System.out.printf(" Card 3 [Id] : ");
+                           cardThree = scan.nextInt();
                                  
-                              //checks that the cards are within the range
-                              if(cardOne > deckLength || cardTwo > deckLength || cardThree > deckLength) {
-                                 disp.ErrorMessage();
-                                 canTrade = false; 
-                              }
-                              //Checks that the cards are not duplicates
-                              else if(cardOne == cardTwo || cardOne == cardThree || cardTwo == cardThree) {
-                                 disp.ErrorMessage();
-                                 canTrade = false;
-                              } 
-                              else {
-                                 canTrade = true;
-                              }
+                           //checks that the cards are within the range
+                           if(cardOne > deckLength || cardTwo > deckLength || cardThree > deckLength) {
+                              disp.ErrorMessage();
+                              canTrade = false; 
+                           }
+                           //Checks that the cards are not duplicates
+                           else if(cardOne == cardTwo || cardOne == cardThree || cardTwo == cardThree) {
+                              disp.ErrorMessage();
+                              canTrade = false;
+                           } 
+                           else {
+                              canTrade = true;
+                           }
                                                       
-                              if(canTrade) {
-                                 //Bonus Card Swap Results
-                                 switch( gs.GetCurrPlayer().Bonus(cardOne, cardTwo, cardThree) ) {
-                                    case GameSystem.SUCCESSFUL:
-                                       System.out.println("\nSuccess\n");
-                                       break;
-                                    case GameSystem.INADEQUATE_BONUS:
-                                       System.out.println("\nIncorrect Combination\n");
-                                       break;  
-                                 }
+                           if(canTrade) {
+                              //Bonus Card Swap Results
+                              switch( gs.GetCurrPlayer().Bonus(cardOne, cardTwo, cardThree) ) {
+                                 case GameSystem.SUCCESSFUL:
+                                    System.out.println("\nSuccess\n");
+                                    break;
+                                 case GameSystem.INADEQUATE_BONUS:
+                                    System.out.println("\nIncorrect Combination\n");
+                                    break;  
                               }
+                           }
                               break;  
                            //Placement of Troops
-                           case Displayer.PLACE:
-                              //Gurantee Inbound Input Error Checking
-                              do{
-                                 disp.DisplayPlace();
-                                 countryId = scan.nextInt();
-                                 
-                                 if(countryId > 42 || countryId < 0) {
-                                    disp.ErrorMessage();
-                                 }
-                                 
-                              }while(countryId > 42 || countryId < 0);     
-                              System.out.print("Selection [Amount of Reinforcement] : ");
-                              reinforcementAmount = scan.nextInt();
-                              //Places Troops
-                              switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
-                                 case GameSystem.SUCCESSFUL:
-                                    System.out.println("\nSuccessful Placement\n");
-                                    break;
-                                 case GameSystem.INVALID_OWNER:
-                                    System.out.println("\nCountry Not Owned by Player\n");
-                                    break; 
-                                 case GameSystem.INADEQUATE_TROOPS:
-                                    System.out.println("\nInvalid Amount of Troops\n");
-                                    break;
+                        case Displayer.PLACE:
+                           //Gurantee Inbound Input Error Checking
+                           do{
+                              disp.DisplayPlace();
+                              countryId = scan.nextInt();
+                              
+                              if(countryId > 42 || countryId < 0) {
+                                 disp.ErrorMessage();
                               }
-                              break;
-                            //Display Mission
-                            case Displayer.MISSION:
-                              disp.DisplayMission();
-                              break;
-                            //Invalid Input
-                            default:
-                              disp.ErrorMessage();                 
+                                 
+                           }while(countryId > 42 || countryId < 0);     
+                           System.out.print("Selection [Amount of Reinforcement] : ");
+                           reinforcementAmount = scan.nextInt();
+                           //Places Troops
+                           switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
+                              case GameSystem.SUCCESSFUL:
+                                 System.out.println("\nSuccessful Placement\n");
+                                 break;
+                              case GameSystem.INVALID_OWNER:
+                                 System.out.println("\nCountry Not Owned by Player\n");
+                                 break; 
+                              case GameSystem.INADEQUATE_TROOPS:
+                                 System.out.println("\nInvalid Amount of Troops\n");
+                                 break;
+                              }
+                           break;
+                        //Display Mission
+                        case Displayer.MISSION:
+                           disp.DisplayMission();
+                           break;
+                        //Invalid Input
+                        default:
+                           disp.ErrorMessage();
+                           System.out.print("\n");                 
                         } 
-                   
                    }
                    
-                   
-                
-                  
-                   
-                   
+                           
                    /*=============== PHASE 2 ===============*/
                    
                   /* PHASE 2 
-                   * attack ZOE WHILE 
-                   * Check Loser, Check Winner ZOE
+                   * attack  
+                   * Check Loser, Check Winner 
                    * move to phase 3
                    * check for bonus */
                    
-                   //disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
+                   //Sets Exit Condition False
+                   exitPhase = false;
+                   //Sets Get Bonus Card
+                   gs.GetCurrPlayer().SetBonusStatus(false);
+                   //Prints Display Globe
+                   disp.DisplayGlobe();  
+                       
                    
-                   
+                   //Loops Display Globe
+                   while(!exitPhase) {
+                     disp.DisplayPhase(Displayer.PHASE_TWO);
+                     gameOption = scan.nextInt();
+                     
+                     //PHASE 2 Option
+                     switch(gameOption) {
+                        case Displayer.DISPLAY_GLOBE:
+                           disp.DisplayGlobe();
+                           break;
+                        case Displayer.N_AMERICA:
+                           disp.DisplayNAmerica();
+                           break;
+                        case Displayer.S_AMERICA:
+                           disp.DisplaySAmerica();
+                           break;
+                        case Displayer.EUROPE:
+                           disp.DisplayEurope();
+                           break;
+                        case Displayer.AFRICA:
+                           disp.DisplayAfrica();
+                           break;
+                        case Displayer.ASIA:
+                           disp.DisplayAsia();
+                           break;
+                        case Displayer.SCOREBOARD:
+                           disp.DisplayScoreboard();
+                           break;
+                        //Mission Option
+                        case Displayer.MISSION:
+                           disp.DisplayMission();
+                           break;
+                        
+                        case Displayer.END:
+                           exitPhase = true; 
+                           break;
+                        
+                        //Invalid Input
+                        default:
+                           disp.ErrorMessage(); 
+                           System.out.print("\n");
+                     }             
+                   }
                    
                   /*=============== PHASE 3 ===============*/
                    
@@ -320,6 +370,7 @@ public class MainRisk {
                break;
             //Exits Game
             case 3:
+               System.out.println("\nExiting...");
                break;
             //Invalid Input 
             default:

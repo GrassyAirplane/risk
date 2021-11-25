@@ -22,6 +22,9 @@ public class Displayer {
    public final static int TRADE         = 9;
    public final static int PLACE         =10;
    public final static int MISSION       =11;
+   public final static int ATTACK        =12;
+   
+   public final static int END           =14;
    
    
    public final static int PHASE_PLACEMENT = 20;

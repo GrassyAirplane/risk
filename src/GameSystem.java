@@ -336,6 +336,8 @@ public class GameSystem {
       this.currPlayer.AddBonusToPlayer(db.GetAllBonus()[bonusIndex]);
       // removing bonus from allBonus array
       db.RemoveBonus(bonusIndex);
+      // setting bonus status back to false
+      this.currPlayer.SetBonusStatus(false);
       return SUCCESSFUL;
     }
     else {

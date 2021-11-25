@@ -379,35 +379,34 @@ public class MainRisk {
       
                             }while(numTroops < 1);
                            
-                           System.out.println("Reaches");
                            
                            //Attacking Conditions
                            switch(gs.Battle(countryAttack, countryDefend, numTroops)) {
                               //Attacker Wins
                               case GameSystem.SUCCESSFUL:
                                  //Gets curr plauer char & Gets country name by id
-                                 System.out.printf("\n %c Has Successfully Conquered %s\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName() );
+                                 System.out.printf("\n %c Has Successfully Conquered %s\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName() );
                                  break;
                               //Defender Wins
                               case 2:
                                  //Gets Defending Players Char, and Defende Country 
-                                 System.out.printf("\n %c Has Successfully Defended %s\n", gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetOwner().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName() );
+                                 System.out.printf("\n %c Has Successfully Defended %s\n\n", gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetOwner().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName() );
                                  break;
                               //Player does not own the country
                               case GameSystem.INVALID_OWNER:
                                  //Gets Player char & Attacking Country name
-                                 System.out.printf("\n %c Does not own %s\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName());
+                                 System.out.printf("\n %c Does not own %s\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName());
                                  break;
                               
                               //Player does not have enough troops
                               case GameSystem.INADEQUATE_TROOPS:
                                  //Gets Player char and Attacking Country Name 
-                                 System.out.printf("\n %c Does not have enough Troops at %s\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName());
+                                 System.out.printf("\n %c Does not have enough Troops at %s\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName());
                                  break;
                               
                               //Countries are not adjacent
                               case GameSystem.SAME_COUNTRY:
-                                 System.out.printf("\n %s and %s are not adjacent.\n", gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName());
+                                 System.out.printf("\n %s and %s are not adjacent.\n\n", gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName());
                                  break;
                            }
                         //Attack Break

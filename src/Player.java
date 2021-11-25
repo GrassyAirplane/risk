@@ -145,6 +145,19 @@ public abstract class Player {
     return this.countryOwned;
   }
   
+  /* gets the position of a country in the countryOwned array
+   * @param id - ID of country to get the position of
+   * @return   - position of the country in the countryOwned array
+   *           - -1 if country does not exist */
+  public int GetCountryOwnedPos(int id) {
+    for (int i = 0; i < this.countryOwned.length; i++) {
+      if (this.countryOwned[i] == id) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  
   /* gets the bonus deck owned by the player
    * @return - array that stores the list of bonus deck */
   public Bonus[] GetBonusDeck() {

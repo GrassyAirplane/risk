@@ -305,16 +305,8 @@ public class GameSystem {
           if (GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() < 1) {
             // adding country to attacker's array
             this.currPlayer.AddCountry(countryDefend);
-            // check countryOwned
-            for (int i = 0; i < GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().GetCountryOwned().length; i++) {
-              System.out.println(GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().GetCountryOwned()[i]);
-            }
             // removing country from defender's array
-            GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().RemoveCountry(GetCountryPos(countryDefend));
-            // check countryOwned
-            for (int i = 0; i < GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().GetCountryOwned().length; i++) {
-              System.out.println(GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().GetCountryOwned()[i]);
-            }
+            GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().RemoveCountry(GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().GetCountryOwnedPos(countryDefend));
             // transferring country ownership to attacker
             GetCountryByPos(GetCountryPos(countryDefend)).SetOwner(this.currPlayer);
             // transferring troops over
@@ -389,7 +381,7 @@ public class GameSystem {
    /* Gets Country Position in allCountries array by country id
     * @param countryId    -  id of Country 
     * @return             -  position of country in allCountries
-    *                     -1 if country doesn't exist */
+    *                     - -1 if country doesn't exist */
    public int GetCountryPos(int countryId) {
       for( int i = 0; i < db.GetAllCountries().length; i++ ) {
          if( db.GetAllCountries()[i].GetCountryId() == countryId) {

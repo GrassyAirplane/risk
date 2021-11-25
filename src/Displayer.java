@@ -198,7 +198,12 @@ public class Displayer {
    
    /* Displays NAmerica */
    public void DisplayNAmerica() {
-   
+      System.out.println("");
+      for(int i = 0; i < 9; i++) {
+         Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
+         System.out.printf("Name: %s Id: %d TroopCount: %d Owner: %c \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar() );
+      }
+      System.out.println("");
    }
    
    /* Displays SAmerica */

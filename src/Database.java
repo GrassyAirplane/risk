@@ -16,7 +16,7 @@ public class Database {
    
    /* FILE VARIABLES */
    private final static String FILE_PATH_COUNTRY = "../Countries.txt";
-   private final static String FILE_PATH_BONUS = "../Bonus.txt";
+   private final static String FILE_PATH_BONUS   = "../Bonus.txt";
    private final static String FILE_PATH_MISSION = "../Mission.txt";
    
    /*=============== CONSTRUCTOR ===============*/

@@ -237,6 +237,10 @@ public class GameSystem {
    *                      - -4 if both countries are the same country
    *                      - -5 if both countries are owned by the same player */
   public int Battle(int countryAttack, int countryDefend, int numAttackers) {
+    // if country has less than 2 troops
+    if (GetCountryByPos(GetCountryPos(countryAttack)).GetTroopCount() < 2) {
+      return INADEQUATE_TROOPS;
+    }
     // check if countryAttack and countryDefend are the same
     if (countryAttack == countryDefend) {
       return SAME_COUNTRY;
@@ -262,7 +266,7 @@ public class GameSystem {
     // checking if both countries are adjacent to one another
     if (GetCountryByPos(GetCountryPos(countryAttack)).isAdjacent(countryDefend)) {
       // checking if player has enough troops to attack
-      if (GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() > numAttackers) {
+      if (GetCountryByPos(GetCountryPos(countryAttack)).GetTroopCount() > numAttackers) {
         while (true) {
           // creating arrays to store dice roll values for attacker and defender
           int[] rollAttack = this.currPlayer.Attack(numAttackers);

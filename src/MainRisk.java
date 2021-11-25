@@ -244,7 +244,7 @@ public class MainRisk {
                                                       
                            if(canTrade) {
                               //Bonus Card Swap Results
-                              switch( gs.GetCurrPlayer().Bonus(cardOne, cardTwo, cardThree) ) {
+                              switch( gs.Bonus(cardOne, cardTwo, cardThree) ) {
                                  case GameSystem.SUCCESSFUL:
                                     System.out.println("\nSuccess\n");
                                     break;
@@ -379,8 +379,29 @@ public class MainRisk {
       
                             }while(numTroops < 1);
                            
-                           
-                           
+                           //Attacking Conditions
+                           switch(gs.Battle(countryAttack, countryDefend, numTroops)) {
+                              //Attacker Wins
+                              case GameSystem.SUCCESSFUL:
+                                 break;
+                              //Defender Wins
+                              case 2:
+                                 break;
+                              //Player does not own the country
+                              case GameSystem.INVALID_OWNER:
+                                 break;
+                              
+                              //Player does not have enough troops
+                              case GameSystem.INADEQUATE_TROOPS:
+                                 break;
+                              
+                              //Countries are not adjacent
+                              case GameSystem.SAME_COUNTRY:
+                                 break;
+                              
+                           }
+                        //Attack Break
+                        break;            
                            
                         case Displayer.END:
                            exitPhase = true; 

@@ -14,7 +14,8 @@ public class MainRisk {
       boolean hasWinner = false; 
       
       // SHARED VARIABLES      
-      int menuOption, numPlayer, creationCycle = 0, turnPhase, gameOption; 
+      int menuOption, numPlayer, creationCycle = 0, turnPhase, gameOption, numTroops; 
+      boolean exitPhase; 
       
       // PLAYER CREATION
       int classType; 
@@ -29,12 +30,11 @@ public class MainRisk {
       boolean canTrade;
       
       /* PHASE TWO VARIABLES */
-      boolean exitPhase; 
       //Attack Variables
-      int countryAttack, countryDefend, numTroops;
+      int countryAttack, countryDefend;
       
       /* PHASE THREE VARIABLES */
-      
+      int countryLocation, countryDestination;
       
       /* PROGRAM START - DisplayMenu */
       disp.DisplayMenu();
@@ -497,6 +497,46 @@ public class MainRisk {
                            break;
                         //Move Option
                         case Displayer.MOVE:
+                                                 
+                            //Valid Starting Country Input 
+                           do{
+                              System.out.print("\n        MOVEMENT ORDERS\n");
+                              System.out.print("Selection [Owned Country Id]  : ");
+                              countryLocation = scan.nextInt();
+                              
+                              if(countryLocation > 41 || countryLocation < 0) {
+                                 disp.ErrorMessage();
+                                 System.out.print("");
+                              }
+                                 
+                           }while(countryLocation > 41 || countryLocation < 0);
+                           
+                            //Valid Destination Country Input 
+                            do {
+                              System.out.print("Selection [Destination Country Id] : ");
+                              countryDestination = scan.nextInt();
+                              
+                              if(countryDestination > 41 || countryDestination < 0) {
+                                 disp.ErrorMessage();
+                                 System.out.print("\n");
+                              }
+                              
+                            }while(countryDestination > 41 || countryDestination < 0);
+                            
+                            //Valid numTroops input
+                            do {
+                              System.out.print("Selection [Number of Troops]  : ");
+                              numTroops = scan.nextInt();
+                              
+                              if(numTroops < 1) {
+                                 disp.ErrorMessage();
+                                 System.out.print("\n");
+                              }
+      
+                            }while(numTroops < 1);
+                            
+                            //move options
+                            
                            
                            
                            break;   

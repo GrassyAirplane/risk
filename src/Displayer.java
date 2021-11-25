@@ -225,7 +225,7 @@ public class Displayer {
       System.out.println("________________________________________________________________________________________________");
       for(int i = 0; i < 9; i++) {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
-         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %-25s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
       }
       System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
@@ -235,7 +235,7 @@ public class Displayer {
       System.out.println("________________________________________________________________________________________________");
       for(int i = 9; i < 13; i++) {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
-         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %-25s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
       }
       System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
@@ -245,7 +245,7 @@ public class Displayer {
       System.out.println("________________________________________________________________________________________________");
       for(int i =13; i < 20; i++) {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
-         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %-25s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
       }
       System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
@@ -255,7 +255,7 @@ public class Displayer {
       System.out.println("________________________________________________________________________________________________");
       for(int i = 20; i < 26; i++) {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
-         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %-25s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
       }
       System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
@@ -265,7 +265,7 @@ public class Displayer {
       System.out.println("________________________________________________________________________________________________");
       for(int i = 26; i < 38; i++) {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
-         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %-25s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
       }
       System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
@@ -275,7 +275,7 @@ public class Displayer {
    System.out.println("________________________________________________________________________________________________");
       for(int i = 38; i < 42; i++) {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
-         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %-25s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
       }
       System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
@@ -429,12 +429,5 @@ public class Displayer {
          System.out.print("\n");
       }
    }
-   
-   /* Placement Troops in country */
-   public void DisplayAttack() {
-      System.out.printf("\n        ATTACK ORDERS\n");
-      System.out.printf("Receiving a total of %d Troops \n", gs.GetCurrPlayer().GetReinforcement());
-      System.out.printf("Selection [Owned Country Id] : ");
-   
-   }
+
 }

@@ -21,6 +21,7 @@ public class Displayer {
    public final static int SCOREBOARD    = 8;
    
    public final static int PLACE         =10;
+   public final static int MISSION       =11;
    
    
    public final static int PHASE_PLACEMENT = 20;
@@ -361,7 +362,14 @@ public class Displayer {
       Mission playerMission = currPlayer.GetPlayerMission();
       
       System.out.printf("\n        MISSION OBJECTIVE\n");
-      System.out.printf("CONFIDENTIAL: READ THIS IN PRIVATE, ENTER WHEN READY");
+      System.out.printf("CONFIDENTIAL: READ THIS IN PRIVATE, ENTER WHEN READY & ENTER WHEN DONE");
       scan.nextLine(); 
+      System.out.printf("          %s\n", playerMission.GetCardName());
+      System.out.printf("%s\n", playerMission.GetMissionDesc());
+      scan.nextLine(); 
+      //Prints multiple spaces
+      for(int i = 0; i < 50; i++){
+         System.out.print("\n");
+      }
    }
 }

@@ -237,6 +237,8 @@ public class MainRisk {
                                     break;
                               }
                               break;
+                            //Display Mission
+                            case Displayer.
                             //Invalid Input
                             default:
                               disp.ErrorMessage();                 

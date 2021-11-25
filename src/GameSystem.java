@@ -320,10 +320,12 @@ public class GameSystem {
    *         - 0 if bonus status is false, so player cannot collect bonus */
   public int GetBonusCard() {
     if (this.currPlayer.GetBonusStatus()) {
-      // selecting random bonus card from allBonus array
-      Bonus bonus = db.GetAllBonus()[new Random().nextInt(db.GetAllBonus().length - 1)];
+      // selecting random bonus card from allBonus array by generating a random index
+      int bonusIndex = new Random().nextInt(db.GetAllBonus().length - 1);
       // adding bonus to player's bonus deck
-      this.currPlayer.AddBonusToPlayer(bonus);
+      this.currPlayer.AddBonusToPlayer(db.GetAllBonus()[bonusIndex]);
+      // removing bonus from allBonus array
+      db.RemoveBonus(bonusIndex);
       return SUCCESSFUL;
     }
     else {
@@ -480,9 +482,9 @@ public class GameSystem {
           db.AddBonus(db.GetBonusByPos(t2));
           db.AddBonus(db.GetBonusByPos(t3));
           // removing the bonus cards from the player
-          this.currPlayer.RemoveBonus(t1);
-          this.currPlayer.RemoveBonus(t2);
-          this.currPlayer.RemoveBonus(t3);
+          this.currPlayer.RemoveBonusFromPlayer(t1);
+          this.currPlayer.RemoveBonusFromPlayer(t2);
+          this.currPlayer.RemoveBonusFromPlayer(t3);
           
           return SUCCESSFUL;
         }
@@ -499,9 +501,9 @@ public class GameSystem {
           db.AddBonus(db.GetBonusByPos(t2));
           db.AddBonus(db.GetBonusByPos(t3));
           // removing bonuses from player deck
-          this.currPlayer.RemoveBonus(t1);
-          this.currPlayer.RemoveBonus(t2);
-          this.currPlayer.RemoveBonus(t3);
+          this.currPlayer.RemoveBonusFromPlayer(t1);
+          this.currPlayer.RemoveBonusFromPlayer(t2);
+          this.currPlayer.RemoveBonusFromPlayer(t3);
           return SUCCESSFUL;
         }
         else {
@@ -517,9 +519,9 @@ public class GameSystem {
           db.AddBonus(db.GetBonusByPos(t2));
           db.AddBonus(db.GetBonusByPos(t3));
           // removing bonuses from player deck
-          this.currPlayer.RemoveBonus(t1);
-          this.currPlayer.RemoveBonus(t2);
-          this.currPlayer.RemoveBonus(t3);
+          this.currPlayer.RemoveBonusFromPlayer(t1);
+          this.currPlayer.RemoveBonusFromPlayer(t2);
+          this.currPlayer.RemoveBonusFromPlayer(t3);
           return SUCCESSFUL;
         }
         else {
@@ -540,9 +542,9 @@ public class GameSystem {
         db.AddBonus(db.GetBonusByPos(t2));
         db.AddBonus(db.GetBonusByPos(t3));
         // removing bonuses from player deck
-        this.currPlayer.RemoveBonus(t1);
-        this.currPlayer.RemoveBonus(t2);
-        this.currPlayer.RemoveBonus(t3);
+        this.currPlayer.RemoveBonusFromPlayer(t1);
+        this.currPlayer.RemoveBonusFromPlayer(t2);
+        this.currPlayer.RemoveBonusFromPlayer(t3);
         return SUCCESSFUL;
       }
       else {

@@ -277,6 +277,24 @@ public class Database {
      this.allBonus = tempArray;
    }
    
+   /* removes bonus card from allBonus deck.
+   * @param pos - position of bonus object to remove */
+  public void RemoveBonus(int pos) {
+    Bonus[] temp = new Bonus[this.allBonus.length - 1];
+    int newIndex = 0;
+    
+    // removing item at the position
+    for( int i = 0; i < this.allBonus.length; i++ ){
+       if( i != pos ) {
+          temp[newIndex] = this.allBonus[i];
+          newIndex++;
+       }
+    }
+    
+    // setting deck to temp
+    this.allBonus = temp;
+  }
+   
    /* adds new player to allPlayer array
    * @param player - player object to add */
    public void AddPlayer(Player player) {   

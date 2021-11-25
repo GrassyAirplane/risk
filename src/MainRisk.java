@@ -448,7 +448,7 @@ public class MainRisk {
                    
                    //disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
                    
-                   break;
+                   
                }
                
                break;

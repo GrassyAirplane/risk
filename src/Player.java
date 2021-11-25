@@ -322,18 +322,23 @@ public abstract class Player {
   /* removes bonus card from player's bonus deck.
    * @param pos - position of bonus object to remove */
   public void RemoveBonusFromPlayer(int pos) {
-    Bonus[] temp = new Bonus[this.deck.length - 1];
-    int newIndex = 0;
-    
-    // removing item at the position
-    for( int i = 0; i < this.deck.length; i++ ){
-       if( i != pos ) {
+    if (this.deck.length < 2) {
+      this.deck = null;
+    }
+    else {
+      Bonus[] temp = new Bonus[this.deck.length - 1];
+      int newIndex = 0;
+      
+      // removing item at the position
+      for( int i = 0; i < this.deck.length; i++ ){
+        if( i != pos ) {
           temp[newIndex] = this.deck[i];
           newIndex++;
-       }
+        }
+      }
+      
+      // setting deck to temp
+      this.deck = temp;
     }
-    
-    // setting deck to temp
-    this.deck = temp;
   }
 }

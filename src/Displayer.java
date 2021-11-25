@@ -214,7 +214,7 @@ public class Displayer {
       System.out.printf(".. . . . . . %c%c%c%c%c . . . .%c%c%c%c %c . . . . . %c%c%c%c. . . . . .|1. Globe     5. Africa               |   \n", getPlayerCharByCountryId(11), getPlayerCharByCountryId(11)/*Peru 11*/, getPlayerCharByCountryId(10), getPlayerCharByCountryId(10), getPlayerCharByCountryId(10)/*Brazil 10*/, getPlayerCharByCountryId(22), getPlayerCharByCountryId(22)/*Congo 22*/, getPlayerCharByCountryId(23)/*East Africa 23*/, getPlayerCharByCountryId(24)/*South Africa 24*/, getPlayerCharByCountryId(25)/*Madagascar 25*/, getPlayerCharByCountryId(38), getPlayerCharByCountryId(38), getPlayerCharByCountryId(38)/*Indonesia 38*/, getPlayerCharByCountryId(39)/*New Guinea 39*/);
       System.out.printf(".. . . . . . %c%c%c . . . . . %c%c. . . . . . . .%c%c%c%c . . . . .|2. N.America 6. Asia                 |   \n", getPlayerCharByCountryId(11)/*Peru 11*/, getPlayerCharByCountryId(12), getPlayerCharByCountryId(12)/*Argentina 12*/, getPlayerCharByCountryId(24), getPlayerCharByCountryId(24)/*South Affrica 24*/, getPlayerCharByCountryId(40), getPlayerCharByCountryId(40)/*Western Australia 40*/, getPlayerCharByCountryId(41), getPlayerCharByCountryId(41)/*Eastern Australia 41*/);
       System.out.printf(".. . . . . . %c%c. . . . . . . . . . . . . . . %c%c. . . . . .|3. S.America 7. Australia            |   \n", getPlayerCharByCountryId(12), getPlayerCharByCountryId(12)/*Argentina 12*/, getPlayerCharByCountryId(41), getPlayerCharByCountryId(41)/*Eastern Australia 41*/ );   
-      System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|4. Europe    8. Scoreboard           |              \n");
+      System.out.printf(".. . . . . . . . . . . . . . . . . . . . . . . . . . . . .|4. Europe                            |              \n");
       System.out.printf("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾      \n");
 
    }
@@ -278,11 +278,6 @@ public class Displayer {
          System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %-25s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
       }
       System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
-   }
-   
-   /* Displays Scoreboard */
-   public void DisplayScoreboard() {
-   
    }
    
    

@@ -119,9 +119,6 @@ public class MainRisk {
                         case Displayer.AUSTRALIA:
                            disp.DisplayAustralia();
                            break;
-                        case Displayer.SCOREBOARD:
-                           disp.DisplayScoreboard();
-                           break;
                         case Displayer.PLACE:
                            //Gurantee Inbound Input Error Checking
                            do{
@@ -212,9 +209,6 @@ public class MainRisk {
                            break;
                         case Displayer.AUSTRALIA:
                            disp.DisplayAustralia();
-                           break;
-                        case Displayer.SCOREBOARD:
-                           disp.DisplayScoreboard();
                            break;
                            //Trading System displayer
                         case Displayer.TRADE:
@@ -343,9 +337,6 @@ public class MainRisk {
                         case Displayer.AUSTRALIA:
                            disp.DisplayAustralia();
                            break;
-                        case Displayer.SCOREBOARD:
-                           disp.DisplayScoreboard();
-                           break;
                         //Mission Option
                         case Displayer.MISSION:
                            disp.DisplayMission();
@@ -404,6 +395,18 @@ public class MainRisk {
                                  if (gs.RemoveLoser(gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetOwner())) {
                                     System.out.printf(" Player %c Has Been Eliminated.\n", gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetOwner().GetPlayerChar());
                                  }
+                                 
+                                 //Checks Winner
+                                 switch(gs.CheckWinner()) {
+                                    case GameSystem.WORLD_DOMINATION:
+                                       hasWinner = true; 
+                                       break;
+                                    case GameSystem.MISSION_WIN:
+                                       hasWinner = true;
+                                       break;
+                                    default:
+                                       break;
+                                 }
                                               
                                  break;
                               //Defender Wins
@@ -449,12 +452,17 @@ public class MainRisk {
                         default:
                            disp.ErrorMessage(); 
                            System.out.print("\n");
-                     }             
+                     }         
+                     
+                     //breaks if hasWinner
+                     if(hasWinner) {
+                        break;
+                     }
                    }
                    
                    /*=============== CHECKS WINNER ===============*/
                    if(hasWinner) {
-                     System.out.printf("\n Player %c Has Won the Game.\n", gs.GetCurrPlayer().GetPlayerChar());
+                     System.out.printf("Player %c Has Won the Game.\n", gs.GetCurrPlayer().GetPlayerChar());
                      break;
                    }
                    
@@ -498,9 +506,6 @@ public class MainRisk {
                            break;
                         case Displayer.AUSTRALIA:
                            disp.DisplayAustralia();
-                           break;
-                        case Displayer.SCOREBOARD:
-                           disp.DisplayScoreboard();
                            break;
                         //Mission Option
                         case Displayer.MISSION:

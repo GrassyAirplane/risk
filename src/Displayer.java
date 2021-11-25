@@ -375,4 +375,12 @@ public class Displayer {
          System.out.print("\n");
       }
    }
+   
+   /* Placement Troops in country */
+   public void DisplayAttack() {
+      System.out.printf("\n        ATTACK ORDERS\n");
+      System.out.printf("Receiving a total of %d Troops \n", gs.GetCurrPlayer().GetReinforcement());
+      System.out.printf("Selection [Owned Country Id] : ");
+   
+   }
 }

@@ -91,20 +91,20 @@ public abstract class Player {
    * @return     - true or false depending on whether the player
    *               has all the countries in the list */
   public boolean CheckContinent(int[] list) {
-    boolean hasList = false;
-    for (int i = 0; i < list.length; i++) {
-      hasList = false;
-      for (int j = 0; j < this.countryOwned.length; j++) {
-        if (list[i] == this.countryOwned[i]) {
-          hasList = true;
-          break;
-        }
-      }
-      if (!hasList) {
-        break;
+    
+    int count = 0;
+    
+    //Loops through player list
+    for(int i = 0; i < this.countryOwned.length; i++) {
+      //loops through continent list
+      for(int j = 0; j < list.length; j++) {
+         if(this.countryOwned[i] == list[j]) {
+            count ++;
+         }
       }
     }
-    return hasList;
+    
+    return count == list.length;
   }
   
   /* checks if player owns a continent and gets the number of bonus troops

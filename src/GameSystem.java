@@ -225,18 +225,18 @@ public class GameSystem {
   /* Compares dice rolls and transfers ownership if attacker successfully conquered the country
    * @param attack        - attacking player
    *        numAttackers  - number of troops the attacker is using to battle
-   *        countryAttack - place the attacker is attacking from
-   *        countryDefend - place the attacker wants to conquer
+   *        countryAttack - ID of country the attacker is attacking from
+   *        countryDefend - ID of country the attacker wants to conquer
    * @return              - 1 if attacker wins
    *                      - 2 if defender wins
    *                      - 0 if player does not own the country
    *                      - -1 if player does not have enough troops
    *                      - -3 if countries are not adjacent */
-  public int Battle(Player attack, int numAttackers, Country countryAttack, Country countryDefend) {
+  public int Battle(int countryAttack, int countryDefend, int numAttackers) {
     // check if attacker owns country
     boolean ownsCountry = false;
-    for (int i = 0; i < attack.GetCountryOwned().length; i++) {
-      if (attack.GetCountryOwned()[i] == countryAttack.GetCountryId()) {
+    for (int i = 0; i < this.currPlayer.GetCountryOwned().length; i++) {
+      if (this.currPlayer.GetCountryOwned()[i] == countryAttack) {
         ownsCountry = true;
         break;
       }
@@ -248,22 +248,22 @@ public class GameSystem {
       return INVALID_OWNER;
     }
     // checking if both countries are adjacent to one another
-    if (countryAttack.isAdjacent(countryDefend.GetCountryId())) {
+    if (GetCountryByPos(GetCountryPos(countryAttack)).isAdjacent(countryDefend)) {
       // checking if player has enough troops to attack
-      if (countryDefend.GetTroopCount() > numAttackers) {
+      if (GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() > numAttackers) {
         while (true) {
           // creating arrays to store dice roll values for attacker and defender
-          int[] rollAttack = attack.Attack(numAttackers);
-          int[] rollDefend = countryDefend.GetOwner().Defend(countryDefend.GetTroopCount());
+          int[] rollAttack = this.currPlayer.Attack(numAttackers);
+          int[] rollDefend = GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().Defend(GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount());
           if (rollAttack.length < 2 || rollDefend.length < 2) {
             // if only one roll is compared
             if (rollAttack[0] > rollDefend[0]) {
               // if attacker wins, defender loses one troop
-              countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
+              GetCountryByPos(GetCountryPos(countryDefend)).SetTroopCount(GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() - 1);
             }
             else {
               // if defender wins, attacker loses one troop
-              countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
+              GetCountryByPos(GetCountryPos(countryAttack)).SetTroopCount(GetCountryByPos(GetCountryPos(countryAttack)).GetTroopCount() - 1);
               numAttackers--;
             }
           }
@@ -272,23 +272,23 @@ public class GameSystem {
               // if two rolls are compared
               if (rollAttack[i] > rollDefend[i]) {
                 // if attacker wins, defender loses one troop
-                countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
+                GetCountryByPos(GetCountryPos(countryDefend)).SetTroopCount(GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() - 1);
               }
               else {
                 // if defender wins, attacker loses one troop
-                countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
+                GetCountryByPos(GetCountryPos(countryAttack)).SetTroopCount(GetCountryByPos(GetCountryPos(countryAttack)).GetTroopCount() - 1);
                 numAttackers--;
               }
             }
           }
           // if attacker successfully conquered the country
-          if (countryDefend.GetTroopCount() < 1) {
+          if (GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() < 1) {
             // transferring country ownership to attacker
-            countryDefend.SetOwner(attack);
+            GetCountryByPos(GetCountryPos(countryDefend)).SetOwner(this.currPlayer);
             // transferring troops over
-            countryDefend.SetTroopCount(numAttackers);
-            countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
-            attack.SetBonusStatus(true);
+            GetCountryByPos(GetCountryPos(countryDefend)).SetTroopCount(numAttackers);
+            GetCountryByPos(GetCountryPos(countryAttack)).SetTroopCount(GetCountryByPos(GetCountryPos(countryAttack)).GetTroopCount() - numAttackers);
+            this.currPlayer.SetBonusStatus(true);
             return 1;
           }
           // if defender wins and attacker runs out of troops to attack

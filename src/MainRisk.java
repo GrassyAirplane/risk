@@ -10,27 +10,31 @@ public class MainRisk {
       Displayer disp = new Displayer(gs, gs.GetDb());
       Scanner scan = new Scanner(System.in);
       
-      //Game Variables      
+      // SHARED VARIABLES      
       int menuOption, numPlayer, creationCycle = 0, turnPhase, gameOption; 
       
-      //Player Creation
+      // PLAYER CREATION
       int classType; 
       char playerChar; 
       
-      //Player Input
+      /* PHASE ZERO */
       int reinforcementAmount, countryId; 
       
-      //DisplayMenu
-      disp.DisplayMenu();
-      
+
+      /* PHASE ONE */
       //Trading Variables
       int cardOne, cardTwo, cardThree; 
       boolean canTrade;
       
       /* PHASE TWO VARIABLES */
-      
+        
       boolean exitPhase; 
       
+      /* PHASE THREE VARIABLES */
+      
+      
+      /* PROGRAM START - DisplayMenu */
+      disp.DisplayMenu();
       
       //Menu Looping
       do {
@@ -302,8 +306,7 @@ public class MainRisk {
                    gs.GetCurrPlayer().SetBonusStatus(false);
                    //Prints Display Globe
                    disp.DisplayGlobe();  
-                       
-                   
+                          
                    //Loops Display Globe
                    while(!exitPhase) {
                      disp.DisplayPhase(Displayer.PHASE_TWO);
@@ -336,6 +339,10 @@ public class MainRisk {
                         case Displayer.MISSION:
                            disp.DisplayMission();
                            break;
+                        //Attack Case 
+                        case Displayer.ATTACK:
+                           
+                               
                         
                         case Displayer.END:
                            exitPhase = true; 

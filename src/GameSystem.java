@@ -299,6 +299,10 @@ public class GameSystem {
           }
           // if attacker successfully conquered the country
           if (GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() < 1) {
+            // adding country to attacker's array
+            this.currPlayer.AddCountry(countryDefend);
+            // removing country from defender's array
+            GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().RemoveCountry(GetCountryPos(countryDefend));
             // transferring country ownership to attacker
             GetCountryByPos(GetCountryPos(countryDefend)).SetOwner(this.currPlayer);
             // transferring troops over

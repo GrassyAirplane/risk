@@ -184,13 +184,17 @@ public class GameSystem {
     }
   }
   
-  /* checks if player being attacked has lost
+  /* checks if player being attacked has lost and removes the player if the player has lost
    * @param player - player to check if eliminated
    * @return       - true if player has lost and is removed
    *                 false if player has not lost */
   public boolean RemoveLoser(Player player) {
     // checks if player is eliminated by seeing if they no longer own any countries
     if (player.GetCountryOwned().length == 0) {
+      // before removing player, the player's bonus cards are returned to the allBonus deck
+      for (int i = 0; i < player.GetBonusDeck().length; i++) {
+        db.AddBonus(player.GetBonusDeck()[i]);
+      }
       db.RemovePlayer(player);
       return true;
     }

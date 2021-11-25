@@ -210,13 +210,13 @@ public class GameSystem {
    * @return            - 1 if successful,
    *                    - -1 if not enough troops,
    *                    - -3 if not adjacent */
-  public int Move(Country fromCountry, Country toCountry, int numTroops) {
+  public int Move(int fromCountry, int toCountry, int numTroops) {
     // checks if countries are adjacents of one another
-    if (fromCountry.isAdjacent(toCountry.GetCountryId())) {
+    if (GetCountryByPos(GetCountryPos(fromCountry)).isAdjacent(toCountry)) {
       // checks if there are enough troops to move
-      if (fromCountry.GetTroopCount() > numTroops) {
-        fromCountry.SetTroopCount(fromCountry.GetTroopCount() - numTroops); // subtracting number of troops
-        toCountry.SetTroopCount(toCountry.GetTroopCount() + numTroops); // adding troops to destination country
+      if (GetCountryByPos(GetCountryPos(fromCountry)).GetTroopCount() > numTroops) {
+        GetCountryByPos(GetCountryPos(fromCountry)).SetTroopCount(GetCountryByPos(GetCountryPos(fromCountry)).GetTroopCount() - numTroops); // subtracting number of troops
+        GetCountryByPos(GetCountryPos(toCountry)).SetTroopCount(GetCountryByPos(GetCountryPos(toCountry)).GetTroopCount() + numTroops); // adding troops to destination country
         return SUCCESSFUL;
       }
       else {

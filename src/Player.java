@@ -417,7 +417,7 @@ public abstract class Player {
   
   /* removes bonus card from player's bonus deck.
    * @param pos - position of bonus object to remove */
-  public void RemoveBonus(int pos) {
+  public void RemoveBonusFromPlayer(int pos) {
     Bonus[] temp = new Bonus[this.deck.length - 1];
     int newIndex = 0;
     

@@ -224,6 +224,7 @@ public class GameSystem {
   
   /* Compares dice rolls and transfers ownership if attacker successfully conquered the country
    * @param attack        - attacking player
+   *        defend        - defending player
    *        numAttackers  - number of troops the attacker is using to battle
    *        countryAttack - place the attacker is attacking from
    *        countryDefend - place the attacker wants to conquer
@@ -232,11 +233,25 @@ public class GameSystem {
    *                      - 0 if player does not own the country
    *                      - -1 if player does not have enough troops
    *                      - -3 if countries are not adjacent */
-  public int Battle(Player attack, int numAttackers, Country countryAttack, Country countryDefend) {
+  public int Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
     // check if attacker owns country
     boolean ownsCountry = false;
     for (int i = 0; i < attack.GetCountryOwned().length; i++) {
       if (attack.GetCountryOwned()[i] == countryAttack.GetCountryId()) {
+        ownsCountry = true;
+        break;
+      }
+      else {
+        ownsCountry = false;
+      }
+    }
+    if (!ownsCountry) {
+      return INVALID_OWNER;
+    }
+    ownsCountry = false;
+    // check if defender owns country
+    for (int i = 0; i < defend.GetCountryOwned().length; i++) {
+      if (defend.GetCountryOwned()[i] == countryDefend.GetCountryId()) {
         ownsCountry = true;
         break;
       }
@@ -254,7 +269,7 @@ public class GameSystem {
         while (true) {
           // creating arrays to store dice roll values for attacker and defender
           int[] rollAttack = attack.Attack(numAttackers);
-          int[] rollDefend = countryDefend.GetOwner().Defend(countryDefend.GetTroopCount());
+          int[] rollDefend = defend.Defend(countryDefend.GetTroopCount());
           if (rollAttack.length < 2 || rollDefend.length < 2) {
             // if only one roll is compared
             if (rollAttack[0] > rollDefend[0]) {
@@ -288,7 +303,6 @@ public class GameSystem {
             // transferring troops over
             countryDefend.SetTroopCount(numAttackers);
             countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
-            attack.SetBonusStatus(true);
             return 1;
           }
           // if defender wins and attacker runs out of troops to attack
@@ -306,17 +320,6 @@ public class GameSystem {
       // if countries are not adjacent
       return NOT_ADJACENT;
     }
-  }
-  
-  /* Collects a bonus card after player's turn if the player has
-   * conquered at least one country.
-   * @return - 1 if successful
-   *         - 0 if bonus status is false, so player cannot collect bonus */
-  public int GetBonusCard() {
-    if (this.currPlayer.GetBonusStatus()) {
-      
-    }
-    return 0; // default return
   }
   
   /* gets the current player

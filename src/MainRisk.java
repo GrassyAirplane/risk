@@ -27,8 +27,9 @@ public class MainRisk {
       boolean canTrade;
       
       /* PHASE TWO VARIABLES */
-        
       boolean exitPhase; 
+      //Attack Variables
+      int countryAttack, countryDefend, numTroops;
       
       /* PHASE THREE VARIABLES */
       
@@ -341,6 +342,7 @@ public class MainRisk {
                            break;
                         //Attack Case 
                         case Displayer.ATTACK:
+                           disp.DisplayAttack();
                            
                                
                         

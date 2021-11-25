@@ -20,6 +20,7 @@ public class GameSystem {
   public final static int INADEQUATE_BONUS  = -2;
   public final static int NOT_ADJACENT      = -3;
   public final static int SAME_COUNTRY      = -4;
+  public final static int SAME_OWNER        = -5;
   
   /* INSTANCE VARIABLES */
   private Player currPlayer;
@@ -232,12 +233,17 @@ public class GameSystem {
    *                      - 2 if defender wins
    *                      - 0 if player does not own the country
    *                      - -1 if player does not have enough troops
-   *                      - -2 if both countries are the same country
-   *                      - -3 if countries are not adjacent */
+   *                      - -3 if countries are not adjacent
+   *                      - -4 if both countries are the same country
+   *                      - -5 if both countries are owned by the same player */
   public int Battle(int countryAttack, int countryDefend, int numAttackers) {
     // check if countryAttack and countryDefend are the same
     if (countryAttack == countryDefend) {
       return SAME_COUNTRY;
+    }
+    // check if countryAttack and countryDefend have the same owner
+    else if (GetCountryByPos(GetCountryPos(countryAttack)).GetOwner() == GetCountryByPos(GetCountryPos(countryDefend)).GetOwner()) {
+      return SAME_OWNER;
     }
     // check if attacker owns country
     boolean ownsCountry = false;

@@ -19,6 +19,7 @@ public class GameSystem {
   public final static int INADEQUATE_TROOPS = -1;
   public final static int INADEQUATE_BONUS  = -2;
   public final static int NOT_ADJACENT      = -3;
+  public final static int SAME_COUNTRY      = -4;
   
   /* INSTANCE VARIABLES */
   private Player currPlayer;
@@ -224,34 +225,24 @@ public class GameSystem {
   
   /* Compares dice rolls and transfers ownership if attacker successfully conquered the country
    * @param attack        - attacking player
-   *        defend        - defending player
    *        numAttackers  - number of troops the attacker is using to battle
-   *        countryAttack - place the attacker is attacking from
-   *        countryDefend - place the attacker wants to conquer
+   *        countryAttack - ID of country the attacker is attacking from
+   *        countryDefend - ID of country the attacker wants to conquer
    * @return              - 1 if attacker wins
    *                      - 2 if defender wins
    *                      - 0 if player does not own the country
    *                      - -1 if player does not have enough troops
+   *                      - -2 if both countries are the same country
    *                      - -3 if countries are not adjacent */
-  public int Battle(Player attack, Player defend, int numAttackers, Country countryAttack, Country countryDefend) {
+  public int Battle(int countryAttack, int countryDefend, int numAttackers) {
+    // check if countryAttack and countryDefend are the same
+    if (countryAttack == countryDefend) {
+      return SAME_COUNTRY;
+    }
     // check if attacker owns country
     boolean ownsCountry = false;
-    for (int i = 0; i < attack.GetCountryOwned().length; i++) {
-      if (attack.GetCountryOwned()[i] == countryAttack.GetCountryId()) {
-        ownsCountry = true;
-        break;
-      }
-      else {
-        ownsCountry = false;
-      }
-    }
-    if (!ownsCountry) {
-      return INVALID_OWNER;
-    }
-    ownsCountry = false;
-    // check if defender owns country
-    for (int i = 0; i < defend.GetCountryOwned().length; i++) {
-      if (defend.GetCountryOwned()[i] == countryDefend.GetCountryId()) {
+    for (int i = 0; i < this.currPlayer.GetCountryOwned().length; i++) {
+      if (this.currPlayer.GetCountryOwned()[i] == countryAttack) {
         ownsCountry = true;
         break;
       }
@@ -263,22 +254,22 @@ public class GameSystem {
       return INVALID_OWNER;
     }
     // checking if both countries are adjacent to one another
-    if (countryAttack.isAdjacent(countryDefend.GetCountryId())) {
+    if (GetCountryByPos(GetCountryPos(countryAttack)).isAdjacent(countryDefend)) {
       // checking if player has enough troops to attack
-      if (countryDefend.GetTroopCount() > numAttackers) {
+      if (GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() > numAttackers) {
         while (true) {
           // creating arrays to store dice roll values for attacker and defender
-          int[] rollAttack = attack.Attack(numAttackers);
-          int[] rollDefend = defend.Defend(countryDefend.GetTroopCount());
+          int[] rollAttack = this.currPlayer.Attack(numAttackers);
+          int[] rollDefend = GetCountryByPos(GetCountryPos(countryDefend)).GetOwner().Defend(GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount());
           if (rollAttack.length < 2 || rollDefend.length < 2) {
             // if only one roll is compared
             if (rollAttack[0] > rollDefend[0]) {
               // if attacker wins, defender loses one troop
-              countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
+              GetCountryByPos(GetCountryPos(countryDefend)).SetTroopCount(GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() - 1);
             }
             else {
               // if defender wins, attacker loses one troop
-              countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
+              GetCountryByPos(GetCountryPos(countryAttack)).SetTroopCount(GetCountryByPos(GetCountryPos(countryAttack)).GetTroopCount() - 1);
               numAttackers--;
             }
           }
@@ -287,22 +278,23 @@ public class GameSystem {
               // if two rolls are compared
               if (rollAttack[i] > rollDefend[i]) {
                 // if attacker wins, defender loses one troop
-                countryDefend.SetTroopCount(countryDefend.GetTroopCount() - 1);
+                GetCountryByPos(GetCountryPos(countryDefend)).SetTroopCount(GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() - 1);
               }
               else {
                 // if defender wins, attacker loses one troop
-                countryAttack.SetTroopCount(countryAttack.GetTroopCount() - 1);
+                GetCountryByPos(GetCountryPos(countryAttack)).SetTroopCount(GetCountryByPos(GetCountryPos(countryAttack)).GetTroopCount() - 1);
                 numAttackers--;
               }
             }
           }
           // if attacker successfully conquered the country
-          if (countryDefend.GetTroopCount() < 1) {
+          if (GetCountryByPos(GetCountryPos(countryDefend)).GetTroopCount() < 1) {
             // transferring country ownership to attacker
-            countryDefend.SetOwner(attack);
+            GetCountryByPos(GetCountryPos(countryDefend)).SetOwner(this.currPlayer);
             // transferring troops over
-            countryDefend.SetTroopCount(numAttackers);
-            countryAttack.SetTroopCount(countryAttack.GetTroopCount() - numAttackers);
+            GetCountryByPos(GetCountryPos(countryDefend)).SetTroopCount(numAttackers);
+            GetCountryByPos(GetCountryPos(countryAttack)).SetTroopCount(GetCountryByPos(GetCountryPos(countryAttack)).GetTroopCount() - numAttackers);
+            this.currPlayer.SetBonusStatus(true);
             return 1;
           }
           // if defender wins and attacker runs out of troops to attack
@@ -319,6 +311,25 @@ public class GameSystem {
     else {
       // if countries are not adjacent
       return NOT_ADJACENT;
+    }
+  }
+  
+  /* Collects a bonus card after player's turn if the player has
+   * conquered at least one country.
+   * @return - 1 if successful
+   *         - 0 if bonus status is false, so player cannot collect bonus */
+  public int GetBonusCard() {
+    if (this.currPlayer.GetBonusStatus()) {
+      // selecting random bonus card from allBonus array by generating a random index
+      int bonusIndex = new Random().nextInt(db.GetAllBonus().length - 1);
+      // adding bonus to player's bonus deck
+      this.currPlayer.AddBonusToPlayer(db.GetAllBonus()[bonusIndex]);
+      // removing bonus from allBonus array
+      db.RemoveBonus(bonusIndex);
+      return SUCCESSFUL;
+    }
+    else {
+      return 0;
     }
   }
   
@@ -434,5 +445,115 @@ public class GameSystem {
        return -1;
      }
    }
+   
+   /* cashes in card bonuses for extra troops.
+   * @param t1 - position in deck array of first bonus card to cash in
+   *        t2 - position in deck array of second bonus card to cash in
+   *        t3 - position in deck array of third bonus card to cash in
+   * @return   - 1 if bonus troops are successfully added to reinforcements
+   *           - -2 if the player do not have the required bonuses to cash in */
+  public int Bonus(int t1, int t2, int t3) {
+    int numInfantry = 0; // keeps track of number of infantry bonuses
+    int numHorse = 0; // keeps track of number of horse bonuses
+    int numCannon = 0; // keeps track of number of cannon bonuses
+    
+    // counting number of troops for each type
+    for (int i = 0; i < this.currPlayer.GetBonusDeck().length; i++) {
+      if (this.currPlayer.GetBonusDeck()[i].GetTroopBonusType() == INFANTRY_TROOP) {
+        numInfantry++;
+      }
+      else if (this.currPlayer.GetBonusDeck()[i].GetTroopBonusType() == HORSE_TROOP) {
+        numHorse++;
+      }
+      else if (this.currPlayer.GetBonusDeck()[i].GetTroopBonusType() == CANNON_TROOP) {
+        numCannon++;
+      }
+    }
+    
+    // checking if all troops are the same type
+    if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == this.currPlayer.GetBonusDeck()[t2].GetTroopBonusType() 
+        && this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == this.currPlayer.GetBonusDeck()[t3].GetTroopBonusType()) {
+      if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == INFANTRY_TROOP) {
+        // checking for infantry bonus
+        if (numInfantry >= 3) {
+          this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() + 4);
+          // adding bonus cards back to main bonus deck
+          db.AddBonus(db.GetBonusByPos(t1));
+          db.AddBonus(db.GetBonusByPos(t2));
+          db.AddBonus(db.GetBonusByPos(t3));
+          // removing the bonus cards from the player
+          this.currPlayer.RemoveBonusFromPlayer(t1);
+          this.currPlayer.RemoveBonusFromPlayer(t2);
+          this.currPlayer.RemoveBonusFromPlayer(t3);
+          
+          return SUCCESSFUL;
+        }
+        else {
+          return INADEQUATE_BONUS;
+        }
+      }
+      else if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == HORSE_TROOP) {
+        // checking for horse bonus
+        if (numHorse >= 3) {
+          this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() + 6);
+          // adding bonus cards back to main bonus deck
+          db.AddBonus(db.GetBonusByPos(t1));
+          db.AddBonus(db.GetBonusByPos(t2));
+          db.AddBonus(db.GetBonusByPos(t3));
+          // removing bonuses from player deck
+          this.currPlayer.RemoveBonusFromPlayer(t1);
+          this.currPlayer.RemoveBonusFromPlayer(t2);
+          this.currPlayer.RemoveBonusFromPlayer(t3);
+          return SUCCESSFUL;
+        }
+        else {
+          return INADEQUATE_BONUS;
+        }
+      }
+      else if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() == CANNON_TROOP) {
+        // checking for cannon bonus
+        if (numCannon >= 3) {
+          this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() + 8);
+          // adding bonuses back to main bonus deck
+          db.AddBonus(db.GetBonusByPos(t1));
+          db.AddBonus(db.GetBonusByPos(t2));
+          db.AddBonus(db.GetBonusByPos(t3));
+          // removing bonuses from player deck
+          this.currPlayer.RemoveBonusFromPlayer(t1);
+          this.currPlayer.RemoveBonusFromPlayer(t2);
+          this.currPlayer.RemoveBonusFromPlayer(t3);
+          return SUCCESSFUL;
+        }
+        else {
+          return INADEQUATE_BONUS;
+        }
+      }
+      else {
+        return INADEQUATE_BONUS;
+      }
+    }
+    else if (this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() != this.currPlayer.GetBonusDeck()[t2].GetTroopBonusType() && 
+             this.currPlayer.GetBonusDeck()[t2].GetTroopBonusType() != this.currPlayer.GetBonusDeck()[t3].GetTroopBonusType() && 
+             this.currPlayer.GetBonusDeck()[t1].GetTroopBonusType() != this.currPlayer.GetBonusDeck()[t3].GetTroopBonusType()) {
+      if (numInfantry > 0 && numHorse > 0 && numCannon > 0) {
+        this.currPlayer.SetReinforcement(this.currPlayer.GetReinforcement() + 10);
+        // adding bonuses back to main bonus deck
+        db.AddBonus(db.GetBonusByPos(t1));
+        db.AddBonus(db.GetBonusByPos(t2));
+        db.AddBonus(db.GetBonusByPos(t3));
+        // removing bonuses from player deck
+        this.currPlayer.RemoveBonusFromPlayer(t1);
+        this.currPlayer.RemoveBonusFromPlayer(t2);
+        this.currPlayer.RemoveBonusFromPlayer(t3);
+        return SUCCESSFUL;
+      }
+      else {
+        return INADEQUATE_BONUS;
+      }
+    }
+    else {
+      return INADEQUATE_BONUS;
+    }
+  }
   
 }

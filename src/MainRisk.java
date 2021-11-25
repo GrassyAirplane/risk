@@ -422,7 +422,7 @@ public class MainRisk {
                                  break;
                               //Countries are not adjacent
                               case GameSystem.SAME_COUNTRY:
-                                 System.out.printf("\n %s and %s are not adjacent.\n\n", gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName());
+                                 System.out.printf("\n %s and %s are the same Countries.\n\n", gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName());
                                  System.out.print("\n");
                                  break;
                               
@@ -498,7 +498,7 @@ public class MainRisk {
                         //Move Option
                         case Displayer.MOVE:
                                                  
-                            //Valid Starting Country Input 
+                           //Valid Starting Country Input 
                            do{
                               System.out.print("\n        MOVEMENT ORDERS\n");
                               System.out.print("Selection [Owned Country Id]  : ");
@@ -536,9 +536,39 @@ public class MainRisk {
                             }while(numTroops < 1);
                             
                             //move options
-                            
+                            switch(gs.Move(countryLocation, countryDestination, numTroops)) {
+                              
+                              //Successful Move
+                              case GameSystem.SUCCESSFUL:
+                                 System.out.println("\nSuccessful Transfer\n");
+                                 break;
+                              
+                              //Not Owner of Country
+                              case GameSystem.INVALID_OWNER:
+                                 //Gets Player char & Location Country name
+                                 System.out.printf("\n %c Does not own %s.\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryLocation)).GetCountryName());
+                                 System.out.print("\n"); 
+                                 break;
+                                 
+                              //Not Enough Troops
+                              case GameSystem.INADEQUATE_TROOPS:
+                                 System.out.printf("\n %c Does not have enough Troops at %s.\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryLocation)).GetCountryName());
+                                 System.out.print("\n");
+                                 break;
+                              
+                              //Countries are not adjacent
+                              case GameSystem.NOT_ADJACENT:
+                                 System.out.printf("\n %s is Not adjacent with %s.\n\n", gs.GetCountryByPos(gs.GetCountryPos(countryLocation)).GetCountryName(), gs.GetCountryByPos(gs.GetCountryPos(countryDestination)).GetCountryName());
+                                 System.out.print("\n");
+                                 break;
+                              
+                              case GameSystem.SAME_COUNTRY:
+                                 System.out.printf("\n %s and %s are the same Countries.\n\n", gs.GetCountryByPos(gs.GetCountryPos(countryLocation)).GetCountryName(), gs.GetCountryByPos(gs.GetCountryPos(countryDestination)).GetCountryName());
+                                 System.out.print("\n");
+                                 break;    
+                            }
                            
-                           
+                           //Move Break
                            break;   
                         
                         case Displayer.END:

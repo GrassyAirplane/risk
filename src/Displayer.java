@@ -365,9 +365,9 @@ public class Displayer {
       Mission playerMission = currPlayer.GetPlayerMission();
       
       System.out.printf("\n        MISSION OBJECTIVE\n");
-      System.out.printf("CONFIDENTIAL: READ THIS IN PRIVATE, ENTER WHEN READY & ENTER WHEN DONE");
+      System.out.printf("CONFIDENTIAL: READ THIS IN PRIVATE, ENTER WHEN READY & ENTER WHEN DONE\n");
       scan.nextLine(); 
-      System.out.printf("          %s\n", playerMission.GetCardName());
+      System.out.printf("%s: \n", playerMission.GetCardName());
       System.out.printf("%s\n", playerMission.GetMissionDesc());
       scan.nextLine(); 
       //Prints multiple spaces

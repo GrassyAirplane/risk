@@ -208,9 +208,24 @@ public class GameSystem {
    *        toCountry   - ID country the troops are moving to
    *        numTroops   - number of troops being moved
    * @return            - 1 if successful,
+   *                    - 0 if player does not own the countries,
    *                    - -1 if not enough troops,
-   *                    - -3 if not adjacent */
+   *                    - -3 if not adjacent,
+   *                    - -4 if both countries are the same */
   public int Move(int fromCountry, int toCountry, int numTroops) {
+    // error checking
+    if (GetCountryByPos(GetCountryPos(fromCountry)).GetOwner() != this.currPlayer) {
+      // check if player owns the country
+      return INVALID_OWNER;
+    }
+    else if (GetCountryByPos(GetCountryPos(toCountry)).GetOwner() != this.currPlayer) {
+      // check if player owns the country
+      return INVALID_OWNER;
+    }
+    else if (fromCountry == toCountry) {
+      // check if both countries are the same
+      return SAME_COUNTRY;
+    }
     // checks if countries are adjacents of one another
     if (GetCountryByPos(GetCountryPos(fromCountry)).isAdjacent(toCountry)) {
       // checks if there are enough troops to move

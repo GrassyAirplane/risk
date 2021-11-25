@@ -84,12 +84,12 @@ public class MainRisk {
                               
                //Initial Player Turn
                gs.RotatePlayer();
-               disp.DisplayGlobe();
                
                /*=============== PHASE 0 ===============*/
                
                //Loops Through all players
                for(int i = 0; i < numPlayer; i++) {
+                  disp.DisplayGlobe();
                   //Place until Reinforcements are diminished
                   while(gs.GetCurrPlayer().GetReinforcement() > 0) {
                   disp.DisplayPhase(Displayer.PHASE_PLACEMENT); 
@@ -261,11 +261,11 @@ public class MainRisk {
                               disp.DisplayPlace();
                               countryId = scan.nextInt();
                               
-                              if(countryId > 42 || countryId < 0) {
+                              if(countryId > 41 || countryId < 0) {
                                  disp.ErrorMessage();
                               }
                                  
-                           }while(countryId > 42 || countryId < 0);     
+                           }while(countryId > 41 || countryId < 0);     
                            System.out.print("Selection [Amount of Reinforcement] : ");
                            reinforcementAmount = scan.nextInt();
                            //Places Troops
@@ -342,10 +342,46 @@ public class MainRisk {
                            break;
                         //Attack Case 
                         case Displayer.ATTACK:
-                           disp.DisplayAttack();
+                             //Valid Attacking Country Input 
+                           do{
+                              System.out.print("\n        ATTACK ORDERS\n");
+                              System.out.print("Selection [Owned Country Id]  : ");
+                              countryAttack = scan.nextInt();
+                              
+                              if(countryAttack > 41 || countryAttack < 0) {
+                                 disp.ErrorMessage();
+                                 System.out.print("");
+                              }
+                                 
+                           }while(countryAttack > 41 || countryAttack < 0);
                            
-                               
-                        
+                            //Valid Defending Country Input 
+                            do {
+                              System.out.print("Selection [Enemey Country Id] : ");
+                              countryDefend = scan.nextInt();
+                              
+                              if(countryDefend > 41 || countryDefend < 0) {
+                                 disp.ErrorMessage();
+                                 System.out.print("\n");
+                              }
+                              
+                            }while(countryDefend > 41 || countryDefend < 0);
+                            
+                            //Valid numTroops input
+                            do {
+                              System.out.print("Selection [Number of Troops]  : ");
+                              numTroops = scan.nextInt();
+                              
+                              if(numTroops < 1) {
+                                 disp.ErrorMessage();
+                                 System.out.print("\n");
+                              }
+      
+                            }while(numTroops < 1);
+                           
+                           
+                           
+                           
                         case Displayer.END:
                            exitPhase = true; 
                            break;

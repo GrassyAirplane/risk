@@ -10,6 +10,9 @@ public class MainRisk {
       Displayer disp = new Displayer(gs, gs.GetDb());
       Scanner scan = new Scanner(System.in);
       
+      // WIN_CONDITION
+      boolean hasWinner = false; 
+      
       // SHARED VARIABLES      
       int menuOption, numPlayer, creationCycle = 0, turnPhase, gameOption; 
       
@@ -292,7 +295,10 @@ public class MainRisk {
                         } 
                    }
                    
-                           
+                   // CHECK WINNER
+                   
+                   
+                   
                    /*=============== PHASE 2 ===============*/
                    
                   /* PHASE 2 
@@ -386,33 +392,38 @@ public class MainRisk {
                               case GameSystem.SUCCESSFUL:
                                  //Gets curr plauer char & Gets country name by id
                                  System.out.printf("\n %c Has Successfully Conquered %s\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName() );
+                                 System.out.print("\n");
                                  break;
                               //Defender Wins
                               case 2:
                                  //Gets Defending Players Char, and Defende Country 
                                  System.out.printf("\n %c Has Successfully Defended %s\n\n", gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetOwner().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName() );
+                                 System.out.print("\n");
                                  break;
                               //Player does not own the country
                               case GameSystem.INVALID_OWNER:
                                  //Gets Player char & Attacking Country name
                                  System.out.printf("\n %c Does not own %s\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName());
+                                 System.out.print("\n");
                                  break;
-                              
                               //Player does not have enough troops
                               case GameSystem.INADEQUATE_TROOPS:
                                  //Gets Player char and Attacking Country Name 
                                  System.out.printf("\n %c Does not have enough Troops at %s\n\n", gs.GetCurrPlayer().GetPlayerChar(), gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName());
+                                 System.out.print("\n");
                                  break;
-                              
                               //Countries are not adjacent
                               case GameSystem.SAME_COUNTRY:
                                  System.out.printf("\n %s and %s are not adjacent.\n\n", gs.GetCountryByPos(gs.GetCountryPos(countryAttack)).GetCountryName(), gs.GetCountryByPos(gs.GetCountryPos(countryDefend)).GetCountryName());
+                                 System.out.print("\n");
                                  break;
                            }
                         //Attack Break
                         break;            
                            
                         case Displayer.END:
+                           //Gets Bonus Card if bonus status is true.
+                           gs.GetBonusCard();
                            exitPhase = true; 
                            break;
                         
@@ -422,6 +433,9 @@ public class MainRisk {
                            System.out.print("\n");
                      }             
                    }
+                   
+                   //Test
+                   disp.DisplayPhase(Displayer.PHASE_TWO);
                    
                   /*=============== PHASE 3 ===============*/
                    

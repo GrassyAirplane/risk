@@ -22,9 +22,9 @@ public class Displayer {
    public final static int TRADE         = 9;
    public final static int PLACE         = 10;
    public final static int MISSION       = 11;
-   public final static int ATTACK        = 12;
-   
-   public final static int END           =14;
+   public final static int ATTACK        = 12; 
+   public final static int MOVE          = 13;
+   public final static int END           = 14;
    
    
    public final static int PHASE_PLACEMENT = 20;
@@ -223,6 +223,7 @@ public class Displayer {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
          System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
       }
+      System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
    
    /* Displays Africa */
@@ -232,6 +233,7 @@ public class Displayer {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
          System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
       }
+      System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
    
    /* Displays Asia */
@@ -241,6 +243,7 @@ public class Displayer {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
          System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
       }
+      System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
    
    /* Displays Australia */
@@ -250,6 +253,7 @@ public class Displayer {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
          System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
       }
+      System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }
    
    /* Displays Scoreboard */
@@ -368,7 +372,7 @@ public class Displayer {
       
       System.out.printf("\n     TRADE SCHEMEATIC %c           ________________________________________________________________ \n", currPlayer.GetPlayerChar());
       System.out.printf("   Options:                        |%-12s|%-12s|%-12s|%-12s|%-12s|\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
-      System.out.printf("   Infantry X 3  = 4               |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
+      System.out.printf("   Infantry X 3  = 4               |  ID %3s    |  ID %3s    |  ID %3s    |  ID %3s    |  ID %3s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
       System.out.printf("   Horse X 3     = 6               |            |            |            |            |            |\n");
       System.out.printf("   Cannon X 3    = 8               |  %-8s  |  %-8s  |  %-8s  |  %-8s  |  %-8s  |\n", cardType[0], cardType[1], cardType[2], cardType[3], cardType[4]); //Troop Type
       System.out.printf("   One of Each   = 10              |____________|____________|____________|____________|____________|\n");

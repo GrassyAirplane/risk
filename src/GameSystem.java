@@ -578,8 +578,8 @@ public class GameSystem {
         db.AddBonus(db.GetBonusByPos(t3));
         // removing bonuses from player deck
         this.currPlayer.RemoveBonusFromPlayer(t1);
-        this.currPlayer.RemoveBonusFromPlayer(t2);
-        this.currPlayer.RemoveBonusFromPlayer(t3);
+        this.currPlayer.RemoveBonusFromPlayer(t2-1);
+        this.currPlayer.RemoveBonusFromPlayer(t3-2);
         return SUCCESSFUL;
       }
       else {

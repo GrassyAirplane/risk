@@ -25,6 +25,7 @@ public class MainRisk {
       
       //Trading Variables
       int cardOne, cardTwo, cardThree; 
+      boolean canTrade;
       
       
       //Menu Looping
@@ -113,13 +114,25 @@ public class MainRisk {
                               disp.DisplayPlace();
                               countryId = scan.nextInt();
                               
-                              if(countryId > 42 || countryId < 0) {
+                              if(countryId > 41 || countryId < 0) {
                                  disp.ErrorMessage();
                               }
                               
-                           }while(countryId > 42 || countryId < 0);     
-                           System.out.print("Selection [Amount of Reinforcement] : ");
-                           reinforcementAmount = scan.nextInt();
+                           }while(countryId > 41 || countryId < 0);     
+                           
+                           while(true) {
+                              System.out.print("Selection [Amount of Reinforcement] : ");
+                              reinforcementAmount = scan.nextInt();
+                              
+                              //Checks for correct input amount
+                              if(reinforcementAmount > 0) {
+                                 break;
+                              }
+                              
+                              disp.ErrorMessage();
+                              
+                           }
+                           
                            //Places Troops
                            switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
                               case GameSystem.SUCCESSFUL:
@@ -135,7 +148,8 @@ public class MainRisk {
                            break;
                          //Invalid Input
                          default:
-                           disp.ErrorMessage();                 
+                           disp.ErrorMessage(); 
+                           System.out.print("\n");                
                      }             
                   }
                   //Rotates Player
@@ -185,29 +199,48 @@ public class MainRisk {
                               break;
                            //Trading System displayer
                            case Displayer.TRADE:
-                              //Error Checking
-                              do {
-                                 //Trading Displayer
-                                 disp.DisplayTrade();
-                                 cardOne = scan.nextInt();
-                                 System.out.printf(" Card 2 [Id] : ");
-                                 cardTwo = scan.nextInt();
-                                 System.out.printf(" Card 3 [Id] : ");
-                                 cardThree = scan.nextInt();
                                  
-                                 if() {
-                                    disp.ErrorMessage();
-                                 }
-                                 else {
-                                    break;
-                                 }
-                                      
-                              } while(true);
+                              //Checks if deck is null
+                              if(gs.GetCurrPlayer().GetBonusDeck() == null) {
+                                 System.out.println("\nNo Cards In Deck\n");
+                                 //breaks out of trade
+                                 break;
+                              }
                               
-                              //Bonus Card Swap Results
-                              switch( gs.GetCurrPlayer().Bonus(cardOne, cardTwo, cardThree) ) {
+                              int deckLength = gs.GetCurrPlayer().GetBonusDeck().length - 1;
+
+                              //Trading Displayer
+                              disp.DisplayTrade();
+                              cardOne = scan.nextInt();
+                              System.out.printf(" Card 2 [Id] : ");
+                              cardTwo = scan.nextInt();
+                              System.out.printf(" Card 3 [Id] : ");
+                              cardThree = scan.nextInt();
                                  
-                                
+                              //checks that the cards are within the range
+                              if(cardOne > deckLength || cardTwo > deckLength || cardThree > deckLength) {
+                                 disp.ErrorMessage();
+                                 canTrade = false; 
+                              }
+                              //Checks that the cards are not duplicates
+                              else if(cardOne == cardTwo || cardOne == cardThree || cardTwo == cardThree) {
+                                 disp.ErrorMessage();
+                                 canTrade = false;
+                              } 
+                              else {
+                                 canTrade = true;
+                              }
+                                                      
+                              if(canTrade) {
+                                 //Bonus Card Swap Results
+                                 switch( gs.GetCurrPlayer().Bonus(cardOne, cardTwo, cardThree) ) {
+                                    case GameSystem.SUCCESSFUL:
+                                       System.out.println("\nSuccess\n");
+                                       break;
+                                    case GameSystem.INADEQUATE_BONUS:
+                                       System.out.println("\nIncorrect Combination\n");
+                                       break;  
+                                 }
                               }
                               break;  
                            //Placement of Troops
@@ -227,7 +260,7 @@ public class MainRisk {
                               //Places Troops
                               switch(gs.PlaceTroops(gs.GetCountryByPos(gs.GetCountryPos(countryId)), reinforcementAmount)) {
                                  case GameSystem.SUCCESSFUL:
-                                    System.out.println("\nSuccess\n");
+                                    System.out.println("\nSuccessful Placement\n");
                                     break;
                                  case GameSystem.INVALID_OWNER:
                                     System.out.println("\nCountry Not Owned by Player\n");
@@ -238,7 +271,9 @@ public class MainRisk {
                               }
                               break;
                             //Display Mission
-                            case Displayer.
+                            case Displayer.MISSION:
+                              disp.DisplayMission();
+                              break;
                             //Invalid Input
                             default:
                               disp.ErrorMessage();                 

@@ -19,7 +19,7 @@ public class Displayer {
    public final static int ASIA          = 6;
    public final static int AUSTRALIA     = 7;
    public final static int SCOREBOARD    = 8;
-   
+   public final static int TRADE         = 9;
    public final static int PLACE         =10;
    public final static int MISSION       =11;
    
@@ -267,7 +267,7 @@ public class Displayer {
       //Checks PhaseNumber
       switch(phaseNum) {
          case PHASE_PLACEMENT: 
-            System.out.printf("        PLACEMENT PHASE         ________________________________________________________________ \n");
+            System.out.printf("      PLACEMENT PHASE %c         ________________________________________________________________ \n", currPlayer.GetPlayerChar());
             System.out.printf("Receiving a total of %2d Troops |%s       |%s       |%s       |%s       |%s       |\n", currPlayer.GetReinforcement(), cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
             System.out.printf("Options:                       |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  -----   12. ------         |            |            |            |            |            |\n");
@@ -276,7 +276,7 @@ public class Displayer {
             System.out.printf(" Selection : "); 
             break;
          case PHASE_ONE:
-            System.out.printf("        TURN PHASE ONE          ________________________________________________________________ \n");
+            System.out.printf("      TURN PHASE ONE %c          ________________________________________________________________ \n", currPlayer.GetPlayerChar());
             System.out.printf("Receiving a total of %2d Troops |%s       |%s       |%s       |%s       |%s       |\n", currPlayer.GetReinforcement(), cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
             System.out.printf("Options:                       |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  Trade   12. ------         |            |            |            |            |            |\n");
@@ -285,7 +285,7 @@ public class Displayer {
             System.out.printf(" Selection : "); 
             break;
          case PHASE_TWO:
-            System.out.printf("        TURN PHASE TWO          ________________________________________________________________ \n");
+            System.out.printf("      TURN PHASE TWO %c          ________________________________________________________________ \n", currPlayer.GetPlayerChar());
             System.out.printf("                               |%s       |%s       |%s       |%s       |%s       |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
             System.out.printf("Options:                       |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  -----   12. Attack         |            |            |            |            |            |\n");
@@ -294,7 +294,7 @@ public class Displayer {
             System.out.printf(" Selection : ");
             break; 
          case PHASE_THREE:
-            System.out.printf("       TURN PHASE THREE         ________________________________________________________________ \n");
+            System.out.printf("     TURN PHASE THREE %c         ________________________________________________________________ \n", currPlayer.GetPlayerChar());
             System.out.printf("                               |%s       |%s       |%s       |%s       |%s       |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
             System.out.printf("Options:                       |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
             System.out.printf("9.  -----   12. ------         |            |            |            |            |            |\n");
@@ -337,7 +337,7 @@ public class Displayer {
          }
       }
       
-      System.out.printf("\n       TRADE SCHEMEATIC           ________________________________________________________________ \n");
+      System.out.printf("\n     TRADE SCHEMEATIC %c           ________________________________________________________________ \n", currPlayer.GetPlayerChar());
       System.out.printf("   Options:                        |%s       |%s       |%s       |%s       |%s       |\n", cardName[0], cardName[1], cardName[2], cardName[3], cardName[4]); //Card Name
       System.out.printf("   Infantry X 3  = 4               |  ID %s    |  ID %s    |  ID %s    |  ID %s    |  ID %s    |\n", cardPos[0], cardPos[1], cardPos[2], cardPos[3], cardPos[4]); //Card Id
       System.out.printf("   Horse X 3     = 6               |            |            |            |            |            |\n");

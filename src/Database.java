@@ -80,7 +80,7 @@ public class Database {
                   String[] dataArray = scanData.split(":");
                   
                   //Adds initialized country object           
-                  addBonus( new Bonus(dataArray[0], Integer.parseInt(dataArray[1])) );
+                  AddBonus( new Bonus(dataArray[0], Integer.parseInt(dataArray[1])) );
                }
             }
       } catch( FileNotFoundException exception ) {
@@ -162,33 +162,6 @@ public class Database {
       tempArray[tempArray.length-1] = country;
       //Sets allCountries to equal tempArray
       this.allCountries = tempArray;
-   }
-   
-   /* Increases the size of allBonus Array, adding the inputted Bonus Card object in
-    * @param    - Bonus Card inputted*/
-   private void addBonus(Bonus bonus) {
-      //Initilize empty temp array
-      Bonus[] tempArray; 
-      
-      if( this.allBonus == null ) {
-         //Creates temp array with length of one
-         tempArray = new Bonus[1];
-      }
-      
-      else {
-         //Create temp array with length of one longer then allBonus
-         tempArray = new Bonus[this.allBonus.length + 1];
-         
-         //copies allCountries into tempArray
-         for( int i = 0; i < this.allBonus.length; i++ ) {
-            tempArray[i] = this.allBonus[i];
-         }
-      }
-      
-      //Adds given country into the last position of the temp array
-      tempArray[tempArray.length-1] = bonus;
-      //Sets allCountries to equal tempArray
-      this.allBonus = tempArray;
    }
    
    /* Increases the size of allMission Array, adding the inputted Mission Card object in
@@ -275,6 +248,33 @@ public class Database {
     * @return             -  Mission card instance at position in allMission */
    public Mission GetMissionByPos(int missionPos) {
       return allMission[missionPos]; 
+   }
+   
+   /* Increases the size of allBonus Array, adding the inputted Bonus Card object in
+    * @param    - Bonus Card inputted*/
+   public void AddBonus(Bonus bonus) {
+     //Initilize empty temp array
+     Bonus[] tempArray; 
+     
+     if( this.allBonus == null ) {
+       //Creates temp array with length of one
+       tempArray = new Bonus[1];
+     }
+     
+     else {
+       //Create temp array with length of one longer then allBonus
+       tempArray = new Bonus[this.allBonus.length + 1];
+       
+       //copies allCountries into tempArray
+       for( int i = 0; i < this.allBonus.length; i++ ) {
+         tempArray[i] = this.allBonus[i];
+       }
+     }
+     
+     //Adds given country into the last position of the temp array
+     tempArray[tempArray.length-1] = bonus;
+     //Sets allCountries to equal tempArray
+     this.allBonus = tempArray;
    }
    
    /* adds new player to allPlayer array

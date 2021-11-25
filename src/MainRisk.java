@@ -495,7 +495,11 @@ public class MainRisk {
                         case Displayer.MISSION:
                            disp.DisplayMission();
                            break;
-                        case Displayer   
+                        //Move Option
+                        case Displayer.MOVE:
+                           
+                           
+                           break;   
                         
                         case Displayer.END:
                            //Rotates Player

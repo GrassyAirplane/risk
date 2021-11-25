@@ -32,6 +32,29 @@ public class Displayer {
    public final static int PHASE_TWO = 22;
    public final static int PHASE_THREE = 23;
    
+   private String[] adjacency = {" 2,14,15", " 13,15,16,17", " 13,14,16,18",
+                                 " 14,15,17,18,19", " 14,16,19,26,31,35", " 15,16,19,20",
+                                 " 16,17,18,20,21,35",
+                                 
+                                 " 8,10,11", " 9,11,12,20", " 9,10,12",
+                                 " 10,11",
+                                 
+                                 " 2,14,15", " 13,15,16,17", " 13,14,16,18",
+                                 " 14,15,17,18,19", " 14,16,19,26,31,35", " 15,16,19,20",
+                                 " 16,17,18,20,21,35",
+                                 
+                                 
+                                 " 10,18,19,21,22,23", " 19,20,23,35", " 20,23,24",
+                                 " 20,21,22,24,25,35", " 22,23,25", " 23,24",
+                                 
+                                 " 17,27,31,32", " 26,28,29,32,33", " 27,29,30",
+                                 " 27,28,30,33", " 0,28,29,33,34", " 17,26,32,35,36",
+                                 " 26,27,29,31,33,36,37", " 27,29,30,32,34", " 30,33",
+                                 " 17,19,21,23,31,36", " 31,32,35,37", " 32,36,38",
+                                 
+                                 " 37,39,40", " 38,40,41", " 38,39,41",
+                                 " 39,40"};
+   
    
    /*=============== CONSTRUCTOR ===============*/
    /* Displayer Constructor
@@ -198,10 +221,11 @@ public class Displayer {
    
    /* Displays NAmerica */
    public void DisplayNAmerica() {
+      
       System.out.println("________________________________________________________________________________________________");
       for(int i = 0; i < 9; i++) {
          Country country = gs.GetCountryByPos(gs.GetCountryPos(i));
-         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c%37s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(),"");
+         System.out.printf("Name: %-20s Id: %-2d TroopCount: %-3d Owner: %c Adjacency: %s | \n", country.GetCountryName(), country.GetCountryId(), country.GetTroopCount(), country.GetOwner().GetPlayerChar(), adjacency[i]);
       }
       System.out.println("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
    }

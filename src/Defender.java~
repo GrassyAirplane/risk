@@ -48,12 +48,6 @@ public class Defender extends Player {
       }
     }
     
-    // returning dice rolls without the last index
-    int[] temp = new int[rolls.length - 1];
-    for (int i = 0; i < temp.length; i++) {
-      temp[i] = rolls[i];
-    }
-    rolls = temp;
     return rolls;
   }
 

@@ -495,30 +495,6 @@ public class GameSystem {
     int numHorse = 0; // keeps track of number of horse bonuses
     int numCannon = 0; // keeps track of number of cannon bonuses
     
-    // sorting lowest to highest
-    int temp1 = t1;
-    int temp2 = t2;
-    int temp3 = t3;
-    int[] temp = {temp1, temp2, temp3};
-    for (int i = 0; i < temp.length - 1; i++) {
-      int currMin = temp[i];
-      int currMinIndex = i;
-      for (int j = i + 1; j < temp.length; j++) {
-        if (temp[j] < currMin) {
-          currMin = temp[j];
-          currMinIndex = j;
-        }
-      }
-      if (currMinIndex != i) {
-        temp[currMinIndex] = temp[i];
-        temp[i] = currMin;
-      }
-    }
-    // setting newly sorted values into t1, t2, and t3
-    t1 = temp[0];
-    t2 = temp[1];
-    t3 = temp[2];
-    
     // counting number of troops for each type
     for (int i = 0; i < this.currPlayer.GetBonusDeck().length; i++) {
       if (this.currPlayer.GetBonusDeck()[i].GetTroopBonusType() == INFANTRY_TROOP) {

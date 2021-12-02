@@ -1,5 +1,5 @@
 Alaska:1
-N.W.Territory:1
+N.W.T:1
 Greenland:1
 Alberta:1
 Ontario:1
